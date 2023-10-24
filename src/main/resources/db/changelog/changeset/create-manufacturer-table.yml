@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-manufacturer-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: manufacturer
+            remarks: Производитель
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: manufacturer_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: manufacturer_name_uq
+                    nullable: false

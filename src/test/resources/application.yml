@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:16:///${PC_CONFIG_APP_TEST_DB_NAME}
+  liquibase:
+    change-log: classpath:db/changelog/test-changelog-master.yml

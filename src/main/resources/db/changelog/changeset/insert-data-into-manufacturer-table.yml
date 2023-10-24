@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-manufacturer-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/manufacturers.sql
+            stripComments: true
