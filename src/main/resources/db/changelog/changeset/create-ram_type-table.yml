@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-ram-type-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: ram_type
+            remarks: Тип оперативной памяти
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: ram_type_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: ram_type_name_uq
+                    nullable: false

@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-ram-type-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/ram_types.sql
+            stripComments: true

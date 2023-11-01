@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-main-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: main_power_connector
+            remarks: Основной коннектор питания
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: main_power_connector_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: main_power_connector_name_uq
+                    nullable: false

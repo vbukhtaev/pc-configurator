@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-psu-form-factor-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: psu_form_factor
+            remarks: Форм-фактор блока питания
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: psu_form_factor_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: psu_form_factor_name_uq
+                    nullable: false

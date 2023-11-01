@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-pci-express-connector-version-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: pci_express_connector_version
+            remarks: Версия коннектора PCI-Express
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pci_express_connector_version_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: pci_express_connector_version_name_uq
+                    nullable: false

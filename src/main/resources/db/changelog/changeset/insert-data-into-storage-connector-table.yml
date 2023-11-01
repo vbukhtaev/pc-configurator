@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-storage-connector-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/storage_connectors.sql
+            stripComments: true

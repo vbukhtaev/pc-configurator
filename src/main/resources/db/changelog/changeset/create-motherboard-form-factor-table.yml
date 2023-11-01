@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-motherboard-form-factor-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: motherboard_form_factor
+            remarks: Форм-фактор материнской платы
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: motherboard_form_factor_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: motherboard_form_factor_name_uq
+                    nullable: false
