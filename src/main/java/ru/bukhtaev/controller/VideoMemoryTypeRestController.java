@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IVideoMemoryTypeMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IVideoMemoryTypeCrudService;
+import ru.bukhtaev.model.VideoMemoryType;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class VideoMemoryTypeRestController {
     /**
      * Сервис CRUD операций над типами видеопамяти.
      */
-    private final IVideoMemoryTypeCrudService crudService;
+    private final ICrudService<VideoMemoryType, UUID> crudService;
 
     /**
      * Маппер для DTO типов видеопамяти.
@@ -55,7 +56,7 @@ public class VideoMemoryTypeRestController {
      */
     @Autowired
     public VideoMemoryTypeRestController(
-            final IVideoMemoryTypeCrudService crudService,
+            final ICrudService<VideoMemoryType, UUID> crudService,
             final IVideoMemoryTypeMapper mapper
     ) {
         this.crudService = crudService;

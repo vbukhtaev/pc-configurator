@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IPsuFormFactorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IPsuFormFactorCrudService;
+import ru.bukhtaev.model.PsuFormFactor;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class PsuFormFactorRestController {
     /**
      * Сервис CRUD операций над форм-факторами блоков питания.
      */
-    private final IPsuFormFactorCrudService crudService;
+    private final ICrudService<PsuFormFactor, UUID> crudService;
 
     /**
      * Маппер для DTO форм-факторов блоков питания.
@@ -55,7 +56,7 @@ public class PsuFormFactorRestController {
      */
     @Autowired
     public PsuFormFactorRestController(
-            final IPsuFormFactorCrudService crudService,
+            final ICrudService<PsuFormFactor, UUID> crudService,
             final IPsuFormFactorMapper mapper
     ) {
         this.crudService = crudService;

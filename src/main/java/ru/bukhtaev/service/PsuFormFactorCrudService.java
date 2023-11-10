@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.StoragePowerConnector;
-import ru.bukhtaev.repository.IStoragePowerConnectorRepository;
+import ru.bukhtaev.model.PsuFormFactor;
+import ru.bukhtaev.repository.IPsuFormFactorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_POWER_CONNECTOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_FORM_FACTOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над коннекторами питания накопителей.
+ * Реализация сервиса CRUD операций над форм-факторами блоков питания.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class StoragePowerConnectorCrudServiceImpl implements IStoragePowerConnectorCrudService {
+public class PsuFormFactorCrudService implements ICrudService<PsuFormFactor, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IStoragePowerConnectorRepository repository;
+    private final IPsuFormFactorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class StoragePowerConnectorCrudServiceImpl implements IStoragePowerConnec
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public StoragePowerConnectorCrudServiceImpl(
-            final IStoragePowerConnectorRepository repository,
+    public PsuFormFactorCrudService(
+            final IPsuFormFactorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class StoragePowerConnectorCrudServiceImpl implements IStoragePowerConnec
     }
 
     @Override
-    public StoragePowerConnector getById(final UUID id) {
+    public PsuFormFactor getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<StoragePowerConnector> getAll() {
+    public List<PsuFormFactor> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public StoragePowerConnector create(final StoragePowerConnector newConnector) {
-        repository.findByName(newConnector.getName())
-                .ifPresent(connector -> {
+    public PsuFormFactor create(final PsuFormFactor newFormFactor) {
+        repository.findByName(newFormFactor.getName())
+                .ifPresent(formFactor -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE,
-                                    connector.getName()
+                                    MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE,
+                                    formFactor.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newConnector);
+        return repository.save(newFormFactor);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class StoragePowerConnectorCrudServiceImpl implements IStoragePowerConnec
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public StoragePowerConnector update(final UUID id, final StoragePowerConnector changedConnector) {
+    public PsuFormFactor update(final UUID id, final PsuFormFactor changedFormFactor) {
         repository.findByNameAndIdNot(
-                changedConnector.getName(),
+                changedFormFactor.getName(),
                 id
-        ).ifPresent(connector -> {
+        ).ifPresent(formFactor -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE,
-                            connector.getName()
+                            MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE,
+                            formFactor.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final StoragePowerConnector toBeUpdated = findById(id);
-        Optional.ofNullable(changedConnector.getName())
+        final PsuFormFactor toBeUpdated = findById(id);
+        Optional.ofNullable(changedFormFactor.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class StoragePowerConnectorCrudServiceImpl implements IStoragePowerConnec
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public StoragePowerConnector replace(final UUID id, final StoragePowerConnector newConnector) {
+    public PsuFormFactor replace(final UUID id, final PsuFormFactor newFormFactor) {
         repository.findByNameAndIdNot(
-                newConnector.getName(),
+                newFormFactor.getName(),
                 id
-        ).ifPresent(connector -> {
+        ).ifPresent(formFactor -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE,
-                            connector.getName()
+                            MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE,
+                            formFactor.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final StoragePowerConnector existent = findById(id);
-        existent.setName(newConnector.getName());
+        final PsuFormFactor existent = findById(id);
+        existent.setName(newFormFactor.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает коннектор питания накопителя с указанным ID, если он существует.
+     * Возвращает форм-фактор блока питания с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return коннектор питания накопителя с указанным ID, если он существует
+     * @return форм-фактор блока питания с указанным ID, если он существует
      */
-    private StoragePowerConnector findById(final UUID id) {
+    private PsuFormFactor findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_STORAGE_POWER_CONNECTOR_NOT_FOUND,
+                                MESSAGE_CODE_PSU_FORM_FACTOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

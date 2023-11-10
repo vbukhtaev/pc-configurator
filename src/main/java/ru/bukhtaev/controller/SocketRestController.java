@@ -17,7 +17,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.ISocketMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.ISocketCrudService;
+import ru.bukhtaev.model.Socket;
+import ru.bukhtaev.service.IPagingCrudService;
 import ru.bukhtaev.util.NameableSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
@@ -43,7 +44,7 @@ public class SocketRestController {
     /**
      * Сервис CRUD операций над сокетами.
      */
-    private final ISocketCrudService crudService;
+    private final IPagingCrudService<Socket, UUID> crudService;
 
     /**
      * Маппер для DTO сокетов.
@@ -58,7 +59,7 @@ public class SocketRestController {
      */
     @Autowired
     public SocketRestController(
-            final ISocketCrudService crudService,
+            final IPagingCrudService<Socket, UUID> crudService,
             final ISocketMapper mapper
     ) {
         this.crudService = crudService;

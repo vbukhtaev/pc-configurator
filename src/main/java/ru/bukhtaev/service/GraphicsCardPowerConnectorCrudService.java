@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.StorageConnector;
-import ru.bukhtaev.repository.IStorageConnectorRepository;
+import ru.bukhtaev.model.GraphicsCardPowerConnector;
+import ru.bukhtaev.repository.IGraphicsCardPowerConnectorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_CONNECTOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над коннекторами подключения накопителей.
+ * Реализация сервиса CRUD операций над коннекторами питания видеокарт.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class StorageConnectorCrudServiceImpl implements IStorageConnectorCrudService {
+public class GraphicsCardPowerConnectorCrudService implements ICrudService<GraphicsCardPowerConnector, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IStorageConnectorRepository repository;
+    private final IGraphicsCardPowerConnectorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class StorageConnectorCrudServiceImpl implements IStorageConnectorCrudSer
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public StorageConnectorCrudServiceImpl(
-            final IStorageConnectorRepository repository,
+    public GraphicsCardPowerConnectorCrudService(
+            final IGraphicsCardPowerConnectorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,23 +55,23 @@ public class StorageConnectorCrudServiceImpl implements IStorageConnectorCrudSer
     }
 
     @Override
-    public StorageConnector getById(final UUID id) {
+    public GraphicsCardPowerConnector getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<StorageConnector> getAll() {
+    public List<GraphicsCardPowerConnector> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public StorageConnector create(final StorageConnector newConnector) {
+    public GraphicsCardPowerConnector create(final GraphicsCardPowerConnector newConnector) {
         repository.findByName(newConnector.getName())
                 .ifPresent(connector -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE,
+                                    MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE,
                                     connector.getName()
                             ),
                             FIELD_NAME
@@ -89,21 +89,21 @@ public class StorageConnectorCrudServiceImpl implements IStorageConnectorCrudSer
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public StorageConnector update(final UUID id, final StorageConnector changedConnector) {
+    public GraphicsCardPowerConnector update(final UUID id, final GraphicsCardPowerConnector changedConnector) {
         repository.findByNameAndIdNot(
                 changedConnector.getName(),
                 id
         ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE,
+                            MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE,
                             connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final StorageConnector toBeUpdated = findById(id);
+        final GraphicsCardPowerConnector toBeUpdated = findById(id);
         Optional.ofNullable(changedConnector.getName())
                 .ifPresent(toBeUpdated::setName);
 
@@ -112,38 +112,38 @@ public class StorageConnectorCrudServiceImpl implements IStorageConnectorCrudSer
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public StorageConnector replace(final UUID id, final StorageConnector newConnector) {
+    public GraphicsCardPowerConnector replace(final UUID id, final GraphicsCardPowerConnector newConnector) {
         repository.findByNameAndIdNot(
                 newConnector.getName(),
                 id
         ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE,
+                            MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE,
                             connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final StorageConnector existent = findById(id);
+        final GraphicsCardPowerConnector existent = findById(id);
         existent.setName(newConnector.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает коннектор подключения накопителя с указанным ID, если он существует.
+     * Возвращает коннектор питания видеокарты с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return коннектор подключения накопителя с указанным ID, если он существует
+     * @return коннектор питания видеокарты с указанным ID, если он существует
      */
-    private StorageConnector findById(final UUID id) {
+    private GraphicsCardPowerConnector findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_STORAGE_CONNECTOR_NOT_FOUND,
+                                MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

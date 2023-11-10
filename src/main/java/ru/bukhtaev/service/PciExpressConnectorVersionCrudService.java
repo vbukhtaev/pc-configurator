@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.PsuCertificate;
-import ru.bukhtaev.repository.IPsuCertificateRepository;
+import ru.bukhtaev.model.PciExpressConnectorVersion;
+import ru.bukhtaev.repository.IPciExpressConnectorVersionRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_CERTIFICATE_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над сертификатами блоков питания.
+ * Реализация сервиса CRUD операций над версиями коннектора PCI-Express.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class PsuCertificateCrudServiceImpl implements IPsuCertificateCrudService {
+public class PciExpressConnectorVersionCrudService implements ICrudService<PciExpressConnectorVersion, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IPsuCertificateRepository repository;
+    private final IPciExpressConnectorVersionRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class PsuCertificateCrudServiceImpl implements IPsuCertificateCrudService
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public PsuCertificateCrudServiceImpl(
-            final IPsuCertificateRepository repository,
+    public PciExpressConnectorVersionCrudService(
+            final IPciExpressConnectorVersionRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class PsuCertificateCrudServiceImpl implements IPsuCertificateCrudService
     }
 
     @Override
-    public PsuCertificate getById(final UUID id) {
+    public PciExpressConnectorVersion getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<PsuCertificate> getAll() {
+    public List<PciExpressConnectorVersion> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PsuCertificate create(final PsuCertificate newCertificate) {
-        repository.findByName(newCertificate.getName())
-                .ifPresent(certificate -> {
+    public PciExpressConnectorVersion create(final PciExpressConnectorVersion newVersion) {
+        repository.findByName(newVersion.getName())
+                .ifPresent(version -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE,
-                                    certificate.getName()
+                                    MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE,
+                                    version.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newCertificate);
+        return repository.save(newVersion);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class PsuCertificateCrudServiceImpl implements IPsuCertificateCrudService
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PsuCertificate update(final UUID id, final PsuCertificate changedCertificate) {
+    public PciExpressConnectorVersion update(final UUID id, final PciExpressConnectorVersion changedVersion) {
         repository.findByNameAndIdNot(
-                changedCertificate.getName(),
+                changedVersion.getName(),
                 id
-        ).ifPresent(certificate -> {
+        ).ifPresent(version -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE,
-                            certificate.getName()
+                            MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE,
+                            version.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final PsuCertificate toBeUpdated = findById(id);
-        Optional.ofNullable(changedCertificate.getName())
+        final PciExpressConnectorVersion toBeUpdated = findById(id);
+        Optional.ofNullable(changedVersion.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class PsuCertificateCrudServiceImpl implements IPsuCertificateCrudService
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PsuCertificate replace(final UUID id, final PsuCertificate newCertificate) {
+    public PciExpressConnectorVersion replace(final UUID id, final PciExpressConnectorVersion newVersion) {
         repository.findByNameAndIdNot(
-                newCertificate.getName(),
+                newVersion.getName(),
                 id
-        ).ifPresent(certificate -> {
+        ).ifPresent(version -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE,
-                            certificate.getName()
+                            MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE,
+                            version.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final PsuCertificate existent = findById(id);
-        existent.setName(newCertificate.getName());
+        final PciExpressConnectorVersion existent = findById(id);
+        existent.setName(newVersion.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает сертификат блока питания с указанным ID, если он существует.
+     * Возвращает версию коннектора PCI-Express с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return сертификат блока питания с указанным ID, если он существует
+     * @return версию коннектора PCI-Express с указанным ID, если он существует
      */
-    private PsuCertificate findById(final UUID id) {
+    private PciExpressConnectorVersion findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_PSU_CERTIFICATE_NOT_FOUND,
+                                MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

@@ -5,34 +5,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.CpuPowerConnector;
-import ru.bukhtaev.repository.ICpuPowerConnectorRepository;
+import ru.bukhtaev.model.ExpansionBayFormat;
+import ru.bukhtaev.repository.IExpansionBayFormatRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.springframework.transaction.annotation.Isolation.*;
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_CPU_POWER_CONNECTOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_CPU_POWER_CONNECTOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_EXPANSION_BAY_FORMAT_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над коннекторами питания процессоров.
+ * Реализация сервиса CRUD операций над форматами отсеков расширения.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class CpuPowerConnectorCrudServiceImpl implements ICpuPowerConnectorCrudService {
+public class ExpansionBayFormatCrudService implements ICrudService<ExpansionBayFormat, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final ICpuPowerConnectorRepository repository;
+    private final IExpansionBayFormatRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class CpuPowerConnectorCrudServiceImpl implements ICpuPowerConnectorCrudS
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public CpuPowerConnectorCrudServiceImpl(
-            final ICpuPowerConnectorRepository repository,
+    public ExpansionBayFormatCrudService(
+            final IExpansionBayFormatRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class CpuPowerConnectorCrudServiceImpl implements ICpuPowerConnectorCrudS
     }
 
     @Override
-    public CpuPowerConnector getById(final UUID id) {
+    public ExpansionBayFormat getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<CpuPowerConnector> getAll() {
+    public List<ExpansionBayFormat> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public CpuPowerConnector create(final CpuPowerConnector newConnector) {
-        repository.findByName(newConnector.getName())
-                .ifPresent(connector -> {
+    public ExpansionBayFormat create(final ExpansionBayFormat newFormat) {
+        repository.findByName(newFormat.getName())
+                .ifPresent(format -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_CPU_POWER_CONNECTOR_UNIQUE,
-                                    connector.getName()
+                                    MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE,
+                                    format.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newConnector);
+        return repository.save(newFormat);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class CpuPowerConnectorCrudServiceImpl implements ICpuPowerConnectorCrudS
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public CpuPowerConnector update(final UUID id, final CpuPowerConnector changedConnector) {
+    public ExpansionBayFormat update(final UUID id, final ExpansionBayFormat changedFormat) {
         repository.findByNameAndIdNot(
-                changedConnector.getName(),
+                changedFormat.getName(),
                 id
-        ).ifPresent(connector -> {
+        ).ifPresent(format -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_CPU_POWER_CONNECTOR_UNIQUE,
-                            connector.getName()
+                            MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE,
+                            format.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final CpuPowerConnector toBeUpdated = findById(id);
-        Optional.ofNullable(changedConnector.getName())
+        final ExpansionBayFormat toBeUpdated = findById(id);
+        Optional.ofNullable(changedFormat.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class CpuPowerConnectorCrudServiceImpl implements ICpuPowerConnectorCrudS
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public CpuPowerConnector replace(final UUID id, final CpuPowerConnector newConnector) {
+    public ExpansionBayFormat replace(final UUID id, final ExpansionBayFormat newFormat) {
         repository.findByNameAndIdNot(
-                newConnector.getName(),
+                newFormat.getName(),
                 id
-        ).ifPresent(connector -> {
+        ).ifPresent(format -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_CPU_POWER_CONNECTOR_UNIQUE,
-                            connector.getName()
+                            MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE,
+                            format.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final CpuPowerConnector existent = findById(id);
-        existent.setName(newConnector.getName());
+        final ExpansionBayFormat existent = findById(id);
+        existent.setName(newFormat.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает коннектор питания процессора с указанным ID, если он существует.
+     * Возвращает формат отсека расширения с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return коннектор питания процессора с указанным ID, если он существует
+     * @return формат отсека расширения с указанным ID, если он существует
      */
-    private CpuPowerConnector findById(final UUID id) {
+    private ExpansionBayFormat findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_CPU_POWER_CONNECTOR_NOT_FOUND,
+                                MESSAGE_CODE_EXPANSION_BAY_FORMAT_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

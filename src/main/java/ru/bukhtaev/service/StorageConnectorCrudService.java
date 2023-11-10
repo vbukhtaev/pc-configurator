@@ -1,14 +1,12 @@
 package ru.bukhtaev.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.Vendor;
-import ru.bukhtaev.repository.IVendorRepository;
+import ru.bukhtaev.model.StorageConnector;
+import ru.bukhtaev.repository.IStorageConnectorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -18,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_VENDOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_VENDOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_CONNECTOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над вендорами.
+ * Реализация сервиса CRUD операций над коннекторами подключения накопителей.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class VendorCrudServiceImpl implements IVendorCrudService {
+public class StorageConnectorCrudService implements ICrudService<StorageConnector, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IVendorRepository repository;
+    private final IStorageConnectorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -48,8 +46,8 @@ public class VendorCrudServiceImpl implements IVendorCrudService {
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public VendorCrudServiceImpl(
-            final IVendorRepository repository,
+    public StorageConnectorCrudService(
+            final IStorageConnectorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -57,35 +55,30 @@ public class VendorCrudServiceImpl implements IVendorCrudService {
     }
 
     @Override
-    public Vendor getById(final UUID id) {
+    public StorageConnector getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<Vendor> getAll() {
+    public List<StorageConnector> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Slice<Vendor> getAll(final Pageable pageable) {
-        return repository.findAllBy(pageable);
-    }
-
-    @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Vendor create(final Vendor newVendor) {
-        repository.findByName(newVendor.getName())
-                .ifPresent(vendor -> {
+    public StorageConnector create(final StorageConnector newConnector) {
+        repository.findByName(newConnector.getName())
+                .ifPresent(connector -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_VENDOR_UNIQUE,
-                                    vendor.getName()
+                                    MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE,
+                                    connector.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newVendor);
+        return repository.save(newConnector);
     }
 
     @Override
@@ -96,22 +89,22 @@ public class VendorCrudServiceImpl implements IVendorCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Vendor update(final UUID id, final Vendor changedVendor) {
+    public StorageConnector update(final UUID id, final StorageConnector changedConnector) {
         repository.findByNameAndIdNot(
-                changedVendor.getName(),
+                changedConnector.getName(),
                 id
-        ).ifPresent(vendor -> {
+        ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_VENDOR_UNIQUE,
-                            vendor.getName()
+                            MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE,
+                            connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final Vendor toBeUpdated = findById(id);
-        Optional.ofNullable(changedVendor.getName())
+        final StorageConnector toBeUpdated = findById(id);
+        Optional.ofNullable(changedConnector.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -119,38 +112,38 @@ public class VendorCrudServiceImpl implements IVendorCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Vendor replace(final UUID id, final Vendor newVendor) {
+    public StorageConnector replace(final UUID id, final StorageConnector newConnector) {
         repository.findByNameAndIdNot(
-                newVendor.getName(),
+                newConnector.getName(),
                 id
-        ).ifPresent(vendor -> {
+        ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_VENDOR_UNIQUE,
-                            vendor.getName()
+                            MESSAGE_CODE_STORAGE_CONNECTOR_UNIQUE,
+                            connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final Vendor existent = findById(id);
-        existent.setName(newVendor.getName());
+        final StorageConnector existent = findById(id);
+        existent.setName(newConnector.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает вендора с указанным ID, если он существует.
+     * Возвращает коннектор подключения накопителя с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return вендора с указанным ID, если он существует
+     * @return коннектор подключения накопителя с указанным ID, если он существует
      */
-    private Vendor findById(final UUID id) {
+    private StorageConnector findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_VENDOR_NOT_FOUND,
+                                MESSAGE_CODE_STORAGE_CONNECTOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

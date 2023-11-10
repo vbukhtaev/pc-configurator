@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.PsuFormFactor;
-import ru.bukhtaev.repository.IPsuFormFactorRepository;
+import ru.bukhtaev.model.Manufacturer;
+import ru.bukhtaev.repository.IManufacturerRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_FORM_FACTOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MANUFACTURER_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MANUFACTURER_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над форм-факторами блоков питания.
+ * Реализация сервиса CRUD операций над производителями.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class PsuFormFactorCrudServiceImpl implements IPsuFormFactorCrudService {
+public class ManufacturerCrudService implements ICrudService<Manufacturer, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IPsuFormFactorRepository repository;
+    private final IManufacturerRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class PsuFormFactorCrudServiceImpl implements IPsuFormFactorCrudService {
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public PsuFormFactorCrudServiceImpl(
-            final IPsuFormFactorRepository repository,
+    public ManufacturerCrudService(
+            final IManufacturerRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class PsuFormFactorCrudServiceImpl implements IPsuFormFactorCrudService {
     }
 
     @Override
-    public PsuFormFactor getById(final UUID id) {
+    public Manufacturer getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<PsuFormFactor> getAll() {
+    public List<Manufacturer> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PsuFormFactor create(final PsuFormFactor newFormFactor) {
-        repository.findByName(newFormFactor.getName())
-                .ifPresent(formFactor -> {
+    public Manufacturer create(final Manufacturer newManufacturer) {
+        repository.findByName(newManufacturer.getName())
+                .ifPresent(manufacturer -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE,
-                                    formFactor.getName()
+                                    MESSAGE_CODE_MANUFACTURER_UNIQUE,
+                                    manufacturer.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newFormFactor);
+        return repository.save(newManufacturer);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class PsuFormFactorCrudServiceImpl implements IPsuFormFactorCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PsuFormFactor update(final UUID id, final PsuFormFactor changedFormFactor) {
+    public Manufacturer update(final UUID id, final Manufacturer changedManufacturer) {
         repository.findByNameAndIdNot(
-                changedFormFactor.getName(),
+                changedManufacturer.getName(),
                 id
-        ).ifPresent(formFactor -> {
+        ).ifPresent(manufacturer -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE,
-                            formFactor.getName()
+                            MESSAGE_CODE_MANUFACTURER_UNIQUE,
+                            manufacturer.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final PsuFormFactor toBeUpdated = findById(id);
-        Optional.ofNullable(changedFormFactor.getName())
+        final Manufacturer toBeUpdated = findById(id);
+        Optional.ofNullable(changedManufacturer.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class PsuFormFactorCrudServiceImpl implements IPsuFormFactorCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PsuFormFactor replace(final UUID id, final PsuFormFactor newFormFactor) {
+    public Manufacturer replace(final UUID id, final Manufacturer newManufacturer) {
         repository.findByNameAndIdNot(
-                newFormFactor.getName(),
+                newManufacturer.getName(),
                 id
-        ).ifPresent(formFactor -> {
+        ).ifPresent(manufacturer -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_PSU_FORM_FACTOR_UNIQUE,
-                            formFactor.getName()
+                            MESSAGE_CODE_MANUFACTURER_UNIQUE,
+                            manufacturer.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final PsuFormFactor existent = findById(id);
-        existent.setName(newFormFactor.getName());
+        final Manufacturer existent = findById(id);
+        existent.setName(newManufacturer.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает форм-фактор блока питания с указанным ID, если он существует.
+     * Возвращает производителя с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return форм-фактор блока питания с указанным ID, если он существует
+     * @return производителя с указанным ID, если он существует
      */
-    private PsuFormFactor findById(final UUID id) {
+    private Manufacturer findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_PSU_FORM_FACTOR_NOT_FOUND,
+                                MESSAGE_CODE_MANUFACTURER_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IStoragePowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IStoragePowerConnectorCrudService;
+import ru.bukhtaev.model.StoragePowerConnector;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class StoragePowerConnectorRestController {
     /**
      * Сервис CRUD операций над коннекторами питания накопителей.
      */
-    private final IStoragePowerConnectorCrudService crudService;
+    private final ICrudService<StoragePowerConnector, UUID> crudService;
 
     /**
      * Маппер для DTO коннекторов питания накопителей.
@@ -55,7 +56,7 @@ public class StoragePowerConnectorRestController {
      */
     @Autowired
     public StoragePowerConnectorRestController(
-            final IStoragePowerConnectorCrudService crudService,
+            final ICrudService<StoragePowerConnector, UUID> crudService,
             final IStoragePowerConnectorMapper mapper
     ) {
         this.crudService = crudService;

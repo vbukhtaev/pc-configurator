@@ -5,34 +5,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.FanPowerConnector;
-import ru.bukhtaev.repository.IFanPowerConnectorRepository;
+import ru.bukhtaev.model.StoragePowerConnector;
+import ru.bukhtaev.repository.IStoragePowerConnectorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.springframework.transaction.annotation.Isolation.*;
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_FAN_POWER_CONNECTOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_POWER_CONNECTOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над коннекторами питания вентиляторов.
+ * Реализация сервиса CRUD операций над коннекторами питания накопителей.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class FanPowerConnectorCrudServiceImpl implements IFanPowerConnectorCrudService {
+public class StoragePowerConnectorCrudService implements ICrudService<StoragePowerConnector, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IFanPowerConnectorRepository repository;
+    private final IStoragePowerConnectorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class FanPowerConnectorCrudServiceImpl implements IFanPowerConnectorCrudS
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public FanPowerConnectorCrudServiceImpl(
-            final IFanPowerConnectorRepository repository,
+    public StoragePowerConnectorCrudService(
+            final IStoragePowerConnectorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,23 +55,23 @@ public class FanPowerConnectorCrudServiceImpl implements IFanPowerConnectorCrudS
     }
 
     @Override
-    public FanPowerConnector getById(final UUID id) {
+    public StoragePowerConnector getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<FanPowerConnector> getAll() {
+    public List<StoragePowerConnector> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public FanPowerConnector create(final FanPowerConnector newConnector) {
+    public StoragePowerConnector create(final StoragePowerConnector newConnector) {
         repository.findByName(newConnector.getName())
                 .ifPresent(connector -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE,
+                                    MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE,
                                     connector.getName()
                             ),
                             FIELD_NAME
@@ -89,21 +89,21 @@ public class FanPowerConnectorCrudServiceImpl implements IFanPowerConnectorCrudS
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public FanPowerConnector update(final UUID id, final FanPowerConnector changedConnector) {
+    public StoragePowerConnector update(final UUID id, final StoragePowerConnector changedConnector) {
         repository.findByNameAndIdNot(
                 changedConnector.getName(),
                 id
         ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE,
+                            MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE,
                             connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final FanPowerConnector toBeUpdated = findById(id);
+        final StoragePowerConnector toBeUpdated = findById(id);
         Optional.ofNullable(changedConnector.getName())
                 .ifPresent(toBeUpdated::setName);
 
@@ -112,38 +112,38 @@ public class FanPowerConnectorCrudServiceImpl implements IFanPowerConnectorCrudS
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public FanPowerConnector replace(final UUID id, final FanPowerConnector newConnector) {
+    public StoragePowerConnector replace(final UUID id, final StoragePowerConnector newConnector) {
         repository.findByNameAndIdNot(
                 newConnector.getName(),
                 id
         ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE,
+                            MESSAGE_CODE_STORAGE_POWER_CONNECTOR_UNIQUE,
                             connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final FanPowerConnector existent = findById(id);
+        final StoragePowerConnector existent = findById(id);
         existent.setName(newConnector.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает коннектор питания вентилятора с указанным ID, если он существует.
+     * Возвращает коннектор питания накопителя с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return коннектор питания вентилятора с указанным ID, если он существует
+     * @return коннектор питания накопителя с указанным ID, если он существует
      */
-    private FanPowerConnector findById(final UUID id) {
+    private StoragePowerConnector findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_FAN_POWER_CONNECTOR_NOT_FOUND,
+                                MESSAGE_CODE_STORAGE_POWER_CONNECTOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

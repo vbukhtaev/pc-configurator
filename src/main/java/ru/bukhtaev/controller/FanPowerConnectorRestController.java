@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IFanPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IFanPowerConnectorCrudService;
+import ru.bukhtaev.model.FanPowerConnector;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class FanPowerConnectorRestController {
     /**
      * Сервис CRUD операций над коннекторами питания вентилятора.
      */
-    private final IFanPowerConnectorCrudService crudService;
+    private final ICrudService<FanPowerConnector, UUID> crudService;
 
     /**
      * Маппер для DTO коннекторов питания вентилятора.
@@ -55,7 +56,7 @@ public class FanPowerConnectorRestController {
      */
     @Autowired
     public FanPowerConnectorRestController(
-            final IFanPowerConnectorCrudService crudService,
+            final ICrudService<FanPowerConnector, UUID> crudService,
             final IFanPowerConnectorMapper mapper
     ) {
         this.crudService = crudService;

@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IExpansionBayFormatMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IExpansionBayFormatCrudService;
+import ru.bukhtaev.model.ExpansionBayFormat;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class ExpansionBayFormatRestController {
     /**
      * Сервис CRUD операций над форматами отсеков расширения.
      */
-    private final IExpansionBayFormatCrudService crudService;
+    private final ICrudService<ExpansionBayFormat, UUID> crudService;
 
     /**
      * Маппер для DTO форматов отсеков расширения.
@@ -55,7 +56,7 @@ public class ExpansionBayFormatRestController {
      */
     @Autowired
     public ExpansionBayFormatRestController(
-            final IExpansionBayFormatCrudService crudService,
+            final ICrudService<ExpansionBayFormat, UUID> crudService,
             final IExpansionBayFormatMapper mapper
     ) {
         this.crudService = crudService;

@@ -17,7 +17,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IVendorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IVendorCrudService;
+import ru.bukhtaev.model.Vendor;
+import ru.bukhtaev.service.IPagingCrudService;
 import ru.bukhtaev.util.NameableSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
@@ -43,7 +44,7 @@ public class VendorRestController {
     /**
      * Сервис CRUD операций над вендорами.
      */
-    private final IVendorCrudService crudService;
+    private final IPagingCrudService<Vendor, UUID> crudService;
 
     /**
      * Маппер для DTO вендоров.
@@ -58,7 +59,7 @@ public class VendorRestController {
      */
     @Autowired
     public VendorRestController(
-            final IVendorCrudService crudService,
+            final IPagingCrudService<Vendor, UUID> crudService,
             final IVendorMapper mapper
     ) {
         this.crudService = crudService;

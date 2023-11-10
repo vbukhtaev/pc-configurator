@@ -1,12 +1,14 @@
 package ru.bukhtaev.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.ExpansionBayFormat;
-import ru.bukhtaev.repository.IExpansionBayFormatRepository;
+import ru.bukhtaev.model.Socket;
+import ru.bukhtaev.repository.ISocketRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +18,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_EXPANSION_BAY_FORMAT_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_SOCKET_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_SOCKET_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над форматами отсеков расширения.
+ * Реализация сервиса CRUD операций над сокетами.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class ExpansionBayFormatCrudServiceImpl implements IExpansionBayFormatCrudService {
+public class SocketCrudService implements IPagingCrudService<Socket, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IExpansionBayFormatRepository repository;
+    private final ISocketRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +48,8 @@ public class ExpansionBayFormatCrudServiceImpl implements IExpansionBayFormatCru
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public ExpansionBayFormatCrudServiceImpl(
-            final IExpansionBayFormatRepository repository,
+    public SocketCrudService(
+            final ISocketRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +57,35 @@ public class ExpansionBayFormatCrudServiceImpl implements IExpansionBayFormatCru
     }
 
     @Override
-    public ExpansionBayFormat getById(final UUID id) {
+    public Socket getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<ExpansionBayFormat> getAll() {
+    public List<Socket> getAll() {
         return repository.findAll();
     }
 
     @Override
+    public Slice<Socket> getAll(final Pageable pageable) {
+        return repository.findAllBy(pageable);
+    }
+
+    @Override
     @Transactional(isolation = READ_COMMITTED)
-    public ExpansionBayFormat create(final ExpansionBayFormat newFormat) {
-        repository.findByName(newFormat.getName())
-                .ifPresent(format -> {
+    public Socket create(final Socket newSocket) {
+        repository.findByName(newSocket.getName())
+                .ifPresent(socket -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE,
-                                    format.getName()
+                                    MESSAGE_CODE_SOCKET_UNIQUE,
+                                    socket.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newFormat);
+        return repository.save(newSocket);
     }
 
     @Override
@@ -89,22 +96,22 @@ public class ExpansionBayFormatCrudServiceImpl implements IExpansionBayFormatCru
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public ExpansionBayFormat update(final UUID id, final ExpansionBayFormat changedFormat) {
+    public Socket update(final UUID id, final Socket changedSocket) {
         repository.findByNameAndIdNot(
-                changedFormat.getName(),
+                changedSocket.getName(),
                 id
-        ).ifPresent(format -> {
+        ).ifPresent(socket -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE,
-                            format.getName()
+                            MESSAGE_CODE_SOCKET_UNIQUE,
+                            socket.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final ExpansionBayFormat toBeUpdated = findById(id);
-        Optional.ofNullable(changedFormat.getName())
+        final Socket toBeUpdated = findById(id);
+        Optional.ofNullable(changedSocket.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +119,38 @@ public class ExpansionBayFormatCrudServiceImpl implements IExpansionBayFormatCru
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public ExpansionBayFormat replace(final UUID id, final ExpansionBayFormat newFormat) {
+    public Socket replace(final UUID id, final Socket newSocket) {
         repository.findByNameAndIdNot(
-                newFormat.getName(),
+                newSocket.getName(),
                 id
-        ).ifPresent(format -> {
+        ).ifPresent(socket -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_EXPANSION_BAY_FORMAT_UNIQUE,
-                            format.getName()
+                            MESSAGE_CODE_SOCKET_UNIQUE,
+                            socket.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final ExpansionBayFormat existent = findById(id);
-        existent.setName(newFormat.getName());
+        final Socket existent = findById(id);
+        existent.setName(newSocket.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает формат отсека расширения с указанным ID, если он существует.
+     * Возвращает сокет с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return формат отсека расширения с указанным ID, если он существует
+     * @return сокет с указанным ID, если он существует
      */
-    private ExpansionBayFormat findById(final UUID id) {
+    private Socket findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_EXPANSION_BAY_FORMAT_NOT_FOUND,
+                                MESSAGE_CODE_SOCKET_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

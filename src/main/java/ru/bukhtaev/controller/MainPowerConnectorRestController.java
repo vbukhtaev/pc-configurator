@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IMainPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IMainPowerConnectorCrudService;
+import ru.bukhtaev.model.MainPowerConnector;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class MainPowerConnectorRestController {
     /**
      * Сервис CRUD операций над основными коннекторами питания.
      */
-    private final IMainPowerConnectorCrudService crudService;
+    private final ICrudService<MainPowerConnector, UUID> crudService;
 
     /**
      * Маппер для DTO основных коннекторов питания.
@@ -55,7 +56,7 @@ public class MainPowerConnectorRestController {
      */
     @Autowired
     public MainPowerConnectorRestController(
-            final IMainPowerConnectorCrudService crudService,
+            final ICrudService<MainPowerConnector, UUID> crudService,
             final IMainPowerConnectorMapper mapper
     ) {
         this.crudService = crudService;

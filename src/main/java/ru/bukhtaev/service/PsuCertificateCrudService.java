@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.RamType;
-import ru.bukhtaev.repository.IRamTypeRepository;
+import ru.bukhtaev.model.PsuCertificate;
+import ru.bukhtaev.repository.IPsuCertificateRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_RAM_TYPE_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_RAM_TYPE_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_CERTIFICATE_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над типами оперативной памяти.
+ * Реализация сервиса CRUD операций над сертификатами блоков питания.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class RamTypeCrudServiceImpl implements IRamTypeCrudService {
+public class PsuCertificateCrudService implements ICrudService<PsuCertificate, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IRamTypeRepository repository;
+    private final IPsuCertificateRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class RamTypeCrudServiceImpl implements IRamTypeCrudService {
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public RamTypeCrudServiceImpl(
-            final IRamTypeRepository repository,
+    public PsuCertificateCrudService(
+            final IPsuCertificateRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class RamTypeCrudServiceImpl implements IRamTypeCrudService {
     }
 
     @Override
-    public RamType getById(final UUID id) {
+    public PsuCertificate getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<RamType> getAll() {
+    public List<PsuCertificate> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public RamType create(final RamType newType) {
-        repository.findByName(newType.getName())
-                .ifPresent(type -> {
+    public PsuCertificate create(final PsuCertificate newCertificate) {
+        repository.findByName(newCertificate.getName())
+                .ifPresent(certificate -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_RAM_TYPE_UNIQUE,
-                                    type.getName()
+                                    MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE,
+                                    certificate.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newType);
+        return repository.save(newCertificate);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class RamTypeCrudServiceImpl implements IRamTypeCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public RamType update(final UUID id, final RamType changedType) {
+    public PsuCertificate update(final UUID id, final PsuCertificate changedCertificate) {
         repository.findByNameAndIdNot(
-                changedType.getName(),
+                changedCertificate.getName(),
                 id
-        ).ifPresent(type -> {
+        ).ifPresent(certificate -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_RAM_TYPE_UNIQUE,
-                            type.getName()
+                            MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE,
+                            certificate.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final RamType toBeUpdated = findById(id);
-        Optional.ofNullable(changedType.getName())
+        final PsuCertificate toBeUpdated = findById(id);
+        Optional.ofNullable(changedCertificate.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class RamTypeCrudServiceImpl implements IRamTypeCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public RamType replace(final UUID id, final RamType newType) {
+    public PsuCertificate replace(final UUID id, final PsuCertificate newCertificate) {
         repository.findByNameAndIdNot(
-                newType.getName(),
+                newCertificate.getName(),
                 id
-        ).ifPresent(type -> {
+        ).ifPresent(certificate -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_RAM_TYPE_UNIQUE,
-                            type.getName()
+                            MESSAGE_CODE_PSU_CERTIFICATE_UNIQUE,
+                            certificate.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final RamType existent = findById(id);
-        existent.setName(newType.getName());
+        final PsuCertificate existent = findById(id);
+        existent.setName(newCertificate.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает тип оперативной памяти с указанным ID, если он существует.
+     * Возвращает сертификат блока питания с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return тип оперативной памяти с указанным ID, если он существует
+     * @return сертификат блока питания с указанным ID, если он существует
      */
-    private RamType findById(final UUID id) {
+    private PsuCertificate findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_RAM_TYPE_NOT_FOUND,
+                                MESSAGE_CODE_PSU_CERTIFICATE_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

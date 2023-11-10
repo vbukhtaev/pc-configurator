@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IPciExpressConnectorVersionMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IPciExpressConnectorVersionCrudService;
+import ru.bukhtaev.model.PciExpressConnectorVersion;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class PciExpressConnectorVersionRestController {
     /**
      * Сервис CRUD операций над версиями коннектора PCI-Express.
      */
-    private final IPciExpressConnectorVersionCrudService crudService;
+    private final ICrudService<PciExpressConnectorVersion, UUID> crudService;
 
     /**
      * Маппер для DTO версий коннектора PCI-Express.
@@ -55,7 +56,7 @@ public class PciExpressConnectorVersionRestController {
      */
     @Autowired
     public PciExpressConnectorVersionRestController(
-            final IPciExpressConnectorVersionCrudService crudService,
+            final ICrudService<PciExpressConnectorVersion, UUID> crudService,
             final IPciExpressConnectorVersionMapper mapper
     ) {
         this.crudService = crudService;

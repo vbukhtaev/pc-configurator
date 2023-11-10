@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IGraphicsCardPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IGraphicsCardPowerConnectorCrudService;
+import ru.bukhtaev.model.GraphicsCardPowerConnector;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class GraphicsCardPowerConnectorRestController {
     /**
      * Сервис CRUD операций над коннекторами питания видеокарт.
      */
-    private final IGraphicsCardPowerConnectorCrudService crudService;
+    private final ICrudService<GraphicsCardPowerConnector, UUID> crudService;
 
     /**
      * Маппер для DTO коннекторов питания видеокарт.
@@ -55,7 +56,7 @@ public class GraphicsCardPowerConnectorRestController {
      */
     @Autowired
     public GraphicsCardPowerConnectorRestController(
-            final IGraphicsCardPowerConnectorCrudService crudService,
+            final ICrudService<GraphicsCardPowerConnector, UUID> crudService,
             final IGraphicsCardPowerConnectorMapper mapper
     ) {
         this.crudService = crudService;

@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IFanSizeMapper;
 import ru.bukhtaev.dto.request.FanSizeRequestDto;
 import ru.bukhtaev.dto.response.FanSizeResponseDto;
-import ru.bukhtaev.service.IFanSizeCrudService;
+import ru.bukhtaev.model.FanSize;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class FanSizeRestController {
     /**
      * Сервис CRUD операций над размерами вентиляторов.
      */
-    private final IFanSizeCrudService crudService;
+    private final ICrudService<FanSize, UUID> crudService;
 
     /**
      * Маппер для DTO размеров вентиляторов.
@@ -55,7 +56,7 @@ public class FanSizeRestController {
      */
     @Autowired
     public FanSizeRestController(
-            final IFanSizeCrudService crudService,
+            final ICrudService<FanSize, UUID> crudService,
             final IFanSizeMapper mapper
     ) {
         this.crudService = crudService;

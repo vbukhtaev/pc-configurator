@@ -5,34 +5,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.GraphicsCardPowerConnector;
-import ru.bukhtaev.repository.IGraphicsCardPowerConnectorRepository;
+import ru.bukhtaev.model.MotherboardFormFactor;
+import ru.bukhtaev.repository.IMotherboardFormFactorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.springframework.transaction.annotation.Isolation.*;
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над коннекторами питания видеокарт.
+ * Реализация сервиса CRUD операций над форм-факторами материнских плат.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class GraphicsCardPowerConnectorCrudServiceImpl implements IGraphicsCardPowerConnectorCrudService {
+public class MotherboardFormFactorCrudService implements ICrudService<MotherboardFormFactor, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IGraphicsCardPowerConnectorRepository repository;
+    private final IMotherboardFormFactorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class GraphicsCardPowerConnectorCrudServiceImpl implements IGraphicsCardP
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public GraphicsCardPowerConnectorCrudServiceImpl(
-            final IGraphicsCardPowerConnectorRepository repository,
+    public MotherboardFormFactorCrudService(
+            final IMotherboardFormFactorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class GraphicsCardPowerConnectorCrudServiceImpl implements IGraphicsCardP
     }
 
     @Override
-    public GraphicsCardPowerConnector getById(final UUID id) {
+    public MotherboardFormFactor getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<GraphicsCardPowerConnector> getAll() {
+    public List<MotherboardFormFactor> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public GraphicsCardPowerConnector create(final GraphicsCardPowerConnector newConnector) {
-        repository.findByName(newConnector.getName())
-                .ifPresent(connector -> {
+    public MotherboardFormFactor create(final MotherboardFormFactor newFormFactor) {
+        repository.findByName(newFormFactor.getName())
+                .ifPresent(formFactor -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE,
-                                    connector.getName()
+                                    MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE,
+                                    formFactor.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newConnector);
+        return repository.save(newFormFactor);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class GraphicsCardPowerConnectorCrudServiceImpl implements IGraphicsCardP
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public GraphicsCardPowerConnector update(final UUID id, final GraphicsCardPowerConnector changedConnector) {
+    public MotherboardFormFactor update(final UUID id, final MotherboardFormFactor changedFormFactor) {
         repository.findByNameAndIdNot(
-                changedConnector.getName(),
+                changedFormFactor.getName(),
                 id
-        ).ifPresent(connector -> {
+        ).ifPresent(formFactor -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE,
-                            connector.getName()
+                            MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE,
+                            formFactor.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final GraphicsCardPowerConnector toBeUpdated = findById(id);
-        Optional.ofNullable(changedConnector.getName())
+        final MotherboardFormFactor toBeUpdated = findById(id);
+        Optional.ofNullable(changedFormFactor.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class GraphicsCardPowerConnectorCrudServiceImpl implements IGraphicsCardP
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public GraphicsCardPowerConnector replace(final UUID id, final GraphicsCardPowerConnector newConnector) {
+    public MotherboardFormFactor replace(final UUID id, final MotherboardFormFactor newFormFactor) {
         repository.findByNameAndIdNot(
-                newConnector.getName(),
+                newFormFactor.getName(),
                 id
-        ).ifPresent(connector -> {
+        ).ifPresent(formFactor -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_UNIQUE,
-                            connector.getName()
+                            MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE,
+                            formFactor.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final GraphicsCardPowerConnector existent = findById(id);
-        existent.setName(newConnector.getName());
+        final MotherboardFormFactor existent = findById(id);
+        existent.setName(newFormFactor.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает коннектор питания видеокарты с указанным ID, если он существует.
+     * Возвращает форм-фактор материнской платы с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return коннектор питания видеокарты с указанным ID, если он существует
+     * @return форм-фактор материнской платы с указанным ID, если он существует
      */
-    private GraphicsCardPowerConnector findById(final UUID id) {
+    private MotherboardFormFactor findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_GRAPHICS_CARD_POWER_CONNECTOR_NOT_FOUND,
+                                MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

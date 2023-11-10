@@ -5,34 +5,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.Manufacturer;
-import ru.bukhtaev.repository.IManufacturerRepository;
+import ru.bukhtaev.model.FanPowerConnector;
+import ru.bukhtaev.repository.IFanPowerConnectorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.springframework.transaction.annotation.Isolation.*;
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MANUFACTURER_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MANUFACTURER_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_FAN_POWER_CONNECTOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над производителями.
+ * Реализация сервиса CRUD операций над коннекторами питания вентиляторов.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class ManufacturerCrudServiceImpl implements IManufacturerCrudService {
+public class FanPowerConnectorCrudService implements ICrudService<FanPowerConnector, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IManufacturerRepository repository;
+    private final IFanPowerConnectorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class ManufacturerCrudServiceImpl implements IManufacturerCrudService {
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public ManufacturerCrudServiceImpl(
-            final IManufacturerRepository repository,
+    public FanPowerConnectorCrudService(
+            final IFanPowerConnectorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class ManufacturerCrudServiceImpl implements IManufacturerCrudService {
     }
 
     @Override
-    public Manufacturer getById(final UUID id) {
+    public FanPowerConnector getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<Manufacturer> getAll() {
+    public List<FanPowerConnector> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Manufacturer create(final Manufacturer newManufacturer) {
-        repository.findByName(newManufacturer.getName())
-                .ifPresent(manufacturer -> {
+    public FanPowerConnector create(final FanPowerConnector newConnector) {
+        repository.findByName(newConnector.getName())
+                .ifPresent(connector -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_MANUFACTURER_UNIQUE,
-                                    manufacturer.getName()
+                                    MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE,
+                                    connector.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newManufacturer);
+        return repository.save(newConnector);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class ManufacturerCrudServiceImpl implements IManufacturerCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Manufacturer update(final UUID id, final Manufacturer changedManufacturer) {
+    public FanPowerConnector update(final UUID id, final FanPowerConnector changedConnector) {
         repository.findByNameAndIdNot(
-                changedManufacturer.getName(),
+                changedConnector.getName(),
                 id
-        ).ifPresent(manufacturer -> {
+        ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_MANUFACTURER_UNIQUE,
-                            manufacturer.getName()
+                            MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE,
+                            connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final Manufacturer toBeUpdated = findById(id);
-        Optional.ofNullable(changedManufacturer.getName())
+        final FanPowerConnector toBeUpdated = findById(id);
+        Optional.ofNullable(changedConnector.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class ManufacturerCrudServiceImpl implements IManufacturerCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Manufacturer replace(final UUID id, final Manufacturer newManufacturer) {
+    public FanPowerConnector replace(final UUID id, final FanPowerConnector newConnector) {
         repository.findByNameAndIdNot(
-                newManufacturer.getName(),
+                newConnector.getName(),
                 id
-        ).ifPresent(manufacturer -> {
+        ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_MANUFACTURER_UNIQUE,
-                            manufacturer.getName()
+                            MESSAGE_CODE_FAN_POWER_CONNECTOR_UNIQUE,
+                            connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final Manufacturer existent = findById(id);
-        existent.setName(newManufacturer.getName());
+        final FanPowerConnector existent = findById(id);
+        existent.setName(newConnector.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает производителя с указанным ID, если он существует.
+     * Возвращает коннектор питания вентилятора с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return производителя с указанным ID, если он существует
+     * @return коннектор питания вентилятора с указанным ID, если он существует
      */
-    private Manufacturer findById(final UUID id) {
+    private FanPowerConnector findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_MANUFACTURER_NOT_FOUND,
+                                MESSAGE_CODE_FAN_POWER_CONNECTOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

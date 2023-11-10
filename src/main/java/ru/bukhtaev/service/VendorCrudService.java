@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.Socket;
-import ru.bukhtaev.repository.ISocketRepository;
+import ru.bukhtaev.model.Vendor;
+import ru.bukhtaev.repository.IVendorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -18,23 +18,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_SOCKET_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_SOCKET_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_VENDOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_VENDOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над сокетами.
+ * Реализация сервиса CRUD операций над вендорами.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class SocketCrudServiceImpl implements ISocketCrudService {
+public class VendorCrudService implements IPagingCrudService<Vendor, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final ISocketRepository repository;
+    private final IVendorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -48,8 +48,8 @@ public class SocketCrudServiceImpl implements ISocketCrudService {
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public SocketCrudServiceImpl(
-            final ISocketRepository repository,
+    public VendorCrudService(
+            final IVendorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -57,35 +57,35 @@ public class SocketCrudServiceImpl implements ISocketCrudService {
     }
 
     @Override
-    public Socket getById(final UUID id) {
+    public Vendor getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<Socket> getAll() {
+    public List<Vendor> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Slice<Socket> getAll(final Pageable pageable) {
+    public Slice<Vendor> getAll(final Pageable pageable) {
         return repository.findAllBy(pageable);
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Socket create(final Socket newSocket) {
-        repository.findByName(newSocket.getName())
-                .ifPresent(socket -> {
+    public Vendor create(final Vendor newVendor) {
+        repository.findByName(newVendor.getName())
+                .ifPresent(vendor -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_SOCKET_UNIQUE,
-                                    socket.getName()
+                                    MESSAGE_CODE_VENDOR_UNIQUE,
+                                    vendor.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newSocket);
+        return repository.save(newVendor);
     }
 
     @Override
@@ -96,22 +96,22 @@ public class SocketCrudServiceImpl implements ISocketCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Socket update(final UUID id, final Socket changedSocket) {
+    public Vendor update(final UUID id, final Vendor changedVendor) {
         repository.findByNameAndIdNot(
-                changedSocket.getName(),
+                changedVendor.getName(),
                 id
-        ).ifPresent(socket -> {
+        ).ifPresent(vendor -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_SOCKET_UNIQUE,
-                            socket.getName()
+                            MESSAGE_CODE_VENDOR_UNIQUE,
+                            vendor.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final Socket toBeUpdated = findById(id);
-        Optional.ofNullable(changedSocket.getName())
+        final Vendor toBeUpdated = findById(id);
+        Optional.ofNullable(changedVendor.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -119,38 +119,38 @@ public class SocketCrudServiceImpl implements ISocketCrudService {
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public Socket replace(final UUID id, final Socket newSocket) {
+    public Vendor replace(final UUID id, final Vendor newVendor) {
         repository.findByNameAndIdNot(
-                newSocket.getName(),
+                newVendor.getName(),
                 id
-        ).ifPresent(socket -> {
+        ).ifPresent(vendor -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_SOCKET_UNIQUE,
-                            socket.getName()
+                            MESSAGE_CODE_VENDOR_UNIQUE,
+                            vendor.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final Socket existent = findById(id);
-        existent.setName(newSocket.getName());
+        final Vendor existent = findById(id);
+        existent.setName(newVendor.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает сокет с указанным ID, если он существует.
+     * Возвращает вендора с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return сокет с указанным ID, если он существует
+     * @return вендора с указанным ID, если он существует
      */
-    private Socket findById(final UUID id) {
+    private Vendor findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_SOCKET_NOT_FOUND,
+                                MESSAGE_CODE_VENDOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

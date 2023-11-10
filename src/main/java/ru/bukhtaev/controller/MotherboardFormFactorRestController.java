@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IMotherboardFormFactorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IMotherboardFormFactorCrudService;
+import ru.bukhtaev.model.MotherboardFormFactor;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class MotherboardFormFactorRestController {
     /**
      * Сервис CRUD операций над форм-факторами материнских плат.
      */
-    private final IMotherboardFormFactorCrudService crudService;
+    private final ICrudService<MotherboardFormFactor, UUID> crudService;
 
     /**
      * Маппер для DTO форм-факторов материнских плат.
@@ -55,7 +56,7 @@ public class MotherboardFormFactorRestController {
      */
     @Autowired
     public MotherboardFormFactorRestController(
-            final IMotherboardFormFactorCrudService crudService,
+            final ICrudService<MotherboardFormFactor, UUID> crudService,
             final IMotherboardFormFactorMapper mapper
     ) {
         this.crudService = crudService;

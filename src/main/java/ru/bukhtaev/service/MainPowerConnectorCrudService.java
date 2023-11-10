@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.MotherboardFormFactor;
-import ru.bukhtaev.repository.IMotherboardFormFactorRepository;
+import ru.bukhtaev.model.MainPowerConnector;
+import ru.bukhtaev.repository.IMainPowerConnectorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MAIN_POWER_CONNECTOR_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MAIN_POWER_CONNECTOR_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над форм-факторами материнских плат.
+ * Реализация сервиса CRUD операций над основными коннекторами питания.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class MotherboardFormFactorCrudServiceImpl implements IMotherboardFormFactorCrudService {
+public class MainPowerConnectorCrudService implements ICrudService<MainPowerConnector, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IMotherboardFormFactorRepository repository;
+    private final IMainPowerConnectorRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class MotherboardFormFactorCrudServiceImpl implements IMotherboardFormFac
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public MotherboardFormFactorCrudServiceImpl(
-            final IMotherboardFormFactorRepository repository,
+    public MainPowerConnectorCrudService(
+            final IMainPowerConnectorRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class MotherboardFormFactorCrudServiceImpl implements IMotherboardFormFac
     }
 
     @Override
-    public MotherboardFormFactor getById(final UUID id) {
+    public MainPowerConnector getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<MotherboardFormFactor> getAll() {
+    public List<MainPowerConnector> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public MotherboardFormFactor create(final MotherboardFormFactor newFormFactor) {
-        repository.findByName(newFormFactor.getName())
-                .ifPresent(formFactor -> {
+    public MainPowerConnector create(final MainPowerConnector newConnector) {
+        repository.findByName(newConnector.getName())
+                .ifPresent(connector -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE,
-                                    formFactor.getName()
+                                    MESSAGE_CODE_MAIN_POWER_CONNECTOR_UNIQUE,
+                                    connector.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newFormFactor);
+        return repository.save(newConnector);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class MotherboardFormFactorCrudServiceImpl implements IMotherboardFormFac
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public MotherboardFormFactor update(final UUID id, final MotherboardFormFactor changedFormFactor) {
+    public MainPowerConnector update(final UUID id, final MainPowerConnector changedConnector) {
         repository.findByNameAndIdNot(
-                changedFormFactor.getName(),
+                changedConnector.getName(),
                 id
-        ).ifPresent(formFactor -> {
+        ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE,
-                            formFactor.getName()
+                            MESSAGE_CODE_MAIN_POWER_CONNECTOR_UNIQUE,
+                            connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final MotherboardFormFactor toBeUpdated = findById(id);
-        Optional.ofNullable(changedFormFactor.getName())
+        final MainPowerConnector toBeUpdated = findById(id);
+        Optional.ofNullable(changedConnector.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class MotherboardFormFactorCrudServiceImpl implements IMotherboardFormFac
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public MotherboardFormFactor replace(final UUID id, final MotherboardFormFactor newFormFactor) {
+    public MainPowerConnector replace(final UUID id, final MainPowerConnector newConnector) {
         repository.findByNameAndIdNot(
-                newFormFactor.getName(),
+                newConnector.getName(),
                 id
-        ).ifPresent(formFactor -> {
+        ).ifPresent(connector -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_UNIQUE,
-                            formFactor.getName()
+                            MESSAGE_CODE_MAIN_POWER_CONNECTOR_UNIQUE,
+                            connector.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final MotherboardFormFactor existent = findById(id);
-        existent.setName(newFormFactor.getName());
+        final MainPowerConnector existent = findById(id);
+        existent.setName(newConnector.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает форм-фактор материнской платы с указанным ID, если он существует.
+     * Возвращает основной коннектор питания с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return форм-фактор материнской платы с указанным ID, если он существует
+     * @return основной коннектор питания с указанным ID, если он существует
      */
-    private MotherboardFormFactor findById(final UUID id) {
+    private MainPowerConnector findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_MOTHERBOARD_FORM_FACTOR_NOT_FOUND,
+                                MESSAGE_CODE_MAIN_POWER_CONNECTOR_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

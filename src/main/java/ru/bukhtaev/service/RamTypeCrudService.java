@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.PciExpressConnectorVersion;
-import ru.bukhtaev.repository.IPciExpressConnectorVersionRepository;
+import ru.bukhtaev.model.RamType;
+import ru.bukhtaev.repository.IRamTypeRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_RAM_TYPE_NOT_FOUND;
+import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_RAM_TYPE_UNIQUE;
 
 /**
- * Реализация сервиса CRUD операций над версиями коннектора PCI-Express.
+ * Реализация сервиса CRUD операций над типами оперативной памяти.
  */
 @Service
 @Transactional(
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class PciExpressConnectorVersionCrudServiceImpl implements IPciExpressConnectorVersionCrudService {
+public class RamTypeCrudService implements ICrudService<RamType, UUID> {
 
     /**
      * Репозиторий.
      */
-    private final IPciExpressConnectorVersionRepository repository;
+    private final IRamTypeRepository repository;
 
     /**
      * Сервис предоставления сообщений.
@@ -46,8 +46,8 @@ public class PciExpressConnectorVersionCrudServiceImpl implements IPciExpressCon
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public PciExpressConnectorVersionCrudServiceImpl(
-            final IPciExpressConnectorVersionRepository repository,
+    public RamTypeCrudService(
+            final IRamTypeRepository repository,
             final Translator translator
     ) {
         this.repository = repository;
@@ -55,30 +55,30 @@ public class PciExpressConnectorVersionCrudServiceImpl implements IPciExpressCon
     }
 
     @Override
-    public PciExpressConnectorVersion getById(final UUID id) {
+    public RamType getById(final UUID id) {
         return findById(id);
     }
 
     @Override
-    public List<PciExpressConnectorVersion> getAll() {
+    public List<RamType> getAll() {
         return repository.findAll();
     }
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PciExpressConnectorVersion create(final PciExpressConnectorVersion newVersion) {
-        repository.findByName(newVersion.getName())
-                .ifPresent(version -> {
+    public RamType create(final RamType newType) {
+        repository.findByName(newType.getName())
+                .ifPresent(type -> {
                     throw new UniqueNameException(
                             translator.getMessage(
-                                    MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE,
-                                    version.getName()
+                                    MESSAGE_CODE_RAM_TYPE_UNIQUE,
+                                    type.getName()
                             ),
                             FIELD_NAME
                     );
                 });
 
-        return repository.save(newVersion);
+        return repository.save(newType);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class PciExpressConnectorVersionCrudServiceImpl implements IPciExpressCon
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PciExpressConnectorVersion update(final UUID id, final PciExpressConnectorVersion changedVersion) {
+    public RamType update(final UUID id, final RamType changedType) {
         repository.findByNameAndIdNot(
-                changedVersion.getName(),
+                changedType.getName(),
                 id
-        ).ifPresent(version -> {
+        ).ifPresent(type -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE,
-                            version.getName()
+                            MESSAGE_CODE_RAM_TYPE_UNIQUE,
+                            type.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final PciExpressConnectorVersion toBeUpdated = findById(id);
-        Optional.ofNullable(changedVersion.getName())
+        final RamType toBeUpdated = findById(id);
+        Optional.ofNullable(changedType.getName())
                 .ifPresent(toBeUpdated::setName);
 
         return repository.save(toBeUpdated);
@@ -112,38 +112,38 @@ public class PciExpressConnectorVersionCrudServiceImpl implements IPciExpressCon
 
     @Override
     @Transactional(isolation = READ_COMMITTED)
-    public PciExpressConnectorVersion replace(final UUID id, final PciExpressConnectorVersion newVersion) {
+    public RamType replace(final UUID id, final RamType newType) {
         repository.findByNameAndIdNot(
-                newVersion.getName(),
+                newType.getName(),
                 id
-        ).ifPresent(version -> {
+        ).ifPresent(type -> {
             throw new UniqueNameException(
                     translator.getMessage(
-                            MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_UNIQUE,
-                            version.getName()
+                            MESSAGE_CODE_RAM_TYPE_UNIQUE,
+                            type.getName()
                     ),
                     FIELD_NAME
             );
         });
 
-        final PciExpressConnectorVersion existent = findById(id);
-        existent.setName(newVersion.getName());
+        final RamType existent = findById(id);
+        existent.setName(newType.getName());
 
         return repository.save(existent);
     }
 
     /**
-     * Возвращает версию коннектора PCI-Express с указанным ID, если он существует.
+     * Возвращает тип оперативной памяти с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return версию коннектора PCI-Express с указанным ID, если он существует
+     * @return тип оперативной памяти с указанным ID, если он существует
      */
-    private PciExpressConnectorVersion findById(final UUID id) {
+    private RamType findById(final UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
-                                MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION_NOT_FOUND,
+                                MESSAGE_CODE_RAM_TYPE_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

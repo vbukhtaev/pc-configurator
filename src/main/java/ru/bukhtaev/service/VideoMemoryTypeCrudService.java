@@ -27,7 +27,7 @@ import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_VIDEO_MEMORY_TYPE
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class VideoMemoryTypeCrudServiceImpl implements IVideoMemoryTypeCrudService {
+public class VideoMemoryTypeCrudService implements ICrudService<VideoMemoryType, UUID> {
 
     /**
      * Репозиторий.
@@ -46,7 +46,7 @@ public class VideoMemoryTypeCrudServiceImpl implements IVideoMemoryTypeCrudServi
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public VideoMemoryTypeCrudServiceImpl(
+    public VideoMemoryTypeCrudService(
             final IVideoMemoryTypeRepository repository,
             final Translator translator
     ) {

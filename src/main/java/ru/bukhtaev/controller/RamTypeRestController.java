@@ -15,7 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.IRamTypeMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.service.IRamTypeCrudService;
+import ru.bukhtaev.model.RamType;
+import ru.bukhtaev.service.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class RamTypeRestController {
     /**
      * Сервис CRUD операций над типами оперативной памяти.
      */
-    private final IRamTypeCrudService crudService;
+    private final ICrudService<RamType, UUID> crudService;
 
     /**
      * Маппер для DTO типов оперативной памяти.
@@ -55,7 +56,7 @@ public class RamTypeRestController {
      */
     @Autowired
     public RamTypeRestController(
-            final IRamTypeCrudService crudService,
+            final ICrudService<RamType, UUID> crudService,
             final IRamTypeMapper mapper
     ) {
         this.crudService = crudService;

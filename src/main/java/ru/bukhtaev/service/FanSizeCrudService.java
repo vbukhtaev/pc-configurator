@@ -27,7 +27,7 @@ import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_FAN_SIZE_UNIQUE;
         isolation = READ_COMMITTED,
         readOnly = true
 )
-public class FanSizeCrudServiceImpl implements IFanSizeCrudService {
+public class FanSizeCrudService implements ICrudService<FanSize, UUID> {
 
     /**
      * Репозиторий.
@@ -46,7 +46,7 @@ public class FanSizeCrudServiceImpl implements IFanSizeCrudService {
      * @param translator сервис предоставления сообщений
      */
     @Autowired
-    public FanSizeCrudServiceImpl(
+    public FanSizeCrudService(
             final IFanSizeRepository repository,
             final Translator translator
     ) {
