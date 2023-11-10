@@ -19,16 +19,15 @@ ext {
     lombokVersion = "1.18.30"
     mapStructVersion = "1.5.5.Final"
     openApiStarterVersion = "2.2.0"
-    tcPostgresVersion = "1.19.1"
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation 'org.liquibase:liquibase-core'
     runtimeOnly "org.postgresql:postgresql"
+    runtimeOnly "com.h2database:h2"
 
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly "org.projectlombok:lombok:$lombokVersion"
@@ -42,7 +41,9 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$openApiStarterVersion"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:postgresql:$tcPostgresVersion"
+    testImplementation "org.springframework.boot:spring-boot-testcontainers"
+    testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.testcontainers:postgresql"
 }
 
 tasks.named('test') {

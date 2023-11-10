@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-data-into-expansion-bay-table
+      id: insert-data-into-expansion-bay-format-table
       author: VBukhtaev
       changes:
         - sqlFile:
-            path: db/changelog/sql/expansion_bays.sql
+            path: db/changelog/sql/expansion_bay_formats.sql
             stripComments: true

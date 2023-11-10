@@ -1,18 +1,18 @@
 databaseChangeLog:
   - changeSet:
-      id: create-cpu-power-connector-table
+      id: create-expansion-bay-format-table
       author: VBukhtaev
       changes:
         - createTable:
-            tableName: cpu_power_connector
-            remarks: Коннектор питания процессора
+            tableName: expansion_bay_format
+            remarks: Формат отсека расширения
             columns:
               - column:
                   name: id
                   type: UUID
                   constraints:
                     primaryKey: true
-                    primaryKeyName: cpu_power_connector_pk
+                    primaryKeyName: expansion_bay_format_pk
                     nullable: false
               - column:
                   name: name
@@ -20,5 +20,5 @@ databaseChangeLog:
                   type: VARCHAR(64)
                   constraints:
                     unique: true
-                    uniqueConstraintName: cpu_power_connector_name_uq
+                    uniqueConstraintName: expansion_bay_format_name_uq
                     nullable: false

@@ -12,7 +12,7 @@ databaseChangeLog:
                   type: UUID
                   constraints:
                     primaryKey: true
-                    primaryKeyName: video-memory-type_pk
+                    primaryKeyName: video_memory_type_pk
                     nullable: false
               - column:
                   name: name
@@ -20,5 +20,5 @@ databaseChangeLog:
                   type: VARCHAR(64)
                   constraints:
                     unique: true
-                    uniqueConstraintName: video-memory-type_name_uq
+                    uniqueConstraintName: video_memory_type_name_uq
                     nullable: false
