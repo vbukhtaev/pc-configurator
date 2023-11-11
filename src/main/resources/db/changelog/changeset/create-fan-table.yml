@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-fan-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: fan
+            remarks: Вентилятор
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: fan_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vendor_id
+                  remarks: Вендор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fan_vendor_fk
+                    referencedTableName: vendor
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: size_id
+                  remarks: Размер
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fan_fan_size_fk
+                    referencedTableName: fan_size
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: power_connector_id
+                  remarks: Коннектор питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fan_fan_power_connector_fk
+                    referencedTableName: fan_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: fan
+            columnNames: name, size_id
+            constraintName: fan_name_and_size_id_uq

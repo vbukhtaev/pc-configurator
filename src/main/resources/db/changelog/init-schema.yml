@@ -37,3 +37,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-design-table.yml
   - include:
       file: db/changelog/changeset/create-chipset-table.yml
+  - include:
+      file: db/changelog/changeset/create-fan-table.yml

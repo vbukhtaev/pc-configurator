@@ -4,6 +4,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import ru.bukhtaev.util.ChipsetSort;
 import ru.bukhtaev.util.DesignSort;
+import ru.bukhtaev.util.FanSort;
 import ru.bukhtaev.util.NameableSort;
 
 /**
@@ -42,5 +43,14 @@ public class TestUtils {
             0,
             20,
             ChipsetSort.SOCKET_NAME_ASC.getSortValue()
+    );
+
+    /**
+     * Объект типа {@code Pageable} для вентиляторов.
+     */
+    public static final Pageable FAN_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            FanSort.SIZE_LENGTH_ASC.getSortValue()
     );
 }

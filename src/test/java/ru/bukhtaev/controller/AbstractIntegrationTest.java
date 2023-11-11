@@ -10,6 +10,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.util.ChipsetSort;
 import ru.bukhtaev.util.DesignSort;
+import ru.bukhtaev.util.FanSort;
 import ru.bukhtaev.util.NameableSort;
 
 /**
@@ -48,6 +49,16 @@ public abstract class AbstractIntegrationTest extends AbstractContainerizedTest 
         add("offset", "0");
         add("limit", "20");
         add("sort", ChipsetSort.SOCKET_NAME_ASC.toString());
+    }};
+
+    /**
+     * Параметр для запроса на получение вентиляторов с пагинацией.
+     */
+    protected static final LinkedMultiValueMap<String, String> FAN_PAGE_REQUEST_PARAMS
+            = new LinkedMultiValueMap<>() {{
+        add("offset", "0");
+        add("limit", "20");
+        add("sort", FanSort.NAME_ASC.toString());
     }};
 
     @Autowired
