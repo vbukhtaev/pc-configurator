@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-chipset-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/chipsets.sql
+            stripComments: true

@@ -16,7 +16,7 @@ import ru.bukhtaev.util.DesignSort;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static ru.bukhtaev.TestUtils.NAMEABLE_PAGEABLE;
+import static ru.bukhtaev.TestUtils.DESIGN_PAGEABLE;
 
 /**
  * Модульные тесты репозитория вариантов исполнения.
@@ -75,11 +75,11 @@ class DesignRepositoryTest extends AbstractContainerizedTest {
         underTest.save(designEagle);
 
         // when
-        final Slice<Design> designs = underTest.findAllBy(NAMEABLE_PAGEABLE);
+        final Slice<Design> designs = underTest.findAllBy(DESIGN_PAGEABLE);
 
         // then
         assertThat(designs.getSize())
-                .isEqualTo(NAMEABLE_PAGEABLE.getPageSize());
+                .isEqualTo(DESIGN_PAGEABLE.getPageSize());
         assertThat(designs.getNumberOfElements())
                 .isEqualTo(2);
 

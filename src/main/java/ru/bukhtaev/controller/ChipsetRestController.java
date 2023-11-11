@@ -14,63 +14,63 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.bukhtaev.dto.mapper.IDesignMapper;
-import ru.bukhtaev.dto.request.DesignRequestDto;
-import ru.bukhtaev.dto.response.DesignResponseDto;
-import ru.bukhtaev.model.Design;
+import ru.bukhtaev.dto.mapper.IChipsetMapper;
+import ru.bukhtaev.dto.request.ChipsetRequestDto;
+import ru.bukhtaev.dto.response.ChipsetResponseDto;
+import ru.bukhtaev.model.Chipset;
 import ru.bukhtaev.service.IPagingCrudService;
-import ru.bukhtaev.util.DesignSort;
+import ru.bukhtaev.util.ChipsetSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static ru.bukhtaev.controller.DesignRestController.URL_API_V1_DESIGNS;
+import static ru.bukhtaev.controller.ChipsetRestController.URL_API_V1_CHIPSETS;
 
 /**
- * Контроллер обработки CRUD операций над вариантами исполнения.
+ * Контроллер обработки CRUD операций над чипсетами.
  */
-@Tag(name = "Варианты исполнения")
+@Tag(name = "Чипсеты")
 @RestController
-@RequestMapping(value = URL_API_V1_DESIGNS, produces = "application/json")
-public class DesignRestController {
+@RequestMapping(value = URL_API_V1_CHIPSETS, produces = "application/json")
+public class ChipsetRestController {
 
     /**
      * URL.
      */
-    public static final String URL_API_V1_DESIGNS = "/api/v1/designs";
+    public static final String URL_API_V1_CHIPSETS = "/api/v1/chipsets";
 
     /**
-     * Сервис CRUD операций над вариантами исполнения.
+     * Сервис CRUD операций над чипсетами.
      */
-    private final IPagingCrudService<Design, UUID> crudService;
+    private final IPagingCrudService<Chipset, UUID> crudService;
 
     /**
-     * Маппер для DTO вариантов исполнения.
+     * Маппер для DTO чипсетов.
      */
-    private final IDesignMapper mapper;
+    private final IChipsetMapper mapper;
 
     /**
      * Конструктор.
      *
-     * @param crudService сервис CRUD операций над вариантами исполнения
-     * @param mapper      маппер для DTO вариантов исполнения
+     * @param crudService сервис CRUD операций над чипсетами
+     * @param mapper      маппер для DTO чипсетов
      */
     @Autowired
-    public DesignRestController(
-            final IPagingCrudService<Design, UUID> crudService,
-            final IDesignMapper mapper
+    public ChipsetRestController(
+            final IPagingCrudService<Chipset, UUID> crudService,
+            final IChipsetMapper mapper
     ) {
         this.crudService = crudService;
         this.mapper = mapper;
     }
 
-    @Operation(summary = "Получение всех вариантов исполнения")
+    @Operation(summary = "Получение всех чипсетов")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Варианты исполнения получены"
+                    description = "Чипсеты получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -81,7 +81,7 @@ public class DesignRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<DesignResponseDto>> handleGetAll() {
+    public ResponseEntity<List<ChipsetResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -92,11 +92,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Получение всех вариантов исполнения (с пагинацией)")
+    @Operation(summary = "Получение всех чипсетов (с пагинацией)")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Варианты исполнения получены"
+                    description = "Чипсеты получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -107,10 +107,10 @@ public class DesignRestController {
             )
     })
     @GetMapping("/pageable")
-    public ResponseEntity<Slice<DesignResponseDto>> handleGetAll(
+    public ResponseEntity<Slice<ChipsetResponseDto>> handleGetAll(
             @RequestParam(value = "offset", defaultValue = "0") final Integer offset,
             @RequestParam(value = "limit", defaultValue = "20") final Integer limit,
-            @RequestParam(value = "sort", defaultValue = "NAME_ASC") final DesignSort sort
+            @RequestParam(value = "sort", defaultValue = "NAME_ASC") final ChipsetSort sort
     ) {
         return ResponseEntity.ok(
                 crudService.getAll(
@@ -119,11 +119,11 @@ public class DesignRestController {
         );
     }
 
-    @Operation(summary = "Получение варианта исполнения по ID")
+    @Operation(summary = "Получение чипсета по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Вариант исполнения получен"
+                    description = "Чипсет получен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -134,14 +134,14 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вариант исполнения не найден",
+                    description = "Чипсет не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<DesignResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<ChipsetResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -149,11 +149,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Создание варианта исполнения")
+    @Operation(summary = "Создание чипсета")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
-                    description = "Вариант исполнения создан"
+                    description = "Чипсет создан"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -164,35 +164,35 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вендор не найден",
+                    description = "Сокет не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PostMapping
-    public ResponseEntity<DesignResponseDto> handleCreate(
-            @RequestBody final DesignRequestDto dto,
+    public ResponseEntity<ChipsetResponseDto> handleCreate(
+            @RequestBody final ChipsetRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final DesignResponseDto savedDto = mapper.convertToDto(
+        final ChipsetResponseDto savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
         );
 
         return ResponseEntity.created(uriBuilder
-                        .path(URL_API_V1_DESIGNS + "/{id}")
+                        .path(URL_API_V1_CHIPSETS + "/{id}")
                         .build(Map.of("id", savedDto.getId())))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(savedDto);
     }
 
-    @Operation(summary = "Изменение варианта исполнения")
+    @Operation(summary = "Изменение чипсета")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Вариант исполнения изменен"
+                    description = "Чипсет изменен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -203,16 +203,16 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вариант исполнения или вендор не найден",
+                    description = "Чипсет или сокет не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<DesignResponseDto> handleUpdate(
+    public ResponseEntity<ChipsetResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final DesignRequestDto dto
+            @RequestBody final ChipsetRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -226,11 +226,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Замена варианта исполнения")
+    @Operation(summary = "Замена чипсета")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Вариант исполнения заменен"
+                    description = "Чипсет заменен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -241,16 +241,16 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вариант исполнения или вендор не найден",
+                    description = "Чипсет или сокет не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<DesignResponseDto> handleReplace(
+    public ResponseEntity<ChipsetResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final DesignRequestDto dto
+            @RequestBody final ChipsetRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -264,11 +264,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Удаление варианта исполнения по ID")
+    @Operation(summary = "Удаление чипсета по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
-                    description = "Вариант исполнения удален"
+                    description = "Чипсет удален"
             ),
             @ApiResponse(
                     responseCode = "400",

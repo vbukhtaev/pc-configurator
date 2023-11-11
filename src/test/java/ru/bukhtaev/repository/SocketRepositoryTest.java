@@ -112,7 +112,7 @@ class SocketRepositoryTest extends AbstractContainerizedTest {
     @Test
     void findByName_withNonExistentName_shouldReturnEmptyOptional() {
         // given
-        final String anotherName = "X99";
+        final String anotherName = "LGA 2011 V3";
         underTest.save(socketAm5);
         underTest.save(socketLga1700);
         assertThat(underTest.findAll()).hasSize(2);
@@ -167,7 +167,7 @@ class SocketRepositoryTest extends AbstractContainerizedTest {
     void findByNameAndIdNot_withNonExistentNameAndNonExistentId_shouldReturnEmptyOptional() {
         // given
         final UUID anotherId = UUID.randomUUID();
-        final String anotherName = "X99";
+        final String anotherName = "LGA 2011 V3";
         underTest.save(socketAm5);
         underTest.save(socketLga1700);
         assertThat(underTest.findAll()).hasSize(2);
@@ -185,7 +185,7 @@ class SocketRepositoryTest extends AbstractContainerizedTest {
     @Test
     void findByNameAndIdNot_withNonExistentNameAndExistentId_shouldReturnEmptyOptional() {
         // given
-        final String anotherName = "X99";
+        final String anotherName = "LGA 2011 V3";
         final Socket saved = underTest.save(socketAm5);
         underTest.save(socketLga1700);
         assertThat(underTest.findAll()).hasSize(2);

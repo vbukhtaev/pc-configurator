@@ -25,6 +25,9 @@ public class Design extends NameableEntity {
      */
     public static final String FIELD_VENDOR = "vendor";
 
+    /**
+     * Вендор.
+     */
     @ManyToOne
     @JoinColumn(name = "vendor_id", referencedColumnName = "id", nullable = false)
     protected Vendor vendor;

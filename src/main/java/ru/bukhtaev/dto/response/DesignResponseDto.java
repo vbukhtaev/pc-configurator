@@ -14,7 +14,7 @@ import ru.bukhtaev.model.Design;
 public class DesignResponseDto extends NameableResponseDto {
 
     /**
-     * Вендор
+     * Вендор.
      */
     @Schema(description = "Вендор")
     protected NameableResponseDto vendor;

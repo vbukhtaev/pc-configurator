@@ -233,7 +233,7 @@ class SocketRestControllerIT extends AbstractIntegrationTest {
                 mapper.convertFromDto(socketAm5)
         );
         assertThat(repository.findAll()).hasSize(2);
-        final String newName = "X99";
+        final String newName = "LGA 2011 V3";
         final NameableRequestDto dto = NameableRequestDto.builder()
                 .name(newName)
                 .build();
@@ -313,7 +313,7 @@ class SocketRestControllerIT extends AbstractIntegrationTest {
                 mapper.convertFromDto(socketAm5)
         );
         assertThat(repository.findAll()).hasSize(2);
-        final String newName = "X99";
+        final String newName = "LGA 2011 V3";
         final NameableRequestDto dto = NameableRequestDto.builder()
                 .name(newName)
                 .build();

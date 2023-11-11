@@ -2,6 +2,8 @@ package ru.bukhtaev;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import ru.bukhtaev.util.ChipsetSort;
+import ru.bukhtaev.util.DesignSort;
 import ru.bukhtaev.util.NameableSort;
 
 /**
@@ -22,5 +24,23 @@ public class TestUtils {
             0,
             20,
             NameableSort.NAME_ASC.getSortValue()
+    );
+
+    /**
+     * Объект типа {@code Pageable} для вариантов исполнения.
+     */
+    public static final Pageable DESIGN_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            DesignSort.VENDOR_NAME_ASC.getSortValue()
+    );
+
+    /**
+     * Объект типа {@code Pageable} для чипсетов.
+     */
+    public static final Pageable CHIPSET_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            ChipsetSort.SOCKET_NAME_ASC.getSortValue()
     );
 }
