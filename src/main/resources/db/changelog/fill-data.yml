@@ -33,3 +33,5 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-vendor-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-video-memory-type-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-design-table.yml

@@ -1,4 +1,4 @@
 INSERT INTO cpu_power_connector(id, name)
-VALUES (GEN_RANDOM_UUID(), '4 pin'),
-       (GEN_RANDOM_UUID(), '8 pin'),
-       (GEN_RANDOM_UUID(), '8 + 4 pin');
+VALUES ('3789acaa-52c6-4002-a85f-40ab2fcec13f', '4 pin'),
+       ('732537b8-02a1-4e63-893f-cf26df56210c', '8 pin'),
+       ('4a96526f-2bb1-45f3-9e1a-d5aa097adafe', '8 + 4 pin');

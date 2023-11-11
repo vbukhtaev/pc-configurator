@@ -12,6 +12,11 @@ public class MessageUtils {
     }
 
     /**
+     * Код сообщения о том, что значение параметра некорректно.
+     */
+    public static final String MESSAGE_CODE_INVALID_PARAM_VALUE = "validation.common.invalid-param-value";
+
+    /**
      * Код сообщения о том, что производитель с указанным ID не найден.
      */
     public static final String MESSAGE_CODE_MANUFACTURER_NOT_FOUND = "validation.manufacturer.not-found";

@@ -6,13 +6,12 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Модель размера вентилятора.
@@ -28,6 +27,7 @@ import java.util.UUID;
                 "height"
         })
 )
+@SuperBuilder
 @NoArgsConstructor
 public class FanSize extends BaseEntity {
 
@@ -69,27 +69,6 @@ public class FanSize extends BaseEntity {
     @NotNull
     @Column(name = "height", nullable = false)
     protected Integer height;
-
-    /**
-     * Конструктор
-     *
-     * @param id     ID
-     * @param length длина
-     * @param width  ширина
-     * @param height высота
-     */
-    @Builder
-    public FanSize(
-            final UUID id,
-            final @NotNull Integer length,
-            final @NotNull Integer width,
-            final @NotNull Integer height
-    ) {
-        super(id);
-        this.length = length;
-        this.width = width;
-        this.height = height;
-    }
 
     @Override
     public boolean equals(Object o) {

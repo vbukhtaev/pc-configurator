@@ -6,15 +6,16 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Модель сущности, имеющей название.
  */
 @Getter
 @Setter
+@SuperBuilder
 @MappedSuperclass
 @NoArgsConstructor
 public abstract class NameableEntity extends BaseEntity {
@@ -30,17 +31,6 @@ public abstract class NameableEntity extends BaseEntity {
     @NotBlank
     @Column(name = "name", length = 64, nullable = false, unique = true)
     protected String name;
-
-    /**
-     * Конструктор.
-     *
-     * @param id   ID
-     * @param name название
-     */
-    protected NameableEntity(final UUID id, final String name) {
-        super(id);
-        this.name = name;
-    }
 
     @Override
     public boolean equals(Object o) {

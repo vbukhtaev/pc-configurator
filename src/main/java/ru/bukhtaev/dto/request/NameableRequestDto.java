@@ -1,7 +1,10 @@
 package ru.bukhtaev.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import ru.bukhtaev.model.NameableEntity;
 
 /**
@@ -9,9 +12,8 @@ import ru.bukhtaev.model.NameableEntity;
  */
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 public class NameableRequestDto {
 
     /**

@@ -5,11 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 
 /**
- * Варианты сортировки для сущностей, имеющих название.
+ * Варианты сортировки для вариантов исполнения.
  */
 @Getter
 @RequiredArgsConstructor
-public enum NameableSort {
+public enum DesignSort {
 
     /**
      * По ID по возрастанию.
@@ -29,7 +29,17 @@ public enum NameableSort {
     /**
      * По названию по убыванию.
      */
-    NAME_DESC(Sort.by(Sort.Direction.DESC, "name"));
+    NAME_DESC(Sort.by(Sort.Direction.DESC, "name")),
+
+    /**
+     * По названию вендора по возрастанию.
+     */
+    VENDOR_NAME_ASC(Sort.by(Sort.Direction.ASC, "vendor.name")),
+
+    /**
+     * По названию вендора по убыванию.
+     */
+    VENDOR_NAME_DESC(Sort.by(Sort.Direction.DESC, "vendor.name"));
 
     private final Sort sortValue;
 }

@@ -1,9 +1,11 @@
 package ru.bukhtaev.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -13,8 +15,10 @@ import java.util.UUID;
  */
 @Getter
 @Setter
+@SuperBuilder
 @MappedSuperclass
 @NoArgsConstructor
+@AllArgsConstructor
 public abstract class BaseEntity {
 
     /**
@@ -29,15 +33,6 @@ public abstract class BaseEntity {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     protected UUID id;
-
-    /**
-     * Конструктор.
-     *
-     * @param id ID
-     */
-    protected BaseEntity(final UUID id) {
-        this.id = id;
-    }
 
     @Override
     public boolean equals(Object o) {

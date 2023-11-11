@@ -1,9 +1,9 @@
 package ru.bukhtaev.exception;
 
 /**
- * Исключение для ситуации, когда нарушается уникальность имени сущности.
+ * Исключение для ситуации, когда значение параметра некорректно.
  */
-public class UniqueNameException extends CommonClientSideException {
+public class InvalidParamException extends CommonClientSideException {
 
     /**
      * Конструктор.
@@ -11,7 +11,7 @@ public class UniqueNameException extends CommonClientSideException {
      * @param errorMessage сообщение об ошибке
      * @param paramNames   названия параметров, значения которых привели к исключению
      */
-    public UniqueNameException(final String errorMessage, final String... paramNames) {
+    public InvalidParamException(final String errorMessage, final String... paramNames) {
         super(errorMessage, paramNames);
     }
 }
