@@ -39,3 +39,5 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-chipset-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-fan-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-gpu-table.yml

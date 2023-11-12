@@ -2,10 +2,7 @@ package ru.bukhtaev;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import ru.bukhtaev.util.ChipsetSort;
-import ru.bukhtaev.util.DesignSort;
-import ru.bukhtaev.util.FanSort;
-import ru.bukhtaev.util.NameableSort;
+import ru.bukhtaev.util.*;
 
 /**
  * Утилитный класс, содержащий полезные для тестирования константы.
@@ -52,5 +49,14 @@ public class TestUtils {
             0,
             20,
             FanSort.SIZE_LENGTH_ASC.getSortValue()
+    );
+
+    /**
+     * Объект типа {@code Pageable} для графических процессоров.
+     */
+    public static final Pageable GPU_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            GpuSort.MEMORY_SIZE_ASC.getSortValue()
     );
 }

@@ -5,6 +5,8 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
+import java.util.Locale;
+
 /**
  * Абстрактный тест с использованием Testcontainers.
  */
@@ -18,6 +20,7 @@ public abstract class AbstractContainerizedTest {
 
     @BeforeAll
     static void startContainers() {
+        Locale.setDefault(Locale.US);
         postgres.start();
     }
 

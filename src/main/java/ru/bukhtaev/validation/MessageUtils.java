@@ -272,9 +272,9 @@ public class MessageUtils {
 
     /**
      * Код сообщения о том, что графический процессор
-     * с указанным названием и объемом видеопамяти уже существует.
+     * с указанным названием, объемом видеопамяти и типом видеопамяти уже существует.
      */
-    public static final String MESSAGE_CODE_GPU_UNIQUE = "validation.gpu.unique-name-and-memory-size";
+    public static final String MESSAGE_CODE_GPU_UNIQUE = "validation.gpu.unique-name-and-memory-size-and-memory-type";
 
     /**
      * Код сообщения о том, что блок питания с указанным ID не найден.
