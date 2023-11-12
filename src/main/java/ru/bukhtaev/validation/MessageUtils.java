@@ -211,9 +211,11 @@ public class MessageUtils {
     public static final String MESSAGE_CODE_HDD_NOT_FOUND = "validation.hdd.not-found";
 
     /**
-     * Код сообщения о том, что HDD с указанным названием и вместимостью уже существует.
+     * Код сообщения о том, что HDD с указанным названием, вместимостью,
+     * скоростью вращения шпинделя и объемом кэш-памяти уже существует.
      */
-    public static final String MESSAGE_CODE_HDD_UNIQUE = "validation.hdd.unique-name-and-capacity";
+    public static final String MESSAGE_CODE_HDD_UNIQUE
+            = "validation.hdd.unique-name-and-capacity-and-spindle-speed-and-cache-size";
 
     /**
      * Код сообщения о том, что вентилятор с указанным ID не найден.

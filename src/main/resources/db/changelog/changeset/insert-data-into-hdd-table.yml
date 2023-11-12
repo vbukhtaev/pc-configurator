@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-hdd-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/hdds.sql
+            stripComments: true

@@ -59,4 +59,13 @@ public class TestUtils {
             20,
             GpuSort.MEMORY_SIZE_ASC.getSortValue()
     );
+
+    /**
+     * Объект типа {@code Pageable} для жестких дисков.
+     */
+    public static final Pageable HDD_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            HddSort.CAPACITY_ASC.getSortValue()
+    );
 }

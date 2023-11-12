@@ -68,6 +68,16 @@ public abstract class AbstractIntegrationTest extends AbstractContainerizedTest 
         add("sort", GpuSort.MANUFACTURER_NAME_ASC.toString());
     }};
 
+    /**
+     * Параметр для запроса на получение жестких дисков с пагинацией.
+     */
+    protected static final LinkedMultiValueMap<String, String> HDD_PAGE_REQUEST_PARAMS
+            = new LinkedMultiValueMap<>() {{
+        add("offset", "0");
+        add("limit", "20");
+        add("sort", HddSort.VENDOR_NAME_ASC.toString());
+    }};
+
     @Autowired
     protected MockMvc mockMvc;
 
