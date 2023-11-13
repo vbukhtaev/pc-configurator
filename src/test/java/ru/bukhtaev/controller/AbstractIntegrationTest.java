@@ -78,6 +78,16 @@ public abstract class AbstractIntegrationTest extends AbstractContainerizedTest 
         add("sort", HddSort.VENDOR_NAME_ASC.toString());
     }};
 
+    /**
+     * Параметр для запроса на получение SSD накопителей с пагинацией.
+     */
+    protected static final LinkedMultiValueMap<String, String> SSD_PAGE_REQUEST_PARAMS
+            = new LinkedMultiValueMap<>() {{
+        add("offset", "0");
+        add("limit", "20");
+        add("sort", HddSort.VENDOR_NAME_ASC.toString());
+    }};
+
     @Autowired
     protected MockMvc mockMvc;
 

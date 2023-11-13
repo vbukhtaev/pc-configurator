@@ -95,7 +95,7 @@ public abstract class StorageDevice extends NameableEntity {
      * Коннектор питания.
      */
     @ManyToOne
-    @JoinColumn(name = "power_connector_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "power_connector_id", referencedColumnName = "id")
     protected StoragePowerConnector powerConnector;
 
     @Override

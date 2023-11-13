@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-ssd-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: ssd
+            remarks: SSD накопитель
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: ssd_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: capacity
+                  remarks: Объем памяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reading_speed
+                  remarks: Скорость чтения
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: writing_speed
+                  remarks: Скорость записи
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vendor_id
+                  remarks: Вендор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: ssd_vendor_fk
+                    referencedTableName: vendor
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: connector_id
+                  remarks: Коннектор подключения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: ssd_connector_fk
+                    referencedTableName: storage_connector
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: power_connector_id
+                  remarks: Коннектор питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: ssd_power_connector_fk
+                    referencedTableName: storage_power_connector
+                    referencedColumnNames: id
+                    nullable: true
+        - addUniqueConstraint:
+            tableName: ssd
+            columnNames: name, capacity
+            constraintName: ssd_name_and_capacity_uq

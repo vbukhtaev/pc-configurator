@@ -43,3 +43,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-gpu-table.yml
   - include:
       file: db/changelog/changeset/create-hdd-table.yml
+  - include:
+      file: db/changelog/changeset/create-ssd-table.yml

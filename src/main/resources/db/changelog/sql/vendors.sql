@@ -43,4 +43,5 @@ VALUES ('9a99670a-99fd-4ccd-86d0-5154ac3cd96e', 'ASUS'),
        ('0740f68b-9fc7-48e2-bb1d-f536e00ef58c', 'Noctua'),
        ('482c7d39-1620-4b8b-b5a3-d94bd35668f3', 'Western Digital'),
        ('85078c86-3f85-45a4-b20d-03c08d0e2b82', 'Toshiba'),
-       ('9bf6f8d3-e619-4cfb-aaeb-333f38124299', 'Seagate');
+       ('9bf6f8d3-e619-4cfb-aaeb-333f38124299', 'Seagate'),
+       ('c867fa05-bcbc-4040-b17d-37368ca95407', 'Samsung');

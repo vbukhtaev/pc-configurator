@@ -68,4 +68,13 @@ public class TestUtils {
             20,
             HddSort.CAPACITY_ASC.getSortValue()
     );
+
+    /**
+     * Объект типа {@code Pageable} для жестких дисков.
+     */
+    public static final Pageable SSD_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            HddSort.CAPACITY_ASC.getSortValue()
+    );
 }

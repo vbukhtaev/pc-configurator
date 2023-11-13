@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-ssd-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/ssds.sql
+            stripComments: true
