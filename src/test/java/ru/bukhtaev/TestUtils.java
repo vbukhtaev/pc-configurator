@@ -77,4 +77,13 @@ public class TestUtils {
             20,
             HddSort.CAPACITY_ASC.getSortValue()
     );
+
+    /**
+     * Объект типа {@code Pageable} для модулей оперативной памяти.
+     */
+    public static final Pageable RAM_MODULE_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            RamModuleSort.TYPE_NAME_ASC.getSortValue()
+    );
 }

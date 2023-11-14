@@ -88,6 +88,16 @@ public abstract class AbstractIntegrationTest extends AbstractContainerizedTest 
         add("sort", HddSort.VENDOR_NAME_ASC.toString());
     }};
 
+    /**
+     * Параметр для запроса на получение модулей оперативной памяти с пагинацией.
+     */
+    protected static final LinkedMultiValueMap<String, String> RAM_MODULE_PAGE_REQUEST_PARAMS
+            = new LinkedMultiValueMap<>() {{
+        add("offset", "0");
+        add("limit", "20");
+        add("sort", RamModuleSort.TYPE_NAME_DESC.toString());
+    }};
+
     @Autowired
     protected MockMvc mockMvc;
 

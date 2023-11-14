@@ -45,3 +45,5 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-hdd-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-ssd-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-ram-module-table.yml
