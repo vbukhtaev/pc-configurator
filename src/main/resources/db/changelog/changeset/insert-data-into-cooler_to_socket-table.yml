@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-cooler_to_socket-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/coolers_to_sockets.sql
+            stripComments: true

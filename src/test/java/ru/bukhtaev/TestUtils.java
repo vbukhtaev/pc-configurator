@@ -86,4 +86,13 @@ public class TestUtils {
             20,
             RamModuleSort.TYPE_NAME_ASC.getSortValue()
     );
+
+    /**
+     * Объект типа {@code Pageable} для процессорных кулеров.
+     */
+    public static final Pageable COOLER_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            CoolerSort.POWER_DISSIPATION_ASC.getSortValue()
+    );
 }

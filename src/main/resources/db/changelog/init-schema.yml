@@ -47,3 +47,7 @@ databaseChangeLog:
       file: db/changelog/changeset/create-ssd-table.yml
   - include:
       file: db/changelog/changeset/create-ram-module-table.yml
+  - include:
+      file: db/changelog/changeset/create-cooler-table.yml
+  - include:
+      file: db/changelog/changeset/create-cooler_to_socket-table.yml

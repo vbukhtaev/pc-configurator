@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cooler-to-socket-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: cooler_to_socket
+            remarks: Поддерживаемые сокеты процессорных кулеров
+            columns:
+              - column:
+                  name: cooler_id
+                  remarks: Кулер
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cooler_to_socket_cooler_fk
+                    referencedTableName: cooler
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: socket_id
+                  remarks: Сокет
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cooler_to_socket_socket_fk
+                    referencedTableName: socket
+                    referencedColumnNames: id
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: cooler_id, socket_id
+            constraintName: pk_cooler_to_socket
+            tableName: cooler_to_socket

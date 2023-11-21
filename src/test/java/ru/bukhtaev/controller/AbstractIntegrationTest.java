@@ -98,6 +98,16 @@ public abstract class AbstractIntegrationTest extends AbstractContainerizedTest 
         add("sort", RamModuleSort.TYPE_NAME_DESC.toString());
     }};
 
+    /**
+     * Параметр для запроса на получение процессорных кулеров с пагинацией.
+     */
+    protected static final LinkedMultiValueMap<String, String> COOLER_PAGE_REQUEST_PARAMS
+            = new LinkedMultiValueMap<>() {{
+        add("offset", "0");
+        add("limit", "20");
+        add("sort", CoolerSort.NAME_ASC.toString());
+    }};
+
     @Autowired
     protected MockMvc mockMvc;
 

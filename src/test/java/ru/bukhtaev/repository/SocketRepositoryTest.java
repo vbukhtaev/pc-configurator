@@ -1,6 +1,5 @@
 package ru.bukhtaev.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,13 +57,13 @@ class SocketRepositoryTest extends AbstractContainerizedTest {
         final Slice<Socket> sockets = underTest.findAllBy(NAMEABLE_PAGEABLE);
 
         // then
-        Assertions.assertThat(sockets.getSize())
+        assertThat(sockets.getSize())
                 .isEqualTo(NAMEABLE_PAGEABLE.getPageSize());
-        Assertions.assertThat(sockets.getNumberOfElements())
+        assertThat(sockets.getNumberOfElements())
                 .isEqualTo(2);
-        Assertions.assertThat(sockets.getContent().get(0).getName())
+        assertThat(sockets.getContent().get(0).getName())
                 .isEqualTo(socketAm5.getName());
-        Assertions.assertThat(sockets.getContent().get(1).getName())
+        assertThat(sockets.getContent().get(1).getName())
                 .isEqualTo(socketLga1700.getName());
     }
 
@@ -83,11 +82,11 @@ class SocketRepositoryTest extends AbstractContainerizedTest {
         final Slice<Socket> sockets = underTest.findAllBy(singleElementPageable);
 
         // then
-        Assertions.assertThat(sockets.getSize())
+        assertThat(sockets.getSize())
                 .isEqualTo(singleElementPageable.getPageSize());
-        Assertions.assertThat(sockets.getNumberOfElements())
+        assertThat(sockets.getNumberOfElements())
                 .isEqualTo(1);
-        Assertions.assertThat(sockets.getContent().get(0).getName())
+        assertThat(sockets.getContent().get(0).getName())
                 .isEqualTo(socketAm5.getName());
     }
 

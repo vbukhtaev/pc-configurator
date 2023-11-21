@@ -1,6 +1,5 @@
 package ru.bukhtaev.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,13 +57,13 @@ class VendorRepositoryTest extends AbstractContainerizedTest {
         final Slice<Vendor> vendors = underTest.findAllBy(NAMEABLE_PAGEABLE);
 
         // then
-        Assertions.assertThat(vendors.getSize())
+        assertThat(vendors.getSize())
                 .isEqualTo(NAMEABLE_PAGEABLE.getPageSize());
-        Assertions.assertThat(vendors.getNumberOfElements())
+        assertThat(vendors.getNumberOfElements())
                 .isEqualTo(2);
-        Assertions.assertThat(vendors.getContent().get(0).getName())
+        assertThat(vendors.getContent().get(0).getName())
                 .isEqualTo(vendorGigabyte.getName());
-        Assertions.assertThat(vendors.getContent().get(1).getName())
+        assertThat(vendors.getContent().get(1).getName())
                 .isEqualTo(vendorMsi.getName());
     }
 
@@ -83,11 +82,11 @@ class VendorRepositoryTest extends AbstractContainerizedTest {
         final Slice<Vendor> vendors = underTest.findAllBy(singleElementPageable);
 
         // then
-        Assertions.assertThat(vendors.getSize())
+        assertThat(vendors.getSize())
                 .isEqualTo(singleElementPageable.getPageSize());
-        Assertions.assertThat(vendors.getNumberOfElements())
+        assertThat(vendors.getNumberOfElements())
                 .isEqualTo(1);
-        Assertions.assertThat(vendors.getContent().get(0).getName())
+        assertThat(vendors.getContent().get(0).getName())
                 .isEqualTo(vendorGigabyte.getName());
     }
 

@@ -114,7 +114,11 @@ public class ChipsetRestController {
     ) {
         return ResponseEntity.ok(
                 crudService.getAll(
-                        PageRequest.of(offset, limit, sort.getSortValue())
+                        PageRequest.of(
+                                offset, 
+                                limit, 
+                                sort.getSortValue()
+                        )
                 ).map(mapper::convertToDto)
         );
     }

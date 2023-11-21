@@ -14,63 +14,63 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.bukhtaev.dto.mapper.IDesignMapper;
-import ru.bukhtaev.dto.request.DesignRequestDto;
-import ru.bukhtaev.dto.response.DesignResponseDto;
-import ru.bukhtaev.model.Design;
+import ru.bukhtaev.dto.mapper.ICoolerMapper;
+import ru.bukhtaev.dto.request.CoolerRequestDto;
+import ru.bukhtaev.dto.response.CoolerResponseDto;
+import ru.bukhtaev.model.Cooler;
 import ru.bukhtaev.service.IPagingCrudService;
-import ru.bukhtaev.util.DesignSort;
+import ru.bukhtaev.util.CoolerSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static ru.bukhtaev.controller.DesignRestController.URL_API_V1_DESIGNS;
+import static ru.bukhtaev.controller.CoolerRestController.URL_API_V1_COOLERS;
 
 /**
- * Контроллер обработки CRUD операций над вариантами исполнения.
+ * Контроллер обработки CRUD операций над процессорными кулерами.
  */
-@Tag(name = "Варианты исполнения")
+@Tag(name = "Процессорные кулеры")
 @RestController
-@RequestMapping(value = URL_API_V1_DESIGNS, produces = "application/json")
-public class DesignRestController {
+@RequestMapping(value = URL_API_V1_COOLERS, produces = "application/json")
+public class CoolerRestController {
 
     /**
      * URL.
      */
-    public static final String URL_API_V1_DESIGNS = "/api/v1/designs";
+    public static final String URL_API_V1_COOLERS = "/api/v1/coolers";
 
     /**
-     * Сервис CRUD операций над вариантами исполнения.
+     * Сервис CRUD операций над процессорными кулерами.
      */
-    private final IPagingCrudService<Design, UUID> crudService;
+    private final IPagingCrudService<Cooler, UUID> crudService;
 
     /**
-     * Маппер для DTO вариантов исполнения.
+     * Маппер для DTO процессорных кулеров.
      */
-    private final IDesignMapper mapper;
+    private final ICoolerMapper mapper;
 
     /**
      * Конструктор.
      *
-     * @param crudService сервис CRUD операций над вариантами исполнения
-     * @param mapper      маппер для DTO вариантов исполнения
+     * @param crudService сервис CRUD операций над процессорными кулерами
+     * @param mapper      маппер для DTO процессорных кулеров
      */
     @Autowired
-    public DesignRestController(
-            final IPagingCrudService<Design, UUID> crudService,
-            final IDesignMapper mapper
+    public CoolerRestController(
+            final IPagingCrudService<Cooler, UUID> crudService,
+            final ICoolerMapper mapper
     ) {
         this.crudService = crudService;
         this.mapper = mapper;
     }
 
-    @Operation(summary = "Получение всех вариантов исполнения")
+    @Operation(summary = "Получение всех процессорных кулеров")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Варианты исполнения получены"
+                    description = "Процессорные кулеры получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -81,7 +81,7 @@ public class DesignRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<DesignResponseDto>> handleGetAll() {
+    public ResponseEntity<List<CoolerResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -92,11 +92,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Получение всех вариантов исполнения (с пагинацией)")
+    @Operation(summary = "Получение всех процессорных кулеров (с пагинацией)")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Варианты исполнения получены"
+                    description = "Процессорные кулеры получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -107,10 +107,10 @@ public class DesignRestController {
             )
     })
     @GetMapping("/pageable")
-    public ResponseEntity<Slice<DesignResponseDto>> handleGetAll(
+    public ResponseEntity<Slice<CoolerResponseDto>> handleGetAll(
             @RequestParam(value = "offset", defaultValue = "0") final Integer offset,
             @RequestParam(value = "limit", defaultValue = "20") final Integer limit,
-            @RequestParam(value = "sort", defaultValue = "NAME_ASC") final DesignSort sort
+            @RequestParam(value = "sort", defaultValue = "NAME_ASC") final CoolerSort sort
     ) {
         return ResponseEntity.ok(
                 crudService.getAll(
@@ -123,11 +123,11 @@ public class DesignRestController {
         );
     }
 
-    @Operation(summary = "Получение варианта исполнения по ID")
+    @Operation(summary = "Получение процессорного кулера по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Вариант исполнения получен"
+                    description = "Процессорный кулер получен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -138,14 +138,14 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вариант исполнения не найден",
+                    description = "Процессорный кулер не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<DesignResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<CoolerResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -153,11 +153,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Создание варианта исполнения")
+    @Operation(summary = "Создание процессорного кулера")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
-                    description = "Вариант исполнения создан"
+                    description = "Процессорный кулер создан"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -168,35 +168,36 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вендор не найден",
+                    description = "Вендор, сокет, размер вентилятора или " +
+                            "коннектор питания вентилятора не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PostMapping
-    public ResponseEntity<DesignResponseDto> handleCreate(
-            @RequestBody final DesignRequestDto dto,
+    public ResponseEntity<CoolerResponseDto> handleCreate(
+            @RequestBody final CoolerRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final DesignResponseDto savedDto = mapper.convertToDto(
+        final CoolerResponseDto savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
         );
 
         return ResponseEntity.created(uriBuilder
-                        .path(URL_API_V1_DESIGNS + "/{id}")
+                        .path(URL_API_V1_COOLERS + "/{id}")
                         .build(Map.of("id", savedDto.getId())))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(savedDto);
     }
 
-    @Operation(summary = "Изменение варианта исполнения")
+    @Operation(summary = "Изменение процессорного кулера")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Вариант исполнения изменен"
+                    description = "Процессорный кулер изменен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -207,16 +208,17 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вариант исполнения или вендор не найден",
+                    description = "Процессорный кулер, вендор, сокет, размер вентилятора " +
+                            "или коннектор питания вентилятора не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<DesignResponseDto> handleUpdate(
+    public ResponseEntity<CoolerResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final DesignRequestDto dto
+            @RequestBody final CoolerRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -230,11 +232,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Замена варианта исполнения")
+    @Operation(summary = "Замена процессорного кулера")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Вариант исполнения заменен"
+                    description = "Процессорный кулер заменен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -245,16 +247,17 @@ public class DesignRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вариант исполнения или вендор не найден",
+                    description = "Процессорный кулер, вендор, сокет, размер вентилятора " +
+                            "или коннектор питания вентилятора не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<DesignResponseDto> handleReplace(
+    public ResponseEntity<CoolerResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final DesignRequestDto dto
+            @RequestBody final CoolerRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -268,11 +271,11 @@ public class DesignRestController {
                 );
     }
 
-    @Operation(summary = "Удаление варианта исполнения по ID")
+    @Operation(summary = "Удаление процессорного кулера по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
-                    description = "Вариант исполнения удален"
+                    description = "Процессорный кулер удален"
             ),
             @ApiResponse(
                     responseCode = "400",
