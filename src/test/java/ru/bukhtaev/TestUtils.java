@@ -95,4 +95,13 @@ public class TestUtils {
             20,
             CoolerSort.POWER_DISSIPATION_ASC.getSortValue()
     );
+
+    /**
+     * Объект типа {@code Pageable} для процессоров.
+     */
+    public static final Pageable CPU_PAGEABLE = PageRequest.of(
+            0,
+            20,
+            CpuSort.MANUFACTURER_NAME_ASC.getSortValue()
+    );
 }

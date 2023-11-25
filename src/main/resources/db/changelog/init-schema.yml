@@ -51,3 +51,7 @@ databaseChangeLog:
       file: db/changelog/changeset/create-cooler-table.yml
   - include:
       file: db/changelog/changeset/create-cooler_to_socket-table.yml
+  - include:
+      file: db/changelog/changeset/create-cpu-table.yml
+  - include:
+      file: db/changelog/changeset/create-cpu-to-ram-type-table.yml
