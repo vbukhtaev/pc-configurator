@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IChipsetMapper;
 import ru.bukhtaev.dto.request.ChipsetRequestDto;
 import ru.bukhtaev.model.Chipset;
-import ru.bukhtaev.model.Socket;
+import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.IChipsetRepository;
 import ru.bukhtaev.repository.ISocketRepository;
 

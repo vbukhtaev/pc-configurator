@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IStoragePowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.StoragePowerConnector;
+import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 import ru.bukhtaev.repository.IStoragePowerConnectorRepository;
 
 import java.text.MessageFormat;

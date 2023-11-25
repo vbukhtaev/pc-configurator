@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
-import ru.bukhtaev.model.Vendor;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.util.NameableSort;
 
 import java.util.UUID;

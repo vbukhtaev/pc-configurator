@@ -73,5 +73,5 @@ public class CpuResponseDto extends NameableResponseDto {
     @Size(min = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    protected Set<CpuRamTypeResponseDto> supportedRamTypes;
+    protected Set<CpuToRamTypeResponseDto> supportedRamTypes;
 }

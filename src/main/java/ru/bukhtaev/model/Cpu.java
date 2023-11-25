@@ -6,6 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.cross.CpuToRamType;
+import ru.bukhtaev.model.dictionary.Manufacturer;
+import ru.bukhtaev.model.dictionary.RamType;
+import ru.bukhtaev.model.dictionary.Socket;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -138,20 +142,26 @@ public class Cpu extends NameableEntity {
     @Size(min = 1)
     @OneToMany(
             mappedBy = "cpu",
-            cascade = CascadeType.ALL, fetch = FetchType.EAGER
+            cascade = CascadeType.ALL
     )
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    protected Set<CpuRamType> supportedRamTypes = new HashSet<>();
+    protected Set<CpuToRamType> supportedRamTypes = new HashSet<>();
 
+    /**
+     * Добавляет указанный тип оперативной памяти с указанной частотой.
+     *
+     * @param type  тип оперативной памяти
+     * @param clock частота
+     */
     public void addRamType(final RamType type, final Integer clock) {
-        final CpuRamType cpuRamType = new CpuRamType();
+        final CpuToRamType cpuToRamType = new CpuToRamType();
 
-        cpuRamType.setCpu(this);
-        cpuRamType.setRamType(type);
-        cpuRamType.setMaxMemoryClock(clock);
+        cpuToRamType.setCpu(this);
+        cpuToRamType.setRamType(type);
+        cpuToRamType.setMaxMemoryClock(clock);
 
-        this.supportedRamTypes.add(cpuRamType);
+        this.supportedRamTypes.add(cpuToRamType);
     }
 }

@@ -1,4 +1,4 @@
-package ru.bukhtaev.model;
+package ru.bukhtaev.model.dictionary;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -7,18 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.NameableEntity;
 
 /**
- * Модель форм-фактора блока питания.
+ * Модель сокета.
  */
 @Getter
 @Setter
 @Entity
 @Table(
-        name = "psu_form_factor",
+        name = "socket",
         uniqueConstraints = @UniqueConstraint(columnNames = "name")
 )
 @SuperBuilder
 @NoArgsConstructor
-public class PsuFormFactor extends NameableEntity {
+public class Socket extends NameableEntity {
 }

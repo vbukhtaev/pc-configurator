@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IPsuFormFactorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.PsuFormFactor;
+import ru.bukhtaev.model.dictionary.PsuFormFactor;
 import ru.bukhtaev.repository.IPsuFormFactorRepository;
 
 import java.text.MessageFormat;

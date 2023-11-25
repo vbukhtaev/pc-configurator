@@ -2,7 +2,7 @@ package ru.bukhtaev.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.bukhtaev.model.Manufacturer;
+import ru.bukhtaev.model.dictionary.Manufacturer;
 
 import java.util.Optional;
 import java.util.UUID;

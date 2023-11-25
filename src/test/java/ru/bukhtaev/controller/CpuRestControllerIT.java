@@ -8,6 +8,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.request.CpuRequestDto;
 import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.cross.CpuToRamType;
+import ru.bukhtaev.model.dictionary.Manufacturer;
+import ru.bukhtaev.model.dictionary.RamType;
+import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.ICpuRepository;
 import ru.bukhtaev.repository.IManufacturerRepository;
 import ru.bukhtaev.repository.IRamTypeRepository;
@@ -466,7 +470,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuI512400F.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuI512400F.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -763,7 +767,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuI512400F.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuI512400F.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -842,7 +846,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -921,7 +925,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1001,7 +1005,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1074,7 +1078,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1147,7 +1151,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1220,7 +1224,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1297,7 +1301,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1390,7 +1394,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuI512400F.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuI512400F.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1469,7 +1473,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1548,7 +1552,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1627,7 +1631,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }
@@ -1705,7 +1709,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
             assertThat(cooler.getSupportedRamTypes())
                     .hasSize(2)
                     .containsExactlyInAnyOrder(
-                            cpuI512400F.getSupportedRamTypes().toArray(new CpuRamType[0])
+                            cpuI512400F.getSupportedRamTypes().toArray(new CpuToRamType[0])
                     );
         });
     }

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.dictionary.RamType;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.util.RamModuleSort;
 
 import java.util.UUID;

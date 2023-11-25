@@ -9,6 +9,9 @@ import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.InvalidParamException;
 import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.dictionary.FanPowerConnector;
+import ru.bukhtaev.model.dictionary.Socket;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.repository.*;
 import ru.bukhtaev.validation.Translator;
 

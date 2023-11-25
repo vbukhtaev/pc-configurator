@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.model.Manufacturer;
+import ru.bukhtaev.model.dictionary.Manufacturer;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 

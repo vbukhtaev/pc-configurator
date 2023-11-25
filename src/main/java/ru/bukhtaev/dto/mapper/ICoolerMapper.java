@@ -6,7 +6,7 @@ import org.mapstruct.Named;
 import ru.bukhtaev.dto.request.CoolerRequestDto;
 import ru.bukhtaev.dto.response.CoolerResponseDto;
 import ru.bukhtaev.model.Cooler;
-import ru.bukhtaev.model.Socket;
+import ru.bukhtaev.model.dictionary.Socket;
 
 import java.util.Set;
 import java.util.UUID;

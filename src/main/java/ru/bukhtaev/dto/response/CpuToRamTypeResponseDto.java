@@ -3,15 +3,15 @@ package ru.bukhtaev.dto.response;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
-import ru.bukhtaev.model.CpuRamType;
+import ru.bukhtaev.model.cross.CpuToRamType;
 
 /**
- * DTO для модели {@link CpuRamType}, используемый в качестве тела HTTP-ответа.
+ * DTO для модели {@link CpuToRamType}, используемый в качестве тела HTTP-ответа.
  */
 @Schema(description = "Поддерживаемая процессором частота оперативной памяти")
 @Getter
 @SuperBuilder
-public class CpuRamTypeResponseDto extends BaseResponseDto {
+public class CpuToRamTypeResponseDto extends BaseResponseDto {
 
     /**
      * Тип оперативной памяти.

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ru.bukhtaev.AbstractContainerizedTest;
-import ru.bukhtaev.model.VideoMemoryType;
+import ru.bukhtaev.model.dictionary.VideoMemoryType;
 
 import java.util.UUID;
 

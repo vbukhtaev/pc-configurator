@@ -6,7 +6,7 @@ import org.mapstruct.Named;
 import ru.bukhtaev.dto.request.SsdRequestDto;
 import ru.bukhtaev.dto.response.SsdResponseDto;
 import ru.bukhtaev.model.Ssd;
-import ru.bukhtaev.model.StoragePowerConnector;
+import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 
 import java.util.UUID;
 

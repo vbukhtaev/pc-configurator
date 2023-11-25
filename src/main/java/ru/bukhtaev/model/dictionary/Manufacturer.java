@@ -1,4 +1,4 @@
-package ru.bukhtaev.model;
+package ru.bukhtaev.model.dictionary;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -7,18 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.NameableEntity;
 
 /**
- * Модель коннектора питания процессора.
+ * Модель производителя.
  */
 @Getter
 @Setter
 @Entity
 @Table(
-        name = "cpu_power_connector",
+        name = "manufacturer",
         uniqueConstraints = @UniqueConstraint(columnNames = "name")
 )
 @SuperBuilder
 @NoArgsConstructor
-public class CpuPowerConnector extends NameableEntity {
+public class Manufacturer extends NameableEntity {
 }

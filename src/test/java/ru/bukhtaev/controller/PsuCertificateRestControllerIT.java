@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IPsuCertificateMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.PsuCertificate;
+import ru.bukhtaev.model.dictionary.PsuCertificate;
 import ru.bukhtaev.repository.IPsuCertificateRepository;
 
 import java.text.MessageFormat;

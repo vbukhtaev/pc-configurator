@@ -2,7 +2,7 @@ package ru.bukhtaev.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.bukhtaev.model.PciExpressConnectorVersion;
+import ru.bukhtaev.model.dictionary.PciExpressConnectorVersion;
 
 import java.util.Optional;
 import java.util.UUID;

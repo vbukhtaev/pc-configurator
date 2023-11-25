@@ -11,6 +11,10 @@ import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.InvalidParamException;
 import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.cross.CpuToRamType;
+import ru.bukhtaev.model.dictionary.Manufacturer;
+import ru.bukhtaev.model.dictionary.RamType;
+import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.ICpuRepository;
 import ru.bukhtaev.repository.IManufacturerRepository;
 import ru.bukhtaev.repository.IRamTypeRepository;
@@ -124,7 +128,7 @@ public class CpuCrudService implements IPagingCrudService<Cpu, UUID> {
             );
         }
 
-        final Set<CpuRamType> supportedRamTypes = newCpu.getSupportedRamTypes();
+        final Set<CpuToRamType> supportedRamTypes = newCpu.getSupportedRamTypes();
         validateRamTypes(supportedRamTypes);
 
         final Manufacturer foundManufacturer = findManufacturerById(manufacturer.getId());
@@ -133,11 +137,11 @@ public class CpuCrudService implements IPagingCrudService<Cpu, UUID> {
         final Socket foundSocket = findSocketById(socket.getId());
         newCpu.setSocket(foundSocket);
 
-        supportedRamTypes.forEach(cpuRamType -> {
-            final UUID typeId = cpuRamType.getRamType().getId();
+        supportedRamTypes.forEach(cpuToRamType -> {
+            final UUID typeId = cpuToRamType.getRamType().getId();
             final RamType ramType = findRamTypeById(typeId);
-            cpuRamType.setRamType(ramType);
-            cpuRamType.setCpu(newCpu);
+            cpuToRamType.setRamType(ramType);
+            cpuToRamType.setCpu(newCpu);
         });
         newCpu.setSupportedRamTypes(supportedRamTypes);
 
@@ -211,7 +215,7 @@ public class CpuCrudService implements IPagingCrudService<Cpu, UUID> {
                 toBeUpdated.getMaxTdp()
         );
 
-        final Set<CpuRamType> supportedRamTypes = changedCpu.getSupportedRamTypes();
+        final Set<CpuToRamType> supportedRamTypes = changedCpu.getSupportedRamTypes();
         if (supportedRamTypes != null) {
             validateRamTypes(supportedRamTypes);
 
@@ -219,10 +223,10 @@ public class CpuCrudService implements IPagingCrudService<Cpu, UUID> {
             toBeUpdated.getSupportedRamTypes().clear();
             entityManager.flush();
 
-            supportedRamTypes.forEach(cpuRamType -> {
-                final UUID typeId = cpuRamType.getRamType().getId();
+            supportedRamTypes.forEach(cpuToRamType -> {
+                final UUID typeId = cpuToRamType.getRamType().getId();
                 final RamType ramType = findRamTypeById(typeId);
-                toBeUpdated.addRamType(ramType, cpuRamType.getMaxMemoryClock());
+                toBeUpdated.addRamType(ramType, cpuToRamType.getMaxMemoryClock());
             });
         }
 
@@ -269,7 +273,7 @@ public class CpuCrudService implements IPagingCrudService<Cpu, UUID> {
             );
         }
 
-        final Set<CpuRamType> supportedRamTypes = newCpu.getSupportedRamTypes();
+        final Set<CpuToRamType> supportedRamTypes = newCpu.getSupportedRamTypes();
         validateRamTypes(supportedRamTypes);
 
         final Cpu existent = findCpuById(id);
@@ -281,10 +285,10 @@ public class CpuCrudService implements IPagingCrudService<Cpu, UUID> {
         existent.getSupportedRamTypes().clear();
         entityManager.flush();
 
-        supportedRamTypes.forEach(cpuRamType -> {
-            final UUID typeId = cpuRamType.getRamType().getId();
+        supportedRamTypes.forEach(cpuToRamType -> {
+            final UUID typeId = cpuToRamType.getRamType().getId();
             final RamType ramType = findRamTypeById(typeId);
-            existent.addRamType(ramType, cpuRamType.getMaxMemoryClock());
+            existent.addRamType(ramType, cpuToRamType.getMaxMemoryClock());
         });
 
         cpuRepository.findByNameAndIdNot(
@@ -392,12 +396,12 @@ public class CpuCrudService implements IPagingCrudService<Cpu, UUID> {
      *
      * @param ramTypes множество поддерживаемых процессором типов оперативной
      */
-    private void validateRamTypes(final Set<CpuRamType> ramTypes) {
+    private void validateRamTypes(final Set<CpuToRamType> ramTypes) {
         if (ramTypes == null
                 || ramTypes.isEmpty()
                 || ramTypes.stream().anyMatch(Objects::isNull)
-                || ramTypes.stream().anyMatch(cpuRamType -> cpuRamType.getRamType() == null)
-                || ramTypes.stream().anyMatch(cpuRamType -> cpuRamType.getRamType().getId() == null)
+                || ramTypes.stream().anyMatch(cpuToRamType -> cpuToRamType.getRamType() == null)
+                || ramTypes.stream().anyMatch(cpuToRamType -> cpuToRamType.getRamType().getId() == null)
         ) {
             throw new InvalidParamException(
                     translator.getMessage(MESSAGE_CODE_INVALID_PARAM_VALUE),

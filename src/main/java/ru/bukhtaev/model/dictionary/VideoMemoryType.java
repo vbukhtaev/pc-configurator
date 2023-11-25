@@ -1,4 +1,4 @@
-package ru.bukhtaev.model;
+package ru.bukhtaev.model.dictionary;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -7,18 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.NameableEntity;
 
 /**
- * Модель форм-фактора материнской платы.
+ * Модель типа видеопамяти.
  */
 @Getter
 @Setter
 @Entity
 @Table(
-        name = "motherboard_form_factor",
+        name = "video_memory_type",
         uniqueConstraints = @UniqueConstraint(columnNames = "name")
 )
 @SuperBuilder
 @NoArgsConstructor
-public class MotherboardFormFactor extends NameableEntity {
+public class VideoMemoryType extends NameableEntity {
 }

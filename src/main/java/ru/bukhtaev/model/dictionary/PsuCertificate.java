@@ -1,4 +1,4 @@
-package ru.bukhtaev.model;
+package ru.bukhtaev.model.dictionary;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -7,18 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.NameableEntity;
 
 /**
- * Модель формата отсека расширения.
+ * Модель сертификата блока питания.
  */
 @Getter
 @Setter
 @Entity
 @Table(
-        name = "expansion_bay_format",
+        name = "psu_certificate",
         uniqueConstraints = @UniqueConstraint(columnNames = "name")
 )
 @SuperBuilder
 @NoArgsConstructor
-public class ExpansionBayFormat extends NameableEntity {
+public class PsuCertificate extends NameableEntity {
 }

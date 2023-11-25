@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IMainPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.MainPowerConnector;
+import ru.bukhtaev.model.dictionary.MainPowerConnector;
 import ru.bukhtaev.repository.IMainPowerConnectorRepository;
 
 import java.text.MessageFormat;

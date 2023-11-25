@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IPciExpressConnectorVersionMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.PciExpressConnectorVersion;
+import ru.bukhtaev.model.dictionary.PciExpressConnectorVersion;
 import ru.bukhtaev.repository.IPciExpressConnectorVersionRepository;
 
 import java.text.MessageFormat;

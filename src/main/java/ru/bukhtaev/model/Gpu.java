@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.dictionary.Manufacturer;
+import ru.bukhtaev.model.dictionary.VideoMemoryType;
 
 import java.util.Objects;
 

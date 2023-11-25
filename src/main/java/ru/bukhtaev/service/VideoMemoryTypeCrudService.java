@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.VideoMemoryType;
+import ru.bukhtaev.model.dictionary.VideoMemoryType;
 import ru.bukhtaev.repository.IVideoMemoryTypeRepository;
 import ru.bukhtaev.validation.Translator;
 

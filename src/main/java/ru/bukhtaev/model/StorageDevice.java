@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.dictionary.StorageConnector;
+import ru.bukhtaev.model.dictionary.StoragePowerConnector;
+import ru.bukhtaev.model.dictionary.Vendor;
 
 import java.util.Objects;
 

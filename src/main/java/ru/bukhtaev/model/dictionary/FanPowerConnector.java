@@ -1,4 +1,4 @@
-package ru.bukhtaev.model;
+package ru.bukhtaev.model.dictionary;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -7,18 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.NameableEntity;
 
 /**
- * Модель версии коннектора PCI-Express.
+ * Модель коннектора питания вентилятора.
  */
 @Getter
 @Setter
 @Entity
 @Table(
-        name = "pci_express_connector_version",
+        name = "fan_power_connector",
         uniqueConstraints = @UniqueConstraint(columnNames = "name")
 )
 @SuperBuilder
 @NoArgsConstructor
-public class PciExpressConnectorVersion extends NameableEntity {
+public class FanPowerConnector extends NameableEntity {
 }

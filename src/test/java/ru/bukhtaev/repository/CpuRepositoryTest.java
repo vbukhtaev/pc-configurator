@@ -10,6 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.cross.CpuToRamType;
+import ru.bukhtaev.model.dictionary.Manufacturer;
+import ru.bukhtaev.model.dictionary.RamType;
+import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.util.CpuSort;
 
 import java.util.List;
@@ -172,7 +176,7 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
             assertThat(foundCpu.getSocket().getName())
                     .isEqualTo(savedCpu.getSocket().getName());
             assertThat(foundCpu.getSupportedRamTypes())
-                    .containsOnly(savedCpu.getSupportedRamTypes().toArray(new CpuRamType[0]));
+                    .containsOnly(savedCpu.getSupportedRamTypes().toArray(new CpuToRamType[0]));
         }
     }
 
@@ -219,7 +223,7 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
         assertThat(cpu.getSocket().getName())
                 .isEqualTo(cpuR55600X.getSocket().getName());
         assertThat(cpu.getSupportedRamTypes())
-                .containsOnly(cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0]));
+                .containsOnly(cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0]));
     }
 
     @Test
@@ -260,7 +264,7 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
         assertThat(cpu.getSocket().getName())
                 .isEqualTo(cpuR55600X.getSocket().getName());
         assertThat(cpu.getSupportedRamTypes())
-                .containsOnly(cpuR55600X.getSupportedRamTypes().toArray(new CpuRamType[0]));
+                .containsOnly(cpuR55600X.getSupportedRamTypes().toArray(new CpuToRamType[0]));
     }
 
     @Test
@@ -320,7 +324,7 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
         assertThat(cpu.getSocket().getName())
                 .isEqualTo(cpuI512400F.getSocket().getName());
         assertThat(cpu.getSupportedRamTypes())
-                .containsOnly(cpuI512400F.getSupportedRamTypes().toArray(new CpuRamType[0]));
+                .containsOnly(cpuI512400F.getSupportedRamTypes().toArray(new CpuToRamType[0]));
     }
 
     @Test

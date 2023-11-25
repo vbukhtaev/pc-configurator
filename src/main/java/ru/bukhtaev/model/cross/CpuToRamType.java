@@ -1,4 +1,4 @@
-package ru.bukhtaev.model;
+package ru.bukhtaev.model.cross;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.Cpu;
+import ru.bukhtaev.model.dictionary.RamType;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -20,12 +22,15 @@ import java.util.UUID;
 @Entity
 @Table(
         name = "cpu_to_ram_type",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"cpu_id", "ram_type_id"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {
+                "cpu_id",
+                "ram_type_id"
+        })
 )
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CpuRamType {
+public class CpuToRamType {
 
     /**
      * Название поля, хранящего процессор.
@@ -74,7 +79,7 @@ public class CpuRamType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CpuRamType that = (CpuRamType) o;
+        CpuToRamType that = (CpuToRamType) o;
 
         if (!Objects.equals(ramType, that.ramType)) return false;
         return Objects.equals(maxMemoryClock, that.maxMemoryClock);

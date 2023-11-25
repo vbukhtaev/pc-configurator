@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-graphics-card-to-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: graphics_card_to_power_connector
+            remarks: Видеокарты и их коннекторы питания
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: graphics_card_to_power_connector_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: graphics_card_id
+                  remarks: Видеокарта
+                  type: UUID
+                  constraints:
+                    foreignKeyName: graphics_card_to_power_connector_graphics_card_fk
+                    referencedTableName: graphics_card
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: power_connector_id
+                  remarks: Тип оперативной памяти
+                  type: UUID
+                  constraints:
+                    foreignKeyName: graphics_card_to_power_connector_power_connector_fk
+                    referencedTableName: graphics_card_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: graphics_card_to_power_connector
+            columnNames: graphics_card_id, power_connector_id
+            constraintName: graphics_card_to_power_connector_graphics_card_id_and_power_connector_id_uq

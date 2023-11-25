@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.ExpansionBayFormat;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 import ru.bukhtaev.repository.IExpansionBayFormatRepository;
 import ru.bukhtaev.validation.Translator;
 

@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.model.ExpansionBayFormat;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 

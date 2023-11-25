@@ -9,7 +9,7 @@ import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.InvalidParamException;
 import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.Chipset;
-import ru.bukhtaev.model.Socket;
+import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.IChipsetRepository;
 import ru.bukhtaev.repository.ISocketRepository;
 import ru.bukhtaev.validation.Translator;

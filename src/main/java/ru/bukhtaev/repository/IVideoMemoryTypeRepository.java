@@ -2,7 +2,7 @@ package ru.bukhtaev.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.bukhtaev.model.VideoMemoryType;
+import ru.bukhtaev.model.dictionary.VideoMemoryType;
 
 import java.util.Optional;
 import java.util.UUID;

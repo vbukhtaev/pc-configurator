@@ -10,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.dictionary.FanPowerConnector;
+import ru.bukhtaev.model.dictionary.Socket;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.util.CoolerSort;
 
 import java.util.List;

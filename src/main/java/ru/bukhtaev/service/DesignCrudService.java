@@ -9,7 +9,7 @@ import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.InvalidParamException;
 import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.Design;
-import ru.bukhtaev.model.Vendor;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.repository.IDesignRepository;
 import ru.bukhtaev.repository.IVendorRepository;
 import ru.bukhtaev.validation.Translator;

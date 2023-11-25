@@ -9,6 +9,9 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.ICoolerMapper;
 import ru.bukhtaev.dto.request.CoolerRequestDto;
 import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.dictionary.FanPowerConnector;
+import ru.bukhtaev.model.dictionary.Socket;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.repository.*;
 import ru.bukhtaev.service.TransactionService;
 

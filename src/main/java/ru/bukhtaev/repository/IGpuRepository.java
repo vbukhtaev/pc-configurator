@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.bukhtaev.model.Gpu;
-import ru.bukhtaev.model.VideoMemoryType;
+import ru.bukhtaev.model.dictionary.VideoMemoryType;
 
 import java.util.Optional;
 import java.util.UUID;

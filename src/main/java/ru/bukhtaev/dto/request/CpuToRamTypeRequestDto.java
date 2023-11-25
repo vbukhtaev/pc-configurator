@@ -8,19 +8,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import ru.bukhtaev.model.CpuRamType;
+import ru.bukhtaev.model.cross.CpuToRamType;
 
 import java.util.UUID;
 
 /**
- * DTO для модели {@link CpuRamType}, используемый в качестве тела HTTP-запроса.
+ * DTO для модели {@link CpuToRamType}, используемый в качестве тела HTTP-запроса.
  */
 @Schema(description = "Поддерживаемая процессором частота оперативной памяти")
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class CpuRamTypeRequestDto {
+public class CpuToRamTypeRequestDto {
 
     /**
      * ID типа оперативной памяти.
@@ -29,6 +29,9 @@ public class CpuRamTypeRequestDto {
     @NotBlank
     protected UUID ramTypeId;
 
+    /**
+     * Частота оперативной памяти (МГц).
+     */
     @Schema(description = "Частота оперативной памяти (МГц)")
     @Min(800)
     @NotNull

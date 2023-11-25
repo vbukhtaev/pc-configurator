@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.PsuCertificate;
+import ru.bukhtaev.model.dictionary.PsuCertificate;
 import ru.bukhtaev.repository.IPsuCertificateRepository;
 import ru.bukhtaev.validation.Translator;
 

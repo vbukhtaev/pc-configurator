@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IMotherboardFormFactorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.MotherboardFormFactor;
+import ru.bukhtaev.model.dictionary.MotherboardFormFactor;
 import ru.bukhtaev.repository.IMotherboardFormFactorRepository;
 
 import java.text.MessageFormat;

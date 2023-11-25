@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.ISocketMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
-import ru.bukhtaev.model.Socket;
+import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.service.IPagingCrudService;
 import ru.bukhtaev.util.NameableSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;

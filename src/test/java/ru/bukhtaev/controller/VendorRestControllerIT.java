@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IVendorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.Vendor;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.repository.IVendorRepository;
 
 import java.text.MessageFormat;

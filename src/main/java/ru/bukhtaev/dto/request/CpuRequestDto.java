@@ -72,16 +72,16 @@ public class CpuRequestDto extends NameableRequestDto {
     protected Integer maxTdp;
 
     /**
-     * Производитель.
+     * ID производитель.
      */
-    @Schema(description = "Производитель")
+    @Schema(description = "ID производитель")
     @NotBlank
     protected UUID manufacturerId;
 
     /**
-     * Сокет.
+     * ID сокет.
      */
-    @Schema(description = "Сокет")
+    @Schema(description = "ID сокет")
     @NotBlank
     protected UUID socketId;
 
@@ -93,14 +93,20 @@ public class CpuRequestDto extends NameableRequestDto {
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    protected Set<CpuRamTypeRequestDto> supportedRamTypes = new HashSet<>();
+    protected Set<CpuToRamTypeRequestDto> supportedRamTypes = new HashSet<>();
 
+    /**
+     * Добавляет указанный тип оперативной памяти с указанной частотой.
+     *
+     * @param typeId ID типа оперативной памяти
+     * @param clock  частота
+     */
     public void addRamType(final UUID typeId, final Integer clock) {
-        final CpuRamTypeRequestDto cpuRamType = new CpuRamTypeRequestDto();
+        final CpuToRamTypeRequestDto cpuToRamType = new CpuToRamTypeRequestDto();
 
-        cpuRamType.setRamTypeId(typeId);
-        cpuRamType.setMaxMemoryClock(clock);
+        cpuToRamType.setRamTypeId(typeId);
+        cpuToRamType.setMaxMemoryClock(clock);
 
-        this.supportedRamTypes.add(cpuRamType);
+        this.supportedRamTypes.add(cpuToRamType);
     }
 }

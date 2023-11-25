@@ -2,7 +2,7 @@ package ru.bukhtaev.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.bukhtaev.model.ExpansionBayFormat;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 
 import java.util.Optional;
 import java.util.UUID;

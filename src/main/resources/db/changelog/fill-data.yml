@@ -55,3 +55,7 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-cpu-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-cpu-to-ram-type-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-graphics-card-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-graphics-card-to-power-connector-table.yml

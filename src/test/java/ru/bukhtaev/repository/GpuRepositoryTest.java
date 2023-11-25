@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.Gpu;
-import ru.bukhtaev.model.Manufacturer;
-import ru.bukhtaev.model.VideoMemoryType;
+import ru.bukhtaev.model.dictionary.Manufacturer;
+import ru.bukhtaev.model.dictionary.VideoMemoryType;
 import ru.bukhtaev.util.GpuSort;
 
 import java.util.UUID;

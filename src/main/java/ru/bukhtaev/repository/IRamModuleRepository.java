@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.bukhtaev.model.Design;
 import ru.bukhtaev.model.RamModule;
-import ru.bukhtaev.model.RamType;
+import ru.bukhtaev.model.dictionary.RamType;
 
 import java.util.Optional;
 import java.util.UUID;

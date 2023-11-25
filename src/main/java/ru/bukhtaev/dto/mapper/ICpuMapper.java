@@ -13,7 +13,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
  */
 @Mapper(
         componentModel = SPRING,
-        uses = ICpuRamTypeMapper.class
+        uses = ICpuToRamTypeMapper.class
 )
 public interface ICpuMapper {
 

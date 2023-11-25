@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.UniqueNameException;
-import ru.bukhtaev.model.MainPowerConnector;
+import ru.bukhtaev.model.dictionary.MainPowerConnector;
 import ru.bukhtaev.repository.IMainPowerConnectorRepository;
 import ru.bukhtaev.validation.Translator;
 

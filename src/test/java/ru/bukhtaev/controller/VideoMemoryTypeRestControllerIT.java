@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IVideoMemoryTypeMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.model.VideoMemoryType;
+import ru.bukhtaev.model.dictionary.VideoMemoryType;
 import ru.bukhtaev.repository.IVideoMemoryTypeRepository;
 
 import java.text.MessageFormat;

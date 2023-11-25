@@ -10,9 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.Ssd;
-import ru.bukhtaev.model.StorageConnector;
-import ru.bukhtaev.model.StoragePowerConnector;
-import ru.bukhtaev.model.Vendor;
+import ru.bukhtaev.model.dictionary.StorageConnector;
+import ru.bukhtaev.model.dictionary.StoragePowerConnector;
+import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.util.SsdSort;
 
 import java.util.UUID;
