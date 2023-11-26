@@ -12,6 +12,8 @@ import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.Gpu;
 import ru.bukhtaev.model.dictionary.Manufacturer;
 import ru.bukhtaev.model.dictionary.VideoMemoryType;
+import ru.bukhtaev.repository.dictionary.IManufacturerRepository;
+import ru.bukhtaev.repository.dictionary.IVideoMemoryTypeRepository;
 import ru.bukhtaev.util.GpuSort;
 
 import java.util.UUID;

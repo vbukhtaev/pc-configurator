@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import ru.bukhtaev.model.dictionary.FanPowerConnector;
+import ru.bukhtaev.model.dictionary.FanSize;
 import ru.bukhtaev.model.dictionary.Vendor;
 
 import java.util.Objects;

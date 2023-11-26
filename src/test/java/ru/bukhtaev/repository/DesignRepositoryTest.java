@@ -11,6 +11,7 @@ import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.Design;
 import ru.bukhtaev.model.dictionary.Vendor;
+import ru.bukhtaev.repository.dictionary.IVendorRepository;
 import ru.bukhtaev.util.DesignSort;
 
 import java.util.UUID;

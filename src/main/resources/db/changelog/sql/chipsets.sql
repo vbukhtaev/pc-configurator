@@ -1,5 +1,6 @@
 INSERT INTO chipset(id, name, socket_id)
-VALUES ('2a72b7e8-215f-4884-90a6-d589d563c189', 'H610', '43bf0d25-2688-42ec-9bfb-0788ce49fd69'),
+VALUES ('5bcc9795-aff9-4941-93f0-244f6dc88e2a', 'H110', '04728b83-3968-47b8-9a1f-a303f28386e9'),
+       ('2a72b7e8-215f-4884-90a6-d589d563c189', 'H610', '43bf0d25-2688-42ec-9bfb-0788ce49fd69'),
        ('75a4caa7-4c75-4a89-8372-f52915b758d1', 'B660', '43bf0d25-2688-42ec-9bfb-0788ce49fd69'),
        ('ed271d66-c10b-4c5c-a989-ae4a8cda71ee', 'H670', '43bf0d25-2688-42ec-9bfb-0788ce49fd69'),
        ('ad3d8da3-abd9-462a-bb2c-8a39891376cc', 'Q670', '43bf0d25-2688-42ec-9bfb-0788ce49fd69'),

@@ -100,19 +100,19 @@ public class GraphicsCard extends BaseEntity {
     protected Set<GraphicsCardToPowerConnector> powerConnectors = new HashSet<>();
 
     /**
-     * Добавляет указанный коннектор питания видеокарты в указанном количестве.
+     * Добавляет коннектор питания видеокарты в указанном количестве.
      *
-     * @param powerConnector коннектор питания видеокарты
+     * @param connector коннектор питания видеокарты
      * @param count          количество
      */
-    public void addPowerConnector(final GraphicsCardPowerConnector powerConnector, final Integer count) {
-        final GraphicsCardToPowerConnector cardToPowerConnector = new GraphicsCardToPowerConnector();
+    public void addPowerConnector(final GraphicsCardPowerConnector connector, final Integer count) {
+        final var cardToConnector = new GraphicsCardToPowerConnector();
 
-        cardToPowerConnector.setGraphicsCard(this);
-        cardToPowerConnector.setPowerConnector(powerConnector);
-        cardToPowerConnector.setCount(count);
+        cardToConnector.setGraphicsCard(this);
+        cardToConnector.setPowerConnector(connector);
+        cardToConnector.setCount(count);
 
-        this.powerConnectors.add(cardToPowerConnector);
+        this.powerConnectors.add(cardToConnector);
     }
 
     @Override

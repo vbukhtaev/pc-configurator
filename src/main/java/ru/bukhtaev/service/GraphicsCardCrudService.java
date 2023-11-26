@@ -17,6 +17,8 @@ import ru.bukhtaev.model.cross.GraphicsCardToPowerConnector;
 import ru.bukhtaev.model.dictionary.GraphicsCardPowerConnector;
 import ru.bukhtaev.model.dictionary.PciExpressConnectorVersion;
 import ru.bukhtaev.repository.*;
+import ru.bukhtaev.repository.dictionary.IGraphicsCardPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IPciExpressConnectorVersionRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.*;

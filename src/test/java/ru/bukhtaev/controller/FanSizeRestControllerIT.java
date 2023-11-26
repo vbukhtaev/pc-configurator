@@ -8,8 +8,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IFanSizeMapper;
 import ru.bukhtaev.dto.request.FanSizeRequestDto;
-import ru.bukhtaev.model.FanSize;
-import ru.bukhtaev.repository.IFanSizeRepository;
+import ru.bukhtaev.model.dictionary.FanSize;
+import ru.bukhtaev.repository.dictionary.IFanSizeRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

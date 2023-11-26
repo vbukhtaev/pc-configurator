@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IMotherboardFormFactorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.MotherboardFormFactor;
-import ru.bukhtaev.repository.IMotherboardFormFactorRepository;
+import ru.bukhtaev.repository.dictionary.IMotherboardFormFactorRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

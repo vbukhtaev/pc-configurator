@@ -59,3 +59,9 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-graphics-card-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-graphics-card-to-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-motherboard-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-motherboard-to-fan-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-motherboard-to-storage-connector-table.yml

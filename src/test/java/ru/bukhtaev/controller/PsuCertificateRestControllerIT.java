@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IPsuCertificateMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.PsuCertificate;
-import ru.bukhtaev.repository.IPsuCertificateRepository;
+import ru.bukhtaev.repository.dictionary.IPsuCertificateRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

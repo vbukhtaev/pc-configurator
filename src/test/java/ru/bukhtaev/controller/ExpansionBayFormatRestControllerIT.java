@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IExpansionBayFormatMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
-import ru.bukhtaev.repository.IExpansionBayFormatRepository;
+import ru.bukhtaev.repository.dictionary.IExpansionBayFormatRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

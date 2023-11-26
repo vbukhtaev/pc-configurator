@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IFanPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.FanPowerConnector;
-import ru.bukhtaev.repository.IFanPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IFanPowerConnectorRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

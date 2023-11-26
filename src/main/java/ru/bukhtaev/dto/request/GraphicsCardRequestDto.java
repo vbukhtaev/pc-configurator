@@ -57,24 +57,26 @@ public class GraphicsCardRequestDto {
      */
     @Schema(description = "Коннекторы питания")
     @Size(min = 1)
-    @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    protected Set<GraphicsCardToPowerConnectorRequestDto> powerConnectors = new HashSet<>();
+    protected Set<GraphicsCardToPowerConnectorRequestDto> powerConnectors;
 
     /**
-     * Добавляет указанный коннектор питания видеокарты в указанном количестве.
+     * Добавляет коннектор питания видеокарты в указанном количестве.
      *
      * @param powerConnectorId ID коннектора питания видеокарты
      * @param count            количество
      */
     public void addPowerConnector(final UUID powerConnectorId, final Integer count) {
-        final GraphicsCardToPowerConnectorRequestDto cardToRamTypeRequestDto
-                = new GraphicsCardToPowerConnectorRequestDto();
+        if (this.powerConnectors == null) {
+            this.powerConnectors = new HashSet<>();
+        }
 
-        cardToRamTypeRequestDto.setPowerConnectorId(powerConnectorId);
-        cardToRamTypeRequestDto.setCount(count);
+        final var cardToConnector = new GraphicsCardToPowerConnectorRequestDto();
 
-        this.powerConnectors.add(cardToRamTypeRequestDto);
+        cardToConnector.setPowerConnectorId(powerConnectorId);
+        cardToConnector.setCount(count);
+
+        this.powerConnectors.add(cardToConnector);
     }
 }

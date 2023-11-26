@@ -9,7 +9,7 @@ import ru.bukhtaev.model.cross.GraphicsCardToPowerConnector;
  * DTO для модели {@link GraphicsCardToPowerConnector},
  * используемый в качестве тела HTTP-ответа.
  */
-@Schema(description = "Имеющийся у видеокарты коннектор питания")
+@Schema(description = "Имеющиеся у видеокарты коннекторы питания")
 @Getter
 @SuperBuilder
 public class GraphicsCardToPowerConnectorResponseDto extends BaseResponseDto {
@@ -21,8 +21,8 @@ public class GraphicsCardToPowerConnectorResponseDto extends BaseResponseDto {
     protected NameableResponseDto powerConnector;
 
     /**
-     * Количество коннекторов питания.
+     * Количество.
      */
-    @Schema(description = "Количество коннекторов питания")
+    @Schema(description = "Количество")
     protected Integer count;
 }

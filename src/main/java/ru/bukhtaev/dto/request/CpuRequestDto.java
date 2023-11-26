@@ -90,19 +90,22 @@ public class CpuRequestDto extends NameableRequestDto {
      */
     @Schema(description = "Поддерживаемые типы оперативной памяти")
     @Size(min = 1)
-    @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    protected Set<CpuToRamTypeRequestDto> supportedRamTypes = new HashSet<>();
+    protected Set<CpuToRamTypeRequestDto> supportedRamTypes;
 
     /**
-     * Добавляет указанный тип оперативной памяти с указанной частотой.
+     * Добавляет тип оперативной памяти с указанной частотой.
      *
      * @param typeId ID типа оперативной памяти
      * @param clock  частота
      */
     public void addRamType(final UUID typeId, final Integer clock) {
-        final CpuToRamTypeRequestDto cpuToRamType = new CpuToRamTypeRequestDto();
+        if (this.supportedRamTypes == null) {
+            this.supportedRamTypes = new HashSet<>();
+        }
+
+        final var cpuToRamType = new CpuToRamTypeRequestDto();
 
         cpuToRamType.setRamTypeId(typeId);
         cpuToRamType.setMaxMemoryClock(clock);

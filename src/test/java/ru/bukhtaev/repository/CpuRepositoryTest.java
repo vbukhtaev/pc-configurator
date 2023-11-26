@@ -14,6 +14,9 @@ import ru.bukhtaev.model.cross.CpuToRamType;
 import ru.bukhtaev.model.dictionary.Manufacturer;
 import ru.bukhtaev.model.dictionary.RamType;
 import ru.bukhtaev.model.dictionary.Socket;
+import ru.bukhtaev.repository.dictionary.IManufacturerRepository;
+import ru.bukhtaev.repository.dictionary.IRamTypeRepository;
+import ru.bukhtaev.repository.dictionary.ISocketRepository;
 import ru.bukhtaev.util.CpuSort;
 
 import java.util.List;

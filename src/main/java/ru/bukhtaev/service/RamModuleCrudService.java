@@ -13,7 +13,7 @@ import ru.bukhtaev.model.RamModule;
 import ru.bukhtaev.model.dictionary.RamType;
 import ru.bukhtaev.repository.IDesignRepository;
 import ru.bukhtaev.repository.IRamModuleRepository;
-import ru.bukhtaev.repository.IRamTypeRepository;
+import ru.bukhtaev.repository.dictionary.IRamTypeRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;

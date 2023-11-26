@@ -315,11 +315,11 @@ public class MessageUtils {
     public static final String MESSAGE_CODE_MOTHERBOARD_NOT_FOUND = "validation.motherboard.not-found";
 
     /**
-     * Код сообщения о том, что материнская плата
-     * с указанным вариантом исполнения, чипсетом и типом оперативной памяти уже существует.
+     * Код сообщения о том, что материнская плата с указанным названием,
+     * вариантом исполнения, чипсетом и типом оперативной памяти уже существует.
      */
     public static final String MESSAGE_CODE_MOTHERBOARD_UNIQUE
-            = "validation.motherboard.unique-design-and-chipset-and-ram-type";
+            = "validation.motherboard.unique-name-and-design-and-chipset-and-ram-type";
 
     /**
      * Код сообщения о том, что модуль оперативной памяти с указанным ID не найден.

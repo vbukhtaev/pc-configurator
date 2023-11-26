@@ -11,7 +11,7 @@ import ru.bukhtaev.dto.request.ChipsetRequestDto;
 import ru.bukhtaev.model.Chipset;
 import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.IChipsetRepository;
-import ru.bukhtaev.repository.ISocketRepository;
+import ru.bukhtaev.repository.dictionary.ISocketRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

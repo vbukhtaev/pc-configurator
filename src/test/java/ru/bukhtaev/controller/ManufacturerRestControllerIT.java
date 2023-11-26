@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IManufacturerMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.Manufacturer;
-import ru.bukhtaev.repository.IManufacturerRepository;
+import ru.bukhtaev.repository.dictionary.IManufacturerRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

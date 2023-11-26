@@ -16,7 +16,7 @@ import java.util.UUID;
  * DTO для модели {@link GraphicsCardToPowerConnector},
  * используемый в качестве тела HTTP-запроса.
  */
-@Schema(description = "Имеющийся у видеокарты коннектор питания")
+@Schema(description = "Имеющиеся у видеокарты коннекторы питания")
 @Getter
 @Setter
 @SuperBuilder
@@ -31,9 +31,9 @@ public class GraphicsCardToPowerConnectorRequestDto {
     protected UUID powerConnectorId;
 
     /**
-     * Количество коннекторов питания.
+     * Количество.
      */
-    @Schema(description = "Количество коннекторов питания")
+    @Schema(description = "Количество")
     @Min(1)
     @NotNull
     protected Integer count;

@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Модель имеющегося у видеокарты коннектора питания.
+ * Модель имеющихся у видеокарты коннекторов питания.
  */
 @Getter
 @Setter
@@ -67,7 +67,7 @@ public class GraphicsCardToPowerConnector {
     protected GraphicsCardPowerConnector powerConnector;
 
     /**
-     * Количество коннекторов питания.
+     * Количество.
      */
     @Min(1)
     @NotNull

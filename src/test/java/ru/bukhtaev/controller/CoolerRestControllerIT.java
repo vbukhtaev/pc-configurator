@@ -10,9 +10,14 @@ import ru.bukhtaev.dto.mapper.ICoolerMapper;
 import ru.bukhtaev.dto.request.CoolerRequestDto;
 import ru.bukhtaev.model.*;
 import ru.bukhtaev.model.dictionary.FanPowerConnector;
+import ru.bukhtaev.model.dictionary.FanSize;
 import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.repository.*;
+import ru.bukhtaev.repository.dictionary.IFanPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IFanSizeRepository;
+import ru.bukhtaev.repository.dictionary.ISocketRepository;
+import ru.bukhtaev.repository.dictionary.IVendorRepository;
 import ru.bukhtaev.service.TransactionService;
 
 import java.text.MessageFormat;

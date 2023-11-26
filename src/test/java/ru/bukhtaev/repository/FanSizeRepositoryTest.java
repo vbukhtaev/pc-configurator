@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ru.bukhtaev.AbstractContainerizedTest;
-import ru.bukhtaev.model.FanSize;
+import ru.bukhtaev.model.dictionary.FanSize;
+import ru.bukhtaev.repository.dictionary.IFanSizeRepository;
 
 import java.util.UUID;
 

@@ -12,6 +12,8 @@ import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.*;
 import ru.bukhtaev.model.dictionary.RamType;
 import ru.bukhtaev.model.dictionary.Vendor;
+import ru.bukhtaev.repository.dictionary.IRamTypeRepository;
+import ru.bukhtaev.repository.dictionary.IVendorRepository;
 import ru.bukhtaev.util.RamModuleSort;
 
 import java.util.UUID;

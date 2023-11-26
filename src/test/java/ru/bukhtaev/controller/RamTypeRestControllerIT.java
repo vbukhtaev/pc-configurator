@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IRamTypeMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.RamType;
-import ru.bukhtaev.repository.IRamTypeRepository;
+import ru.bukhtaev.repository.dictionary.IRamTypeRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

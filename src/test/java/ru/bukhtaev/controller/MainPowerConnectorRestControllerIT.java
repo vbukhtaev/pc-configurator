@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IMainPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.MainPowerConnector;
-import ru.bukhtaev.repository.IMainPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IMainPowerConnectorRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

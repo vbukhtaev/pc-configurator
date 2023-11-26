@@ -13,9 +13,9 @@ import ru.bukhtaev.model.dictionary.StorageConnector;
 import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.repository.IHddRepository;
-import ru.bukhtaev.repository.IStorageConnectorRepository;
-import ru.bukhtaev.repository.IStoragePowerConnectorRepository;
-import ru.bukhtaev.repository.IVendorRepository;
+import ru.bukhtaev.repository.dictionary.IStorageConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IStoragePowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IVendorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;

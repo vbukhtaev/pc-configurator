@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IGraphicsCardPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.GraphicsCardPowerConnector;
-import ru.bukhtaev.repository.IGraphicsCardPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IGraphicsCardPowerConnectorRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

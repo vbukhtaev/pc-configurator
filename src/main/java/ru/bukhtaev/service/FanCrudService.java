@@ -10,12 +10,12 @@ import ru.bukhtaev.exception.InvalidParamException;
 import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.Fan;
 import ru.bukhtaev.model.dictionary.FanPowerConnector;
-import ru.bukhtaev.model.FanSize;
+import ru.bukhtaev.model.dictionary.FanSize;
 import ru.bukhtaev.model.dictionary.Vendor;
-import ru.bukhtaev.repository.IFanPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IFanPowerConnectorRepository;
 import ru.bukhtaev.repository.IFanRepository;
-import ru.bukhtaev.repository.IFanSizeRepository;
-import ru.bukhtaev.repository.IVendorRepository;
+import ru.bukhtaev.repository.dictionary.IFanSizeRepository;
+import ru.bukhtaev.repository.dictionary.IVendorRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;

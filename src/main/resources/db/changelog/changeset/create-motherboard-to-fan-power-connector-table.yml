@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-motherboard-to-fan-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: motherboard_to_fan_power_connector
+            remarks: Имеющиеся у материнской платы коннекторы питания вентиляторов
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: motherboard_to_fan_power_connector_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: motherboard_id
+                  remarks: Материнская плата
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_to_fan_power_connector_motherboard_fk
+                    referencedTableName: motherboard
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: fan_power_connector_id
+                  remarks: Коннектор питания вентилятора
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_to_fan_power_connector_fan_power_connector_fk
+                    referencedTableName: fan_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: motherboard_to_fan_power_connector
+            columnNames: motherboard_id, fan_power_connector_id
+            constraintName: motherboard_to_fan_power_connector_motherboard_id_and_fan_power_connector_id_uq

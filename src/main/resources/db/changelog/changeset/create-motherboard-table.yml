@@ -1,0 +1,122 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-motherboard-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: motherboard
+            remarks: Материнская плата
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: motherboard_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_memory_clock
+                  remarks: Максимальная частота оперативной памяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_memory_over_clock
+                  remarks: Максимальная частота оперативной памяти с разгоном
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_memory_size
+                  remarks: Максимальный объем оперативной памяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: memory_slots_count
+                  remarks: Количество слотов
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: design_id
+                  remarks: Вариант исполнения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_design_fk
+                    referencedTableName: design
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: chipset_id
+                  remarks: Чипсет
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_chipset_fk
+                    referencedTableName: chipset
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: ram_type_id
+                  remarks: Тип оперативной памяти
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_ram_type_fk
+                    referencedTableName: ram_type
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: form_factor_id
+                  remarks: Форм-фактор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_form_factor_fk
+                    referencedTableName: motherboard_form_factor
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: cpu_power_connector_id
+                  remarks: Коннектор питания процессора
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_cpu_power_connector_fk
+                    referencedTableName: cpu_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: cooler_power_connector_id
+                  remarks: Коннектор питания процессорного кулера
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_cooler_power_connector_fk
+                    referencedTableName: fan_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: main_power_connector_id
+                  remarks: Основной коннектор питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_main_power_connector_fk
+                    referencedTableName: main_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: pci_express_connector_version_id
+                  remarks: Версия коннектора PCI-Express
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_pci_express_connector_version_fk
+                    referencedTableName: pci_express_connector_version
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: motherboard
+            columnNames: name, design_id, chipset_id, ram_type_id
+            constraintName: motherboard_name_and_design_id_and_chipset_id_and_ram_type_id_uq

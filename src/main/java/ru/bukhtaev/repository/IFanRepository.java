@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.bukhtaev.model.Fan;
-import ru.bukhtaev.model.FanSize;
+import ru.bukhtaev.model.dictionary.FanSize;
 
 import java.util.Optional;
 import java.util.UUID;

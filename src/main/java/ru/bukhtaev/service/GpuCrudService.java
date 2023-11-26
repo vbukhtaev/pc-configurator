@@ -12,8 +12,8 @@ import ru.bukhtaev.model.Gpu;
 import ru.bukhtaev.model.dictionary.Manufacturer;
 import ru.bukhtaev.model.dictionary.VideoMemoryType;
 import ru.bukhtaev.repository.IGpuRepository;
-import ru.bukhtaev.repository.IManufacturerRepository;
-import ru.bukhtaev.repository.IVideoMemoryTypeRepository;
+import ru.bukhtaev.repository.dictionary.IManufacturerRepository;
+import ru.bukhtaev.repository.dictionary.IVideoMemoryTypeRepository;
 import ru.bukhtaev.validation.Translator;
 
 import java.util.List;

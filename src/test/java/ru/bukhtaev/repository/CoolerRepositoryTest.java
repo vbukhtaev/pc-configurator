@@ -11,8 +11,13 @@ import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.*;
 import ru.bukhtaev.model.dictionary.FanPowerConnector;
+import ru.bukhtaev.model.dictionary.FanSize;
 import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.model.dictionary.Vendor;
+import ru.bukhtaev.repository.dictionary.IFanPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IFanSizeRepository;
+import ru.bukhtaev.repository.dictionary.ISocketRepository;
+import ru.bukhtaev.repository.dictionary.IVendorRepository;
 import ru.bukhtaev.util.CoolerSort;
 
 import java.util.List;

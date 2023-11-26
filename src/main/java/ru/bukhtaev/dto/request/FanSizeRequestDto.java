@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import ru.bukhtaev.model.FanSize;
+import ru.bukhtaev.model.dictionary.FanSize;
 
 /**
  * DTO для модели {@link FanSize}, используемый в качестве тела HTTP-запроса.

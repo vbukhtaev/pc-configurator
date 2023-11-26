@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.ISocketMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.Socket;
-import ru.bukhtaev.repository.ISocketRepository;
+import ru.bukhtaev.repository.dictionary.ISocketRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

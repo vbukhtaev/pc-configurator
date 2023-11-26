@@ -11,6 +11,7 @@ import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.Chipset;
 import ru.bukhtaev.model.dictionary.Socket;
+import ru.bukhtaev.repository.dictionary.ISocketRepository;
 import ru.bukhtaev.util.ChipsetSort;
 
 import java.util.UUID;

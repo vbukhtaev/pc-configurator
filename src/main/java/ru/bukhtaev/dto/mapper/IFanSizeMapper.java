@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.bukhtaev.dto.request.FanSizeRequestDto;
 import ru.bukhtaev.dto.response.FanSizeResponseDto;
-import ru.bukhtaev.model.FanSize;
+import ru.bukhtaev.model.dictionary.FanSize;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 

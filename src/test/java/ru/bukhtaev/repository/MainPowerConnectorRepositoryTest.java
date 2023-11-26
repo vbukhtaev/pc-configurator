@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.dictionary.MainPowerConnector;
+import ru.bukhtaev.repository.dictionary.IMainPowerConnectorRepository;
 
 import java.util.UUID;
 

@@ -13,9 +13,9 @@ import ru.bukhtaev.model.dictionary.Manufacturer;
 import ru.bukhtaev.model.dictionary.RamType;
 import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.ICpuRepository;
-import ru.bukhtaev.repository.IManufacturerRepository;
-import ru.bukhtaev.repository.IRamTypeRepository;
-import ru.bukhtaev.repository.ISocketRepository;
+import ru.bukhtaev.repository.dictionary.IManufacturerRepository;
+import ru.bukhtaev.repository.dictionary.IRamTypeRepository;
+import ru.bukhtaev.repository.dictionary.ISocketRepository;
 import ru.bukhtaev.service.TransactionService;
 
 import java.text.MessageFormat;

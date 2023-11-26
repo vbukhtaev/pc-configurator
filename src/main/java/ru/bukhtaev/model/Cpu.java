@@ -150,7 +150,7 @@ public class Cpu extends NameableEntity {
     protected Set<CpuToRamType> supportedRamTypes = new HashSet<>();
 
     /**
-     * Добавляет указанный тип оперативной памяти с указанной частотой.
+     * Добавляет тип оперативной памяти с указанной частотой.
      *
      * @param type  тип оперативной памяти
      * @param clock частота

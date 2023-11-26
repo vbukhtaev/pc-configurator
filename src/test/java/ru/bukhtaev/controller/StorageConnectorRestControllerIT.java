@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.IStorageConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.StorageConnector;
-import ru.bukhtaev.repository.IStorageConnectorRepository;
+import ru.bukhtaev.repository.dictionary.IStorageConnectorRepository;
 
 import java.text.MessageFormat;
 import java.util.List;

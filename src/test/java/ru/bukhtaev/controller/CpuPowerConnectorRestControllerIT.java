@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import ru.bukhtaev.dto.mapper.ICpuPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.CpuPowerConnector;
-import ru.bukhtaev.repository.ICpuPowerConnectorRepository;
+import ru.bukhtaev.repository.dictionary.ICpuPowerConnectorRepository;
 
 import java.text.MessageFormat;
 import java.util.List;
