@@ -65,3 +65,11 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-motherboard-to-fan-power-connector-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-motherboard-to-storage-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-psu-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-psu-to-cpu-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-psu-to-storage-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-psu-to-graphics-card-power-connector-table.yml

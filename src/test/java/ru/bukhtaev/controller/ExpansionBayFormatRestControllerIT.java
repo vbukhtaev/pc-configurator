@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import ru.bukhtaev.dto.mapper.IExpansionBayFormatMapper;
+import ru.bukhtaev.dto.mapper.dictionary.IExpansionBayFormatMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 import ru.bukhtaev.repository.dictionary.IExpansionBayFormatRepository;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.bukhtaev.controller.ExpansionBayFormatRestController.URL_API_V1_EXPANSION_BAY_FORMATS;
+import static ru.bukhtaev.controller.dictionary.ExpansionBayFormatRestController.URL_API_V1_EXPANSION_BAY_FORMATS;
 
 /**
  * Интеграционные тесты для CRUD операций над форматами отсеков расширения.

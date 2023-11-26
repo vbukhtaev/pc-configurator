@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import ru.bukhtaev.dto.mapper.IPsuFormFactorMapper;
+import ru.bukhtaev.dto.mapper.dictionary.IPsuFormFactorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.PsuFormFactor;
 import ru.bukhtaev.repository.dictionary.IPsuFormFactorRepository;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.bukhtaev.controller.PsuFormFactorRestController.URL_API_V1_PSU_FORM_FACTORS;
+import static ru.bukhtaev.controller.dictionary.PsuFormFactorRestController.URL_API_V1_PSU_FORM_FACTORS;
 
 /**
  * Интеграционные тесты для CRUD операций над форм-факторами блоков питания.

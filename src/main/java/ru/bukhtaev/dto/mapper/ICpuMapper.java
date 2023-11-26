@@ -2,6 +2,7 @@ package ru.bukhtaev.dto.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import ru.bukhtaev.dto.mapper.cross.ICpuToRamTypeMapper;
 import ru.bukhtaev.dto.request.CpuRequestDto;
 import ru.bukhtaev.dto.response.CpuResponseDto;
 import ru.bukhtaev.model.Cpu;

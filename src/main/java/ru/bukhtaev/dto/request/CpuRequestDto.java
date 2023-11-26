@@ -72,16 +72,16 @@ public class CpuRequestDto extends NameableRequestDto {
     protected Integer maxTdp;
 
     /**
-     * ID производитель.
+     * ID производителя.
      */
-    @Schema(description = "ID производитель")
+    @Schema(description = "ID производителя")
     @NotBlank
     protected UUID manufacturerId;
 
     /**
-     * ID сокет.
+     * ID сокета.
      */
-    @Schema(description = "ID сокет")
+    @Schema(description = "ID сокета")
     @NotBlank
     protected UUID socketId;
 

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import ru.bukhtaev.dto.mapper.IPciExpressConnectorVersionMapper;
+import ru.bukhtaev.dto.mapper.dictionary.IPciExpressConnectorVersionMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.PciExpressConnectorVersion;
 import ru.bukhtaev.repository.dictionary.IPciExpressConnectorVersionRepository;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.bukhtaev.controller.PciExpressConnectorVersionRestController.URL_API_V1_PCI_EXPRESS_CONNECTOR_VERSIONS;
+import static ru.bukhtaev.controller.dictionary.PciExpressConnectorVersionRestController.URL_API_V1_PCI_EXPRESS_CONNECTOR_VERSIONS;
 
 /**
  * Интеграционные тесты для CRUD операций над версиями коннектора PCI-Express.

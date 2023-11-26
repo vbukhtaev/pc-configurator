@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import ru.bukhtaev.dto.mapper.IStoragePowerConnectorMapper;
+import ru.bukhtaev.dto.mapper.dictionary.IStoragePowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 import ru.bukhtaev.repository.dictionary.IStoragePowerConnectorRepository;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.bukhtaev.controller.StoragePowerConnectorRestController.URL_API_V1_STORAGE_POWER_CONNECTORS;
+import static ru.bukhtaev.controller.dictionary.StoragePowerConnectorRestController.URL_API_V1_STORAGE_POWER_CONNECTORS;
 
 /**
  * Интеграционные тесты для CRUD операций над коннекторами питания накопителей.

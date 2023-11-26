@@ -2,6 +2,8 @@ package ru.bukhtaev.dto.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import ru.bukhtaev.dto.mapper.cross.IMotherboardToFanPowerConnectorMapper;
+import ru.bukhtaev.dto.mapper.cross.IMotherboardToStorageConnectorMapper;
 import ru.bukhtaev.dto.request.MotherboardRequestDto;
 import ru.bukhtaev.dto.response.MotherboardResponseDto;
 import ru.bukhtaev.model.Motherboard;

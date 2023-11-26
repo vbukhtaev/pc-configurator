@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import ru.bukhtaev.dto.mapper.ICpuPowerConnectorMapper;
+import ru.bukhtaev.dto.mapper.dictionary.ICpuPowerConnectorMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.CpuPowerConnector;
 import ru.bukhtaev.repository.dictionary.ICpuPowerConnectorRepository;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.bukhtaev.controller.CpuPowerConnectorRestController.URL_API_V1_CPU_POWER_CONNECTORS;
+import static ru.bukhtaev.controller.dictionary.CpuPowerConnectorRestController.URL_API_V1_CPU_POWER_CONNECTORS;
 
 /**
  * Интеграционные тесты для CRUD операций над коннекторами питания процессоров.

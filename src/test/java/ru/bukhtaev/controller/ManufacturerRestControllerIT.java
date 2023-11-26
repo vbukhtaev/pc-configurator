@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import ru.bukhtaev.dto.mapper.IManufacturerMapper;
+import ru.bukhtaev.dto.mapper.dictionary.IManufacturerMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.model.dictionary.Manufacturer;
 import ru.bukhtaev.repository.dictionary.IManufacturerRepository;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.bukhtaev.controller.ManufacturerRestController.URL_API_V1_MANUFACTURERS;
+import static ru.bukhtaev.controller.dictionary.ManufacturerRestController.URL_API_V1_MANUFACTURERS;
 
 /**
  * Интеграционные тесты для CRUD операций над производителями.

@@ -2,6 +2,7 @@ package ru.bukhtaev.dto.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import ru.bukhtaev.dto.mapper.cross.IGraphicsCardToPowerConnectorMapper;
 import ru.bukhtaev.dto.request.GraphicsCardRequestDto;
 import ru.bukhtaev.dto.response.GraphicsCardResponseDto;
 import ru.bukhtaev.model.GraphicsCard;

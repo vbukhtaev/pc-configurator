@@ -239,8 +239,8 @@ public class MotherboardCrudService implements IPagingCrudService<Motherboard, U
         final RamType foundRamType = findRamTypeById(ramType.getId());
         newMotherboard.setRamType(foundRamType);
 
-        final var foundMotherboardFormFactor = findFormFactorById(formFactor.getId());
-        newMotherboard.setFormFactor(foundMotherboardFormFactor);
+        final var foundFormFactor = findFormFactorById(formFactor.getId());
+        newMotherboard.setFormFactor(foundFormFactor);
 
         final var foundCpuPowerConnector = findCpuPowerConnectorById(cpuPowerConnector.getId());
         newMotherboard.setCpuPowerConnector(foundCpuPowerConnector);

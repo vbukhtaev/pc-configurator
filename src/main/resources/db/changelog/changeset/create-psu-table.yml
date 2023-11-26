@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-psu-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: psu
+            remarks: Блок питания
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: psu_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: psu_name_uq
+                    nullable: false
+              - column:
+                  name: power
+                  remarks: Мощность
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: power_12v
+                  remarks: Мощность по линии 12V
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: length
+                  remarks: Длина
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vendor_id
+                  remarks: Вендор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_vendor_fk
+                    referencedTableName: vendor
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: form_factor_id
+                  remarks: Форм-фактор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_form_factor_fk
+                    referencedTableName: psu_form_factor
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: certificate_id
+                  remarks: Сертификат
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_certificate_fk
+                    referencedTableName: psu_certificate
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: main_power_connector_id
+                  remarks: Основной коннектор питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_main_power_connector_fk
+                    referencedTableName: main_power_connector
+                    referencedColumnNames: id
+                    nullable: false
