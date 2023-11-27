@@ -33,5 +33,6 @@ public interface IHddMapper {
     @Mapping(source = "vendorId", target = "vendor.id")
     @Mapping(source = "connectorId", target = "connector.id")
     @Mapping(source = "powerConnectorId", target = "powerConnector.id")
+    @Mapping(source = "expansionBayFormatId", target = "expansionBayFormat.id")
     Hdd convertFromDto(final HddRequestDto dto);
 }

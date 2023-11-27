@@ -77,6 +77,15 @@ databaseChangeLog:
                     referencedTableName: storage_power_connector
                     referencedColumnNames: id
                     nullable: false
+              - column:
+                  name: expansion_bay_format_id
+                  remarks: Формат слота расширения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: hdd_expansion_bay_format_fk
+                    referencedTableName: expansion_bay_format
+                    referencedColumnNames: id
+                    nullable: false
         - addUniqueConstraint:
             tableName: hdd
             columnNames: name, capacity, spindle_speed, cache_size

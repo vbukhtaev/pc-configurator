@@ -65,4 +65,10 @@ public abstract class StorageDeviceRequestDto extends NameableRequestDto {
      */
     @Schema(description = "ID коннектора питания")
     protected UUID powerConnectorId;
+
+    /**
+     * ID формата слота расширения.
+     */
+    @Schema(description = "ID формата слота расширения")
+    protected UUID expansionBayFormatId;
 }

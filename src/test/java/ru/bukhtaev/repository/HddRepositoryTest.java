@@ -10,9 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.Hdd;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 import ru.bukhtaev.model.dictionary.StorageConnector;
 import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 import ru.bukhtaev.model.dictionary.Vendor;
+import ru.bukhtaev.repository.dictionary.IExpansionBayFormatRepository;
 import ru.bukhtaev.repository.dictionary.IStorageConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IStoragePowerConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IVendorRepository;
@@ -54,6 +56,12 @@ class HddRepositoryTest extends AbstractContainerizedTest {
     @Autowired
     private IStoragePowerConnectorRepository powerConnectorRepository;
 
+    /**
+     * Репозиторий форматов слотов расширения.
+     */
+    @Autowired
+    private IExpansionBayFormatRepository expansionBayFormatRepository;
+
     private Hdd hddBarracuda;
     private Hdd hddP300;
 
@@ -92,6 +100,17 @@ class HddRepositoryTest extends AbstractContainerizedTest {
                         .build()
         );
 
+        final ExpansionBayFormat format25 = expansionBayFormatRepository.save(
+                ExpansionBayFormat.builder()
+                        .name("2.5")
+                        .build()
+        );
+        final ExpansionBayFormat format35 = expansionBayFormatRepository.save(
+                ExpansionBayFormat.builder()
+                        .name("3.5")
+                        .build()
+        );
+
         hddBarracuda = Hdd.builder()
                 .name("BarraCuda")
                 .capacity(1024)
@@ -102,6 +121,7 @@ class HddRepositoryTest extends AbstractContainerizedTest {
                 .vendor(vendorSeagate)
                 .connector(connectorSata3)
                 .powerConnector(powerConnectorFdd)
+                .expansionBayFormat(format25)
                 .build();
         hddP300 = Hdd.builder()
                 .name("P300")
@@ -113,6 +133,7 @@ class HddRepositoryTest extends AbstractContainerizedTest {
                 .vendor(vendorToshiba)
                 .connector(connectorSata2)
                 .powerConnector(powerConnectorMolex)
+                .expansionBayFormat(format35)
                 .build();
     }
 
@@ -122,6 +143,7 @@ class HddRepositoryTest extends AbstractContainerizedTest {
         vendorRepository.deleteAll();
         connectorRepository.deleteAll();
         powerConnectorRepository.deleteAll();
+        expansionBayFormatRepository.deleteAll();
     }
 
     @Test
@@ -157,6 +179,10 @@ class HddRepositoryTest extends AbstractContainerizedTest {
                     .isEqualTo(savedHdd.getPowerConnector().getId());
             assertThat(foundHdd.getPowerConnector().getName())
                     .isEqualTo(savedHdd.getPowerConnector().getName());
+            assertThat(foundHdd.getExpansionBayFormat().getId())
+                    .isEqualTo(savedHdd.getExpansionBayFormat().getId());
+            assertThat(foundHdd.getExpansionBayFormat().getName())
+                    .isEqualTo(savedHdd.getExpansionBayFormat().getName());
             assertThat(foundHdd.getCapacity())
                     .isEqualTo(savedHdd.getCapacity());
             assertThat(foundHdd.getReadingSpeed())
@@ -204,6 +230,10 @@ class HddRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(hddBarracuda.getPowerConnector().getId());
         assertThat(hdd.getPowerConnector().getName())
                 .isEqualTo(hddBarracuda.getPowerConnector().getName());
+        assertThat(hdd.getExpansionBayFormat().getId())
+                .isEqualTo(hddBarracuda.getExpansionBayFormat().getId());
+        assertThat(hdd.getExpansionBayFormat().getName())
+                .isEqualTo(hddBarracuda.getExpansionBayFormat().getName());
         assertThat(hdd.getCapacity())
                 .isEqualTo(hddBarracuda.getCapacity());
         assertThat(hdd.getReadingSpeed())
@@ -250,6 +280,10 @@ class HddRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(hddP300.getPowerConnector().getId());
         assertThat(hdd.getPowerConnector().getName())
                 .isEqualTo(hddP300.getPowerConnector().getName());
+        assertThat(hdd.getExpansionBayFormat().getId())
+                .isEqualTo(hddP300.getExpansionBayFormat().getId());
+        assertThat(hdd.getExpansionBayFormat().getName())
+                .isEqualTo(hddP300.getExpansionBayFormat().getName());
         assertThat(hdd.getCapacity())
                 .isEqualTo(hddP300.getCapacity());
         assertThat(hdd.getReadingSpeed())
@@ -318,6 +352,10 @@ class HddRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(hddBarracuda.getPowerConnector().getId());
         assertThat(hdd.getPowerConnector().getName())
                 .isEqualTo(hddBarracuda.getPowerConnector().getName());
+        assertThat(hdd.getExpansionBayFormat().getId())
+                .isEqualTo(hddBarracuda.getExpansionBayFormat().getId());
+        assertThat(hdd.getExpansionBayFormat().getName())
+                .isEqualTo(hddBarracuda.getExpansionBayFormat().getName());
         assertThat(hdd.getCapacity())
                 .isEqualTo(hddBarracuda.getCapacity());
         assertThat(hdd.getReadingSpeed())

@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 import ru.bukhtaev.model.dictionary.StorageConnector;
 import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 import ru.bukhtaev.model.dictionary.Vendor;
@@ -57,6 +58,11 @@ public abstract class StorageDevice extends NameableEntity {
     public static final String FIELD_POWER_CONNECTOR = "powerConnector";
 
     /**
+     * Название поля, хранящего формат слота расширения.
+     */
+    public static final String FIELD_EXPANSION_BAY_FORMAT = "expansionBayFormat";
+
+    /**
      * Объем памяти.
      */
     @Min(120)
@@ -100,6 +106,13 @@ public abstract class StorageDevice extends NameableEntity {
     @ManyToOne
     @JoinColumn(name = "power_connector_id", referencedColumnName = "id")
     protected StoragePowerConnector powerConnector;
+
+    /**
+     * Формат слота расширения.
+     */
+    @ManyToOne
+    @JoinColumn(name = "expansion_bay_format_id", referencedColumnName = "id")
+    protected ExpansionBayFormat expansionBayFormat;
 
     @Override
     public boolean equals(Object o) {

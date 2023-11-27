@@ -9,10 +9,12 @@ import ru.bukhtaev.exception.DataNotFoundException;
 import ru.bukhtaev.exception.InvalidParamException;
 import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.Hdd;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 import ru.bukhtaev.model.dictionary.StorageConnector;
 import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 import ru.bukhtaev.model.dictionary.Vendor;
 import ru.bukhtaev.repository.IHddRepository;
+import ru.bukhtaev.repository.dictionary.IExpansionBayFormatRepository;
 import ru.bukhtaev.repository.dictionary.IStorageConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IStoragePowerConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IVendorRepository;
@@ -62,6 +64,11 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
     private final IStoragePowerConnectorRepository powerConnectorRepository;
 
     /**
+     * Репозиторий форматов слотов расширения.
+     */
+    private final IExpansionBayFormatRepository expansionBayFormatRepository;
+
+    /**
      * Сервис предоставления сообщений.
      */
     private final Translator translator;
@@ -69,11 +76,12 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
     /**
      * Конструктор.
      *
-     * @param hddRepository            репозиторий жестких дисков
-     * @param vendorRepository         репозиторий вендоров
-     * @param connectorRepository      репозиторий коннекторов подключения накопителей
-     * @param powerConnectorRepository репозиторий коннекторов питания накопителей
-     * @param translator               сервис предоставления сообщений
+     * @param hddRepository                репозиторий жестких дисков
+     * @param vendorRepository             репозиторий вендоров
+     * @param connectorRepository          репозиторий коннекторов подключения накопителей
+     * @param powerConnectorRepository     репозиторий коннекторов питания накопителей
+     * @param expansionBayFormatRepository репозиторий форматов слотов расширения
+     * @param translator                   сервис предоставления сообщений
      */
     @Autowired
     public HddCrudService(
@@ -81,12 +89,14 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
             final IVendorRepository vendorRepository,
             final IStorageConnectorRepository connectorRepository,
             final IStoragePowerConnectorRepository powerConnectorRepository,
+            final IExpansionBayFormatRepository expansionBayFormatRepository,
             final Translator translator
     ) {
         this.hddRepository = hddRepository;
         this.vendorRepository = vendorRepository;
         this.connectorRepository = connectorRepository;
         this.powerConnectorRepository = powerConnectorRepository;
+        this.expansionBayFormatRepository = expansionBayFormatRepository;
         this.translator = translator;
     }
 
@@ -132,6 +142,14 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
             );
         }
 
+        final ExpansionBayFormat format = newHdd.getExpansionBayFormat();
+        if (format == null || format.getId() == null) {
+            throw new InvalidParamException(
+                    translator.getMessage(MESSAGE_CODE_INVALID_PARAM_VALUE),
+                    FIELD_EXPANSION_BAY_FORMAT
+            );
+        }
+
         final Vendor foundVendor = findVendorById(vendor.getId());
         newHdd.setVendor(foundVendor);
 
@@ -140,6 +158,9 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
 
         final StoragePowerConnector foundPowerConnector = findPowerConnectorById(powerConnector.getId());
         newHdd.setPowerConnector(foundPowerConnector);
+
+        final ExpansionBayFormat foundFormat = findExpansionBayFormatById(format.getId());
+        newHdd.setExpansionBayFormat(foundFormat);
 
         hddRepository.findTheSame(
                 newHdd.getName(),
@@ -190,6 +211,11 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
                 .map(StoragePowerConnector::getId)
                 .map(this::findPowerConnectorById)
                 .orElse(toBeUpdated.getPowerConnector());
+
+        final ExpansionBayFormat foundFormat = Optional.ofNullable(changedHdd.getExpansionBayFormat())
+                .map(ExpansionBayFormat::getId)
+                .map(this::findExpansionBayFormatById)
+                .orElse(toBeUpdated.getExpansionBayFormat());
 
         final String name = Objects.requireNonNullElse(
                 changedHdd.getName(),
@@ -252,6 +278,7 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
         toBeUpdated.setVendor(foundVendor);
         toBeUpdated.setConnector(foundConnector);
         toBeUpdated.setPowerConnector(foundPowerConnector);
+        toBeUpdated.setExpansionBayFormat(foundFormat);
 
         return hddRepository.save(toBeUpdated);
     }
@@ -283,11 +310,20 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
             );
         }
 
+        final ExpansionBayFormat format = newHdd.getExpansionBayFormat();
+        if (format == null || format.getId() == null) {
+            throw new InvalidParamException(
+                    translator.getMessage(MESSAGE_CODE_INVALID_PARAM_VALUE),
+                    FIELD_EXPANSION_BAY_FORMAT
+            );
+        }
+
         final Hdd existent = findHddById(id);
 
         final Vendor foundVendor = findVendorById(vendor.getId());
         final StorageConnector foundConnector = findConnectorById(connector.getId());
         final StoragePowerConnector foundPowerConnector = findPowerConnectorById(powerConnector.getId());
+        final ExpansionBayFormat foundFormat = findExpansionBayFormatById(format.getId());
 
         hddRepository.findTheSameWithAnotherId(
                 newHdd.getName(),
@@ -320,6 +356,7 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
         existent.setVendor(foundVendor);
         existent.setConnector(foundConnector);
         existent.setPowerConnector(foundPowerConnector);
+        existent.setExpansionBayFormat(foundFormat);
 
         return hddRepository.save(existent);
     }
@@ -390,6 +427,24 @@ public class HddCrudService implements IPagingCrudService<Hdd, UUID> {
                 .orElseThrow(() -> new DataNotFoundException(
                         translator.getMessage(
                                 MESSAGE_CODE_STORAGE_POWER_CONNECTOR_NOT_FOUND,
+                                id
+                        ),
+                        FIELD_ID
+                ));
+    }
+
+    /**
+     * Возвращает формат слота расширения с указанным ID, если он существует.
+     * В противном случае выбрасывает {@link DataNotFoundException}.
+     *
+     * @param id ID
+     * @return формат слота расширения с указанным ID, если он существует
+     */
+    private ExpansionBayFormat findExpansionBayFormatById(final UUID id) {
+        return expansionBayFormatRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(
+                        translator.getMessage(
+                                MESSAGE_CODE_EXPANSION_BAY_FORMAT_NOT_FOUND,
                                 id
                         ),
                         FIELD_ID

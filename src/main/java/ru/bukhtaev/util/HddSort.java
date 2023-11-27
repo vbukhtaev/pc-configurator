@@ -175,6 +175,22 @@ public enum HddSort {
     POWER_CONNECTOR_NAME_DESC(Sort.by(
             Sort.Direction.DESC,
             FIELD_POWER_CONNECTOR + "." + FIELD_NAME
+    )),
+
+    /**
+     * По названию формата слота расширения по возрастанию.
+     */
+    EXPANSION_BAY_FORMAT_NAME_ASC(Sort.by(
+            Sort.Direction.ASC,
+            FIELD_EXPANSION_BAY_FORMAT + "." + FIELD_NAME
+    )),
+
+    /**
+     * По названию формата слота расширения по убыванию.
+     */
+    EXPANSION_BAY_FORMAT_NAME_DESC(Sort.by(
+            Sort.Direction.DESC,
+            FIELD_EXPANSION_BAY_FORMAT + "." + FIELD_NAME
     ));
 
     private final Sort sortValue;

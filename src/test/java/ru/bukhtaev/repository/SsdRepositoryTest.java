@@ -10,9 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
 import ru.bukhtaev.model.Ssd;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 import ru.bukhtaev.model.dictionary.StorageConnector;
 import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 import ru.bukhtaev.model.dictionary.Vendor;
+import ru.bukhtaev.repository.dictionary.IExpansionBayFormatRepository;
 import ru.bukhtaev.repository.dictionary.IStorageConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IStoragePowerConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IVendorRepository;
@@ -53,6 +55,12 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
     @Autowired
     private IStoragePowerConnectorRepository powerConnectorRepository;
 
+    /**
+     * Репозиторий форматов слотов расширения.
+     */
+    @Autowired
+    private IExpansionBayFormatRepository expansionBayFormatRepository;
+
     private Ssd ssd980;
     private Ssd ssdS700;
 
@@ -86,6 +94,12 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
                         .build()
         );
 
+        final ExpansionBayFormat format25 = expansionBayFormatRepository.save(
+                ExpansionBayFormat.builder()
+                        .name("2.5")
+                        .build()
+        );
+
         ssd980 = Ssd.builder()
                 .name("980")
                 .capacity(1000)
@@ -94,6 +108,7 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
                 .vendor(vendorSamsung)
                 .connector(connectorM2)
                 .powerConnector(null)
+                .expansionBayFormat(null)
                 .build();
         ssdS700 = Ssd.builder()
                 .name("S700")
@@ -103,6 +118,7 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
                 .vendor(vendorHp)
                 .connector(connectorSata3)
                 .powerConnector(powerConnectorFdd)
+                .expansionBayFormat(format25)
                 .build();
     }
 
@@ -112,6 +128,7 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
         vendorRepository.deleteAll();
         connectorRepository.deleteAll();
         powerConnectorRepository.deleteAll();
+        expansionBayFormatRepository.deleteAll();
     }
 
     @Test
@@ -144,6 +161,10 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(ssdS700.getPowerConnector().getId());
         assertThat(ssd1.getPowerConnector().getName())
                 .isEqualTo(ssdS700.getPowerConnector().getName());
+        assertThat(ssd1.getExpansionBayFormat().getId())
+                .isEqualTo(ssdS700.getExpansionBayFormat().getId());
+        assertThat(ssd1.getExpansionBayFormat().getName())
+                .isEqualTo(ssdS700.getExpansionBayFormat().getName());
         assertThat(ssd1.getCapacity())
                 .isEqualTo(ssdS700.getCapacity());
         assertThat(ssd1.getReadingSpeed())
@@ -163,6 +184,7 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
         assertThat(ssd2.getConnector().getName())
                 .isEqualTo(ssd980.getConnector().getName());
         assertThat(ssd2.getPowerConnector()).isNull();
+        assertThat(ssd2.getExpansionBayFormat()).isNull();
         assertThat(ssd2.getCapacity())
                 .isEqualTo(ssd980.getCapacity());
         assertThat(ssd2.getReadingSpeed())
@@ -205,6 +227,10 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(ssdS700.getPowerConnector().getId());
         assertThat(ssd.getPowerConnector().getName())
                 .isEqualTo(ssdS700.getPowerConnector().getName());
+        assertThat(ssd.getExpansionBayFormat().getId())
+                .isEqualTo(ssdS700.getExpansionBayFormat().getId());
+        assertThat(ssd.getExpansionBayFormat().getName())
+                .isEqualTo(ssdS700.getExpansionBayFormat().getName());
         assertThat(ssd.getCapacity())
                 .isEqualTo(ssdS700.getCapacity());
         assertThat(ssd.getReadingSpeed())
@@ -245,6 +271,10 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(ssdS700.getPowerConnector().getId());
         assertThat(ssd.getPowerConnector().getName())
                 .isEqualTo(ssdS700.getPowerConnector().getName());
+        assertThat(ssd.getExpansionBayFormat().getId())
+                .isEqualTo(ssdS700.getExpansionBayFormat().getId());
+        assertThat(ssd.getExpansionBayFormat().getName())
+                .isEqualTo(ssdS700.getExpansionBayFormat().getName());
         assertThat(ssd.getCapacity())
                 .isEqualTo(ssdS700.getCapacity());
         assertThat(ssd.getReadingSpeed())
@@ -302,6 +332,7 @@ class SsdRepositoryTest extends AbstractContainerizedTest {
         assertThat(ssd.getConnector().getName())
                 .isEqualTo(ssd980.getConnector().getName());
         assertThat(ssd.getPowerConnector()).isNull();
+        assertThat(ssd.getExpansionBayFormat()).isNull();
         assertThat(ssd.getCapacity())
                 .isEqualTo(ssd980.getCapacity());
         assertThat(ssd.getReadingSpeed())

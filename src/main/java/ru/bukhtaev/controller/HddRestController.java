@@ -168,7 +168,8 @@ public class HddRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вендор, коннектор подключения или коннектор питания не найден",
+                    description = "Вендор, коннектор подключения, " +
+                            "коннектор питания или формат слота расширения не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
@@ -207,7 +208,8 @@ public class HddRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Жесткий диск, вендор, коннектор подключения или коннектор питания не найден",
+                    description = "Жесткий диск, вендор, коннектор подключения, " +
+                            "коннектор питания или формат слота расширения не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
@@ -245,7 +247,8 @@ public class HddRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Жесткий диск, вендор, коннектор подключения или коннектор питания не найден",
+                    description = "Жесткий диск, вендор, коннектор подключения, " +
+                            "коннектор питания или формат слота расширения не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}

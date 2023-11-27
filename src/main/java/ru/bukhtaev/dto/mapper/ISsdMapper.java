@@ -6,6 +6,7 @@ import org.mapstruct.Named;
 import ru.bukhtaev.dto.request.SsdRequestDto;
 import ru.bukhtaev.dto.response.SsdResponseDto;
 import ru.bukhtaev.model.Ssd;
+import ru.bukhtaev.model.dictionary.ExpansionBayFormat;
 import ru.bukhtaev.model.dictionary.StoragePowerConnector;
 
 import java.util.UUID;
@@ -37,6 +38,7 @@ public interface ISsdMapper {
     @Mapping(source = "vendorId", target = "vendor.id")
     @Mapping(source = "connectorId", target = "connector.id")
     @Mapping(source = "powerConnectorId", target = "powerConnector", qualifiedByName = "toPowerConnector")
+    @Mapping(source = "expansionBayFormatId", target = "expansionBayFormat", qualifiedByName = "toExpansionBayFormat")
     Ssd convertFromDto(final SsdRequestDto dto);
 
     @Named("toPowerConnector")
@@ -47,6 +49,17 @@ public interface ISsdMapper {
 
         return StoragePowerConnector.builder()
                 .id(powerConnectorId)
+                .build();
+    }
+
+    @Named("toExpansionBayFormat")
+    static ExpansionBayFormat toExpansionBayFormat(final UUID expansionBayFormatId) {
+        if (expansionBayFormatId == null) {
+            return null;
+        }
+
+        return ExpansionBayFormat.builder()
+                .id(expansionBayFormatId)
                 .build();
     }
 }
