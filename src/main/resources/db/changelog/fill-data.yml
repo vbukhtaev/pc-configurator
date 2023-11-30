@@ -73,3 +73,13 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-psu-to-storage-power-connector-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-psu-to-graphics-card-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-computer-case-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-computer-case-to-expansion-bay-format-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-computer-case-to-fan-size-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-computer-case-to-motherboard-form-factor-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-computer-case-to-psu-form-factor-table.yml

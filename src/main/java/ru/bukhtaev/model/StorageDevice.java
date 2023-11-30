@@ -58,7 +58,7 @@ public abstract class StorageDevice extends NameableEntity {
     public static final String FIELD_POWER_CONNECTOR = "powerConnector";
 
     /**
-     * Название поля, хранящего формат слота расширения.
+     * Название поля, хранящего формат отсека расширения.
      */
     public static final String FIELD_EXPANSION_BAY_FORMAT = "expansionBayFormat";
 
@@ -108,7 +108,7 @@ public abstract class StorageDevice extends NameableEntity {
     protected StoragePowerConnector powerConnector;
 
     /**
-     * Формат слота расширения.
+     * Формат отсека расширения.
      */
     @ManyToOne
     @JoinColumn(name = "expansion_bay_format_id", referencedColumnName = "id")

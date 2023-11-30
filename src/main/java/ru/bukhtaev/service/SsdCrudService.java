@@ -63,7 +63,7 @@ public class SsdCrudService implements IPagingCrudService<Ssd, UUID> {
     private final IStoragePowerConnectorRepository powerConnectorRepository;
 
     /**
-     * Репозиторий форматов слотов расширения.
+     * Репозиторий форматов отсеков расширения.
      */
     private final IExpansionBayFormatRepository expansionBayFormatRepository;
 
@@ -79,7 +79,7 @@ public class SsdCrudService implements IPagingCrudService<Ssd, UUID> {
      * @param vendorRepository             репозиторий вендоров
      * @param connectorRepository          репозиторий коннекторов подключения накопителей
      * @param powerConnectorRepository     репозиторий коннекторов питания накопителей
-     * @param expansionBayFormatRepository репозиторий форматов слотов расширения
+     * @param expansionBayFormatRepository репозиторий форматов отсеков расширения
      * @param translator                   сервис предоставления сообщений
      */
     @Autowired
@@ -387,11 +387,11 @@ public class SsdCrudService implements IPagingCrudService<Ssd, UUID> {
     }
 
     /**
-     * Возвращает формат слота расширения с указанным ID, если он существует.
+     * Возвращает формат отсека расширения с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return формат слота расширения с указанным ID, если он существует
+     * @return формат отсека расширения с указанным ID, если он существует
      */
     private ExpansionBayFormat findExpansionBayFormatById(final UUID id) {
         return expansionBayFormatRepository.findById(id)

@@ -57,7 +57,7 @@ class HddRepositoryTest extends AbstractContainerizedTest {
     private IStoragePowerConnectorRepository powerConnectorRepository;
 
     /**
-     * Репозиторий форматов слотов расширения.
+     * Репозиторий форматов отсеков расширения.
      */
     @Autowired
     private IExpansionBayFormatRepository expansionBayFormatRepository;

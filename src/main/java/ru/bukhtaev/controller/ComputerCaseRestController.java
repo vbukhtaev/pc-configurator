@@ -14,63 +14,63 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.bukhtaev.dto.mapper.IHddMapper;
-import ru.bukhtaev.dto.request.HddRequestDto;
-import ru.bukhtaev.dto.response.HddResponseDto;
-import ru.bukhtaev.model.Hdd;
+import ru.bukhtaev.dto.mapper.IComputerCaseMapper;
+import ru.bukhtaev.dto.request.ComputerCaseRequestDto;
+import ru.bukhtaev.dto.response.ComputerCaseResponseDto;
+import ru.bukhtaev.model.ComputerCase;
 import ru.bukhtaev.service.IPagingCrudService;
-import ru.bukhtaev.util.HddSort;
+import ru.bukhtaev.util.ComputerCaseSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static ru.bukhtaev.controller.HddRestController.URL_API_V1_HDDS;
+import static ru.bukhtaev.controller.ComputerCaseRestController.URL_API_V1_COMPUTER_CASES;
 
 /**
- * Контроллер обработки CRUD операций над жесткими дисками.
+ * Контроллер обработки CRUD операций над корпусами.
  */
-@Tag(name = "Жесткие диски")
+@Tag(name = "Корпуса")
 @RestController
-@RequestMapping(value = URL_API_V1_HDDS, produces = "application/json")
-public class HddRestController {
+@RequestMapping(value = URL_API_V1_COMPUTER_CASES, produces = "application/json")
+public class ComputerCaseRestController {
 
     /**
      * URL.
      */
-    public static final String URL_API_V1_HDDS = "/api/v1/hdds";
+    public static final String URL_API_V1_COMPUTER_CASES = "/api/v1/computer-cases";
 
     /**
-     * Сервис CRUD операций над жесткими дисками.
+     * Сервис CRUD операций над корпусами.
      */
-    private final IPagingCrudService<Hdd, UUID> crudService;
+    private final IPagingCrudService<ComputerCase, UUID> crudService;
 
     /**
-     * Маппер для DTO жестких дисков.
+     * Маппер для DTO корпусов.
      */
-    private final IHddMapper mapper;
+    private final IComputerCaseMapper mapper;
 
     /**
      * Конструктор.
      *
-     * @param crudService сервис CRUD операций над жесткими дисками
-     * @param mapper      маппер для DTO жестких дисков
+     * @param crudService сервис CRUD операций над корпусами
+     * @param mapper      маппер для DTO корпусов
      */
     @Autowired
-    public HddRestController(
-            final IPagingCrudService<Hdd, UUID> crudService,
-            final IHddMapper mapper
+    public ComputerCaseRestController(
+            final IPagingCrudService<ComputerCase, UUID> crudService,
+            final IComputerCaseMapper mapper
     ) {
         this.crudService = crudService;
         this.mapper = mapper;
     }
 
-    @Operation(summary = "Получение всех жестких дисков")
+    @Operation(summary = "Получение всех корпусов")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Жесткие диски получены"
+                    description = "Корпуса получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -81,7 +81,7 @@ public class HddRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<HddResponseDto>> handleGetAll() {
+    public ResponseEntity<List<ComputerCaseResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -92,11 +92,11 @@ public class HddRestController {
                 );
     }
 
-    @Operation(summary = "Получение всех жестких дисков (с пагинацией)")
+    @Operation(summary = "Получение всех корпусов (с пагинацией)")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Жесткие диски получены"
+                    description = "Корпуса получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -107,27 +107,27 @@ public class HddRestController {
             )
     })
     @GetMapping("/pageable")
-    public ResponseEntity<Slice<HddResponseDto>> handleGetAll(
+    public ResponseEntity<Slice<ComputerCaseResponseDto>> handleGetAll(
             @RequestParam(value = "offset", defaultValue = "0") final Integer offset,
             @RequestParam(value = "limit", defaultValue = "20") final Integer limit,
-            @RequestParam(value = "sort", defaultValue = "NAME_ASC") final HddSort sort
+            @RequestParam(value = "sort", defaultValue = "VENDOR_NAME_ASC") final ComputerCaseSort sort
     ) {
         return ResponseEntity.ok(
                 crudService.getAll(
                         PageRequest.of(
-                                offset, 
-                                limit, 
+                                offset,
+                                limit,
                                 sort.getSortValue()
                         )
                 ).map(mapper::convertToDto)
         );
     }
 
-    @Operation(summary = "Получение жесткого диска по ID")
+    @Operation(summary = "Получение корпуса по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Жесткий диск получен"
+                    description = "Корпус получен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -138,14 +138,14 @@ public class HddRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Жесткий диск не найден",
+                    description = "Корпус не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<HddResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<ComputerCaseResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -153,11 +153,11 @@ public class HddRestController {
                 );
     }
 
-    @Operation(summary = "Создание жесткого диска")
+    @Operation(summary = "Создание корпуса")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
-                    description = "Жесткий диск создан"
+                    description = "Корпус создан"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -168,36 +168,36 @@ public class HddRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вендор, коннектор подключения, " +
-                            "коннектор питания или формат отсека расширения не найден",
+                    description = "Вендор, форм-фактор материнской платы, форм-фактор блока питания, " +
+                            "формат отсека расширения или размер вентилятора не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PostMapping
-    public ResponseEntity<HddResponseDto> handleCreate(
-            @RequestBody final HddRequestDto dto,
+    public ResponseEntity<ComputerCaseResponseDto> handleCreate(
+            @RequestBody final ComputerCaseRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final HddResponseDto savedDto = mapper.convertToDto(
+        final ComputerCaseResponseDto savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
         );
 
         return ResponseEntity.created(uriBuilder
-                        .path(URL_API_V1_HDDS + "/{id}")
+                        .path(URL_API_V1_COMPUTER_CASES + "/{id}")
                         .build(Map.of("id", savedDto.getId())))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(savedDto);
     }
 
-    @Operation(summary = "Изменение жесткого диска")
+    @Operation(summary = "Изменение корпуса")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Жесткий диск изменен"
+                    description = "Корпус изменен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -208,17 +208,17 @@ public class HddRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Жесткий диск, вендор, коннектор подключения, " +
-                            "коннектор питания или формат отсека расширения не найден",
+                    description = "Корпус, вендор, форм-фактор материнской платы, форм-фактор блока питания, " +
+                            "формат отсека расширения или размер вентилятора не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<HddResponseDto> handleUpdate(
+    public ResponseEntity<ComputerCaseResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final HddRequestDto dto
+            @RequestBody final ComputerCaseRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -232,11 +232,11 @@ public class HddRestController {
                 );
     }
 
-    @Operation(summary = "Замена жесткого диска")
+    @Operation(summary = "Замена корпуса")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Жесткий диск заменен"
+                    description = "Корпус заменен"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -247,17 +247,17 @@ public class HddRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Жесткий диск, вендор, коннектор подключения, " +
-                            "коннектор питания или формат отсека расширения не найден",
+                    description = "Корпус, вендор, форм-фактор материнской платы, форм-фактор блока питания, " +
+                            "формат отсека расширения или размер вентилятора не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<HddResponseDto> handleReplace(
+    public ResponseEntity<ComputerCaseResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final HddRequestDto dto
+            @RequestBody final ComputerCaseRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -271,11 +271,11 @@ public class HddRestController {
                 );
     }
 
-    @Operation(summary = "Удаление жесткого диска по ID")
+    @Operation(summary = "Удаление корпуса по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
-                    description = "Жесткий диск удален"
+                    description = "Корпус удален"
             ),
             @ApiResponse(
                     responseCode = "400",

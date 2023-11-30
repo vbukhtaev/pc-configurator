@@ -178,7 +178,7 @@ public enum HddSort {
     )),
 
     /**
-     * По названию формата слота расширения по возрастанию.
+     * По названию формата отсека расширения по возрастанию.
      */
     EXPANSION_BAY_FORMAT_NAME_ASC(Sort.by(
             Sort.Direction.ASC,
@@ -186,7 +186,7 @@ public enum HddSort {
     )),
 
     /**
-     * По названию формата слота расширения по убыванию.
+     * По названию формата отсека расширения по убыванию.
      */
     EXPANSION_BAY_FORMAT_NAME_DESC(Sort.by(
             Sort.Direction.DESC,

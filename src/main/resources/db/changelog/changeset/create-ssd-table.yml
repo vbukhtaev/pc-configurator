@@ -67,7 +67,7 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: expansion_bay_format_id
-                  remarks: Формат слота расширения
+                  remarks: Формат отсека расширения
                   type: UUID
                   constraints:
                     foreignKeyName: ssd_expansion_bay_format_fk

@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-computer-case-to-psu-form-factor-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/computer_cases_to_psu_form_factors.sql
+            stripComments: true

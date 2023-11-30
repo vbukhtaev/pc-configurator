@@ -144,7 +144,7 @@ public class GraphicsCardCrudService implements IPagingCrudService<GraphicsCard,
         }
 
         final Set<GraphicsCardToPowerConnector> powerConnectors = newCard.getPowerConnectors();
-        validateDesigns(powerConnectors);
+        validatePowerConnectors(powerConnectors);
 
         final Gpu foundGpu = findGpuById(gpu.getId());
         newCard.setGpu(foundGpu);
@@ -214,7 +214,7 @@ public class GraphicsCardCrudService implements IPagingCrudService<GraphicsCard,
 
         final Set<GraphicsCardToPowerConnector> powerConnectors = changedCard.getPowerConnectors();
         if (powerConnectors != null) {
-            validateDesigns(powerConnectors);
+            validatePowerConnectors(powerConnectors);
 
             toBeUpdated.getPowerConnectors().forEach(pc -> entityManager.remove(pc));
             toBeUpdated.getPowerConnectors().clear();
@@ -279,7 +279,7 @@ public class GraphicsCardCrudService implements IPagingCrudService<GraphicsCard,
         }
 
         final Set<GraphicsCardToPowerConnector> powerConnectors = newCard.getPowerConnectors();
-        validateDesigns(powerConnectors);
+        validatePowerConnectors(powerConnectors);
 
         final GraphicsCard existent = findGraphicsCardById(id);
 
@@ -417,7 +417,7 @@ public class GraphicsCardCrudService implements IPagingCrudService<GraphicsCard,
      *
      * @param powerConnectors множество имеющихся у видеокарты коннекторов питания
      */
-    private void validateDesigns(final Set<GraphicsCardToPowerConnector> powerConnectors) {
+    private void validatePowerConnectors(final Set<GraphicsCardToPowerConnector> powerConnectors) {
         if (powerConnectors == null
                 || powerConnectors.isEmpty()
                 || powerConnectors.stream().anyMatch(Objects::isNull)

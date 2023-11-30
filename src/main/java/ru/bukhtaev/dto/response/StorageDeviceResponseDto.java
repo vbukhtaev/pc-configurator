@@ -50,8 +50,8 @@ public abstract class StorageDeviceResponseDto extends NameableResponseDto {
     protected NameableResponseDto powerConnector;
 
     /**
-     * Формат слота расширения.
+     * Формат отсека расширения.
      */
-    @Schema(description = "Формат слота расширения")
+    @Schema(description = "Формат отсека расширения")
     protected NameableResponseDto expansionBayFormat;
 }

@@ -169,7 +169,7 @@ public class SsdRestController {
             @ApiResponse(
                     responseCode = "404",
                     description = "Вендор, коннектор подключения, " +
-                            "коннектор питания или формат слота расширения не найден",
+                            "коннектор питания или формат отсека расширения не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
@@ -209,7 +209,7 @@ public class SsdRestController {
             @ApiResponse(
                     responseCode = "404",
                     description = "SSD накопитель, вендор, коннектор подключения, " +
-                            "коннектор питания или формат слота расширения не найден",
+                            "коннектор питания или формат отсека расширения не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
@@ -248,7 +248,7 @@ public class SsdRestController {
             @ApiResponse(
                     responseCode = "404",
                     description = "SSD накопитель, вендор, коннектор подключения, " +
-                            "коннектор питания или формат слота расширения не найден",
+                            "коннектор питания или формат отсека расширения не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}

@@ -51,6 +51,7 @@ public class CoolerResponseDto extends NameableResponseDto {
     /**
      * Поддерживаемые сокеты.
      */
+    @Schema(description = "Поддерживаемые сокеты")
     @Size(min = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

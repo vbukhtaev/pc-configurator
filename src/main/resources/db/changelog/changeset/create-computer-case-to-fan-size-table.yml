@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-computer-case-to-fan-size-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: computer_case_to_fan_size
+            remarks: Поддерживаемые корпусом размеры вентиляторов
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: computer_case_to_fan_size_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: computer_case_id
+                  remarks: Корпус
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_case_to_fan_size_computer_case_fk
+                    referencedTableName: computer_case
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: fan_size_id
+                  remarks: Размер вентилятора
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_case_to_fan_size_fan_size_fk
+                    referencedTableName: fan_size
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: computer_case_to_fan_size
+            columnNames: computer_case_id, fan_size_id
+            constraintName: computer_case_to_fan_size_computer_case_id_and_fan_size_id_uq
