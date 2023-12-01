@@ -727,11 +727,11 @@ public class MotherboardCrudService implements IPagingCrudService<Motherboard, U
     }
 
     /**
-     * Возвращает версию коннектора PCI_Express с указанным ID, если он существует.
+     * Возвращает версию коннектора PCI_Express с указанным ID, если она существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return версию коннектора PCI_Express с указанным ID, если он существует
+     * @return версию коннектора PCI_Express с указанным ID, если она существует
      */
     private PciExpressConnectorVersion findPciExpressConnectorVersionById(final UUID id) {
         return pciExpressConnectorVersionRepository.findById(id)

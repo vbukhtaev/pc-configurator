@@ -14,63 +14,63 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.bukhtaev.dto.mapper.IMotherboardMapper;
-import ru.bukhtaev.dto.request.MotherboardRequestDto;
-import ru.bukhtaev.dto.response.MotherboardResponseDto;
-import ru.bukhtaev.model.Motherboard;
+import ru.bukhtaev.dto.mapper.IComputerBuildMapper;
+import ru.bukhtaev.dto.request.ComputerBuildRequestDto;
+import ru.bukhtaev.dto.response.ComputerBuildResponseDto;
+import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.service.IPagingCrudService;
-import ru.bukhtaev.util.MotherboardSort;
+import ru.bukhtaev.util.ComputerBuildSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static ru.bukhtaev.controller.MotherboardRestController.URL_API_V1_MOTHERBOARDS;
+import static ru.bukhtaev.controller.ComputerBuildRestController.URL_API_V1_COMPUTER_BUILDS;
 
 /**
- * Контроллер обработки CRUD операций над материнскими платами.
+ * Контроллер обработки CRUD операций над сборками ПК.
  */
-@Tag(name = "Материнские платы")
+@Tag(name = "Сборки ПК")
 @RestController
-@RequestMapping(value = URL_API_V1_MOTHERBOARDS, produces = "application/json")
-public class MotherboardRestController {
+@RequestMapping(value = URL_API_V1_COMPUTER_BUILDS, produces = "application/json")
+public class ComputerBuildRestController {
 
     /**
      * URL.
      */
-    public static final String URL_API_V1_MOTHERBOARDS = "/api/v1/motherboards";
+    public static final String URL_API_V1_COMPUTER_BUILDS = "/api/v1/computer-builds";
 
     /**
-     * Сервис CRUD операций над материнскими платами.
+     * Сервис CRUD операций над сборками ПК.
      */
-    private final IPagingCrudService<Motherboard, UUID> crudService;
+    private final IPagingCrudService<ComputerBuild, UUID> crudService;
 
     /**
-     * Маппер для DTO материнских плат.
+     * Маппер для DTO сборок ПК.
      */
-    private final IMotherboardMapper mapper;
+    private final IComputerBuildMapper mapper;
 
     /**
      * Конструктор.
      *
-     * @param crudService сервис CRUD операций над материнскими платами
-     * @param mapper      маппер для DTO материнских плат
+     * @param crudService сервис CRUD операций над сборками ПК
+     * @param mapper      маппер для DTO сборок ПК
      */
     @Autowired
-    public MotherboardRestController(
-            final IPagingCrudService<Motherboard, UUID> crudService,
-            final IMotherboardMapper mapper
+    public ComputerBuildRestController(
+            final IPagingCrudService<ComputerBuild, UUID> crudService,
+            final IComputerBuildMapper mapper
     ) {
         this.crudService = crudService;
         this.mapper = mapper;
     }
 
-    @Operation(summary = "Получение всех материнских плат")
+    @Operation(summary = "Получение всех сборок ПК")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Материнские платы получены"
+                    description = "Сборки ПК получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -81,7 +81,7 @@ public class MotherboardRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<MotherboardResponseDto>> handleGetAll() {
+    public ResponseEntity<List<ComputerBuildResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -92,11 +92,11 @@ public class MotherboardRestController {
                 );
     }
 
-    @Operation(summary = "Получение всех материнских плат (с пагинацией)")
+    @Operation(summary = "Получение всех сборок ПК (с пагинацией)")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Материнские платы получены"
+                    description = "Сборки ПК получены"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -107,10 +107,10 @@ public class MotherboardRestController {
             )
     })
     @GetMapping("/pageable")
-    public ResponseEntity<Slice<MotherboardResponseDto>> handleGetAll(
+    public ResponseEntity<Slice<ComputerBuildResponseDto>> handleGetAll(
             @RequestParam(value = "offset", defaultValue = "0") final Integer offset,
             @RequestParam(value = "limit", defaultValue = "20") final Integer limit,
-            @RequestParam(value = "sort", defaultValue = "CHIPSET_NAME_ASC") final MotherboardSort sort
+            @RequestParam(value = "sort", defaultValue = "NAME_ASC") final ComputerBuildSort sort
     ) {
         return ResponseEntity.ok(
                 crudService.getAll(
@@ -123,11 +123,11 @@ public class MotherboardRestController {
         );
     }
 
-    @Operation(summary = "Получение материнской платы по ID")
+    @Operation(summary = "Получение сборки ПК по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Материнская плата получена"
+                    description = "Сборка ПК получена"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -138,14 +138,14 @@ public class MotherboardRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Материнская плата не найдена",
+                    description = "Сборка ПК не найдена",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<MotherboardResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<ComputerBuildResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -153,11 +153,11 @@ public class MotherboardRestController {
                 );
     }
 
-    @Operation(summary = "Создание материнской платы")
+    @Operation(summary = "Создание сборки ПК")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
-                    description = "Материнская плата создана"
+                    description = "Сборка ПК создана"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -168,38 +168,37 @@ public class MotherboardRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Вариант исполнения, чипсет, тип оперативной памяти, " +
-                            "форм-фактор материнской платы, коннектор питания процессора, " +
-                            "основной коннектор питания, коннектор питания процессорного кулера, " +
-                            "версия коннектора PCI-Express или коннектор подключения накопителя не найден",
+                    description = "Процессор, блок питания, процессорный кулер, материнская плата, " +
+                            "видеокарта, корпус, вентилятор, модуль оперативной памяти, " +
+                            "жесткий диск или SSD-накопитель не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PostMapping
-    public ResponseEntity<MotherboardResponseDto> handleCreate(
-            @RequestBody final MotherboardRequestDto dto,
+    public ResponseEntity<ComputerBuildResponseDto> handleCreate(
+            @RequestBody final ComputerBuildRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final MotherboardResponseDto savedDto = mapper.convertToDto(
+        final ComputerBuildResponseDto savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
         );
 
         return ResponseEntity.created(uriBuilder
-                        .path(URL_API_V1_MOTHERBOARDS + "/{id}")
+                        .path(URL_API_V1_COMPUTER_BUILDS + "/{id}")
                         .build(Map.of("id", savedDto.getId())))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(savedDto);
     }
 
-    @Operation(summary = "Изменение материнской платы")
+    @Operation(summary = "Изменение сборки ПК")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Материнская плата изменена"
+                    description = "Сборка ПК изменена"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -210,19 +209,18 @@ public class MotherboardRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Материнская плата, вариант исполнения, чипсет, тип оперативной памяти, " +
-                            "форм-фактор материнской платы, коннектор питания процессора, " +
-                            "основной коннектор питания, коннектор питания процессорного кулера, " +
-                            "версия коннектора PCI-Express или коннектор подключения накопителя не найден",
+                    description = "Сборка ПК, процессор, блок питания, процессорный кулер, " +
+                            "материнская плата, видеокарта, корпус, вентилятор, модуль оперативной памяти, " +
+                            "жесткий диск или SSD-накопитель не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<MotherboardResponseDto> handleUpdate(
+    public ResponseEntity<ComputerBuildResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final MotherboardRequestDto dto
+            @RequestBody final ComputerBuildRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -236,11 +234,11 @@ public class MotherboardRestController {
                 );
     }
 
-    @Operation(summary = "Замена материнской платы")
+    @Operation(summary = "Замена сборки ПК")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Материнская плата заменена"
+                    description = "Сборка ПК заменена"
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -251,19 +249,18 @@ public class MotherboardRestController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Материнская плата, вариант исполнения, чипсет, тип оперативной памяти, " +
-                            "форм-фактор материнской платы, коннектор питания процессора, " +
-                            "основной коннектор питания, коннектор питания процессорного кулера, " +
-                            "версия коннектора PCI-Express или коннектор подключения накопителя не найден",
+                    description = "Сборка ПК, процессор, блок питания, процессорный кулер, " +
+                            "материнская плата, видеокарта, корпус, вентилятор, модуль оперативной памяти, " +
+                            "жесткий диск или SSD-накопитель не найден",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<MotherboardResponseDto> handleReplace(
+    public ResponseEntity<ComputerBuildResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final MotherboardRequestDto dto
+            @RequestBody final ComputerBuildRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -277,11 +274,11 @@ public class MotherboardRestController {
                 );
     }
 
-    @Operation(summary = "Удаление материнской платы по ID")
+    @Operation(summary = "Удаление сборки ПК по ID")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
-                    description = "Материнская плата удалена"
+                    description = "Сборка ПК удалена"
             ),
             @ApiResponse(
                     responseCode = "400",

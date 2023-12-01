@@ -455,11 +455,11 @@ public class PsuCrudService implements IPagingCrudService<Psu, UUID> {
     }
 
     /**
-     * Возвращает блок питания с указанным ID, если она существует.
+     * Возвращает блок питания с указанным ID, если он существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return блок питания с указанным ID, если она существует
+     * @return блок питания с указанным ID, если он существует
      */
     private Psu findPsuById(final UUID id) {
         return psuRepository.findById(id)

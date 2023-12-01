@@ -83,3 +83,13 @@ databaseChangeLog:
       file: db/changelog/changeset/create-computer-case-to-motherboard-form-factor-table.yml
   - include:
       file: db/changelog/changeset/create-computer-case-to-psu-form-factor-table.yml
+  - include:
+      file: db/changelog/changeset/create-computer-build-table.yml
+  - include:
+      file: db/changelog/changeset/create-computer-build-to-fan-table.yml
+  - include:
+      file: db/changelog/changeset/create-computer-build-to-ram-module-table.yml
+  - include:
+      file: db/changelog/changeset/create-computer-build-to-hdd-table.yml
+  - include:
+      file: db/changelog/changeset/create-computer-build-to-ssd-table.yml

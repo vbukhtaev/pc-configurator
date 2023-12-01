@@ -322,11 +322,11 @@ public class GraphicsCardCrudService implements IPagingCrudService<GraphicsCard,
     }
 
     /**
-     * Возвращает видеокарту с указанным ID, если он существует.
+     * Возвращает видеокарту с указанным ID, если она существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return видеокарту с указанным ID, если он существует
+     * @return видеокарту с указанным ID, если она существует
      */
     private GraphicsCard findGraphicsCardById(final UUID id) {
         return cardRepository.findById(id)
@@ -376,11 +376,11 @@ public class GraphicsCardCrudService implements IPagingCrudService<GraphicsCard,
     }
 
     /**
-     * Возвращает версию коннектора PCI_Express с указанным ID, если он существует.
+     * Возвращает версию коннектора PCI_Express с указанным ID, если она существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return версию коннектора PCI_Express с указанным ID, если он существует
+     * @return версию коннектора PCI_Express с указанным ID, если она существует
      */
     private PciExpressConnectorVersion findPciExpressConnectorVersionById(final UUID id) {
         return pciExpressConnectorVersionRepository.findById(id)

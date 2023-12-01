@@ -134,11 +134,11 @@ public class PciExpressConnectorVersionCrudService implements ICrudService<PciEx
     }
 
     /**
-     * Возвращает версию коннектора PCI-Express с указанным ID, если он существует.
+     * Возвращает версию коннектора PCI-Express с указанным ID, если она существует.
      * В противном случае выбрасывает {@link DataNotFoundException}.
      *
      * @param id ID
-     * @return версию коннектора PCI-Express с указанным ID, если он существует
+     * @return версию коннектора PCI-Express с указанным ID, если она существует
      */
     private PciExpressConnectorVersion findById(final UUID id) {
         return repository.findById(id)
