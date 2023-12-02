@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IGpuMapper;
 import ru.bukhtaev.dto.request.GpuRequestDto;
 import ru.bukhtaev.dto.response.GpuResponseDto;
 import ru.bukhtaev.model.Gpu;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.GpuSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

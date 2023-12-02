@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IRamModuleMapper;
 import ru.bukhtaev.dto.request.RamModuleRequestDto;
 import ru.bukhtaev.dto.response.RamModuleResponseDto;
 import ru.bukhtaev.model.RamModule;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.RamModuleSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

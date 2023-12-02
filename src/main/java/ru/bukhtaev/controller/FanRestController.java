@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IFanMapper;
 import ru.bukhtaev.dto.request.FanRequestDto;
 import ru.bukhtaev.dto.response.FanResponseDto;
 import ru.bukhtaev.model.Fan;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.FanSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

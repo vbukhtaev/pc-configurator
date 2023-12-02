@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.ICoolerMapper;
 import ru.bukhtaev.dto.request.CoolerRequestDto;
 import ru.bukhtaev.dto.response.CoolerResponseDto;
 import ru.bukhtaev.model.Cooler;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.CoolerSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

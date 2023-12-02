@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IMotherboardMapper;
 import ru.bukhtaev.dto.request.MotherboardRequestDto;
 import ru.bukhtaev.dto.response.MotherboardResponseDto;
 import ru.bukhtaev.model.Motherboard;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.MotherboardSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

@@ -16,7 +16,7 @@ import ru.bukhtaev.dto.mapper.dictionary.IVideoMemoryTypeMapper;
 import ru.bukhtaev.dto.request.NameableRequestDto;
 import ru.bukhtaev.dto.response.NameableResponseDto;
 import ru.bukhtaev.model.dictionary.VideoMemoryType;
-import ru.bukhtaev.service.ICrudService;
+import ru.bukhtaev.service.crud.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;

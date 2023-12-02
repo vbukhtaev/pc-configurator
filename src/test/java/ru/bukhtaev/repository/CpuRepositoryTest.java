@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import ru.bukhtaev.AbstractContainerizedTest;
-import ru.bukhtaev.model.*;
+import ru.bukhtaev.model.Cpu;
 import ru.bukhtaev.model.cross.CpuToRamType;
 import ru.bukhtaev.model.dictionary.Manufacturer;
 import ru.bukhtaev.model.dictionary.RamType;
@@ -106,6 +106,7 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
                 .maxClock(4000)
                 .l3CacheSize(18)
                 .maxTdp(117)
+                .maxMemorySize(131072)
                 .manufacturer(manufacturerIntel)
                 .socket(socketLga1700)
                 .build();
@@ -121,6 +122,7 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
                 .maxClock(4400)
                 .l3CacheSize(32)
                 .maxTdp(65)
+                .maxMemorySize(131072)
                 .manufacturer(manufacturerAmd)
                 .socket(socketAm4)
                 .build();
@@ -170,6 +172,8 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
                     .isEqualTo(savedCpu.getL3CacheSize());
             assertThat(foundCpu.getMaxTdp())
                     .isEqualTo(savedCpu.getMaxTdp());
+            assertThat(foundCpu.getMaxMemorySize())
+                    .isEqualTo(savedCpu.getMaxMemorySize());
             assertThat(foundCpu.getManufacturer().getId())
                     .isEqualTo(savedCpu.getManufacturer().getId());
             assertThat(foundCpu.getManufacturer().getName())
@@ -217,6 +221,8 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(cpuR55600X.getL3CacheSize());
         assertThat(cpu.getMaxTdp())
                 .isEqualTo(cpuR55600X.getMaxTdp());
+        assertThat(cpu.getMaxMemorySize())
+                .isEqualTo(cpuR55600X.getMaxMemorySize());
         assertThat(cpu.getManufacturer().getId())
                 .isEqualTo(cpuR55600X.getManufacturer().getId());
         assertThat(cpu.getManufacturer().getName())
@@ -258,6 +264,8 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(cpuR55600X.getL3CacheSize());
         assertThat(cpu.getMaxTdp())
                 .isEqualTo(cpuR55600X.getMaxTdp());
+        assertThat(cpu.getMaxMemorySize())
+                .isEqualTo(cpuR55600X.getMaxMemorySize());
         assertThat(cpu.getManufacturer().getId())
                 .isEqualTo(cpuR55600X.getManufacturer().getId());
         assertThat(cpu.getManufacturer().getName())
@@ -318,6 +326,8 @@ class CpuRepositoryTest extends AbstractContainerizedTest {
                 .isEqualTo(cpuI512400F.getL3CacheSize());
         assertThat(cpu.getMaxTdp())
                 .isEqualTo(cpuI512400F.getMaxTdp());
+        assertThat(cpu.getMaxMemorySize())
+                .isEqualTo(cpuI512400F.getMaxMemorySize());
         assertThat(cpu.getManufacturer().getId())
                 .isEqualTo(cpuI512400F.getManufacturer().getId());
         assertThat(cpu.getManufacturer().getName())

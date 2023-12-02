@@ -2,9 +2,14 @@ package ru.bukhtaev.dto.mapper.dictionary;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.dto.response.NameableResponseDto;
+import org.mapstruct.Named;
+import ru.bukhtaev.dto.request.dictionary.CpuPowerConnectorRequestDto;
+import ru.bukhtaev.dto.response.dictionary.CpuPowerConnectorResponseDto;
 import ru.bukhtaev.model.dictionary.CpuPowerConnector;
+
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
@@ -15,20 +20,57 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 public interface ICpuPowerConnectorMapper {
 
     /**
-     * Конвертирует {@link CpuPowerConnector} в DTO {@link NameableResponseDto}.
+     * Конвертирует {@link CpuPowerConnector} в DTO {@link CpuPowerConnectorResponseDto}.
      *
      * @param entity {@link CpuPowerConnector}
-     * @return DTO {@link NameableResponseDto}
+     * @return DTO {@link CpuPowerConnectorResponseDto}
      */
-    NameableResponseDto convertToDto(final CpuPowerConnector entity);
+    @Mapping(
+            source = "compatibleConnectors",
+            target = "compatibleConnectors",
+            qualifiedByName = "connectorSetToConnectorSet"
+    )
+    CpuPowerConnectorResponseDto convertToDto(final CpuPowerConnector entity);
 
     /**
-     * Конвертирует DTO {@link NameableRequestDto} в {@link CpuPowerConnector},
+     * Конвертирует DTO {@link CpuPowerConnectorRequestDto} в {@link CpuPowerConnector},
      * игнорируя поле {@code id}.
      *
-     * @param dto DTO {@link NameableRequestDto}
+     * @param dto DTO {@link CpuPowerConnectorRequestDto}
      * @return {@link CpuPowerConnector}
      */
     @Mapping(target = "id", ignore = true)
-    CpuPowerConnector convertFromDto(final NameableRequestDto dto);
+    @Mapping(
+            source = "compatibleConnectorIds",
+            target = "compatibleConnectors",
+            qualifiedByName = "uuidSetToConnectorSet"
+    )
+    CpuPowerConnector convertFromDto(final CpuPowerConnectorRequestDto dto);
+
+    @Named("uuidSetToConnectorSet")
+    static Set<CpuPowerConnector> uuidSetToConnectorSet(Set<UUID> connectorIds) {
+        if (connectorIds == null) {
+            return null;
+        }
+
+        return connectorIds.stream()
+                .map(connectorId -> CpuPowerConnector.builder()
+                        .id(connectorId)
+                        .build())
+                .collect(Collectors.toSet());
+    }
+
+    @Named("connectorSetToConnectorSet")
+    static Set<CpuPowerConnectorResponseDto> connectorSetToConnectorSet(Set<CpuPowerConnector> connectors) {
+        if (connectors == null) {
+            return null;
+        }
+
+        return connectors.stream()
+                .map(connector -> CpuPowerConnectorResponseDto.builder()
+                        .id(connector.getId())
+                        .name(connector.getName())
+                        .build())
+                .collect(Collectors.toSet());
+    }
 }

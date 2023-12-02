@@ -62,6 +62,7 @@ public class CoolerRequestDto extends NameableRequestDto {
     /**
      * ID поддерживаемых сокетов
      */
+    @Schema(description = "ID поддерживаемых сокетов")
     @Size(min = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

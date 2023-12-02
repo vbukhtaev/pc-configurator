@@ -13,10 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.dictionary.IStorageConnectorMapper;
-import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.dto.response.NameableResponseDto;
+import ru.bukhtaev.dto.request.dictionary.StorageConnectorRequestDto;
+import ru.bukhtaev.dto.response.dictionary.StorageConnectorResponseDto;
 import ru.bukhtaev.model.dictionary.StorageConnector;
-import ru.bukhtaev.service.ICrudService;
+import ru.bukhtaev.service.crud.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class StorageConnectorRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<NameableResponseDto>> handleGetAll() {
+    public ResponseEntity<List<StorageConnectorResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -111,7 +111,7 @@ public class StorageConnectorRestController {
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<StorageConnectorResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -134,11 +134,11 @@ public class StorageConnectorRestController {
             )
     })
     @PostMapping
-    public ResponseEntity<NameableResponseDto> handleCreate(
-            @RequestBody final NameableRequestDto dto,
+    public ResponseEntity<StorageConnectorResponseDto> handleCreate(
+            @RequestBody final StorageConnectorRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final NameableResponseDto savedDto = mapper.convertToDto(
+        final var savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
@@ -173,9 +173,9 @@ public class StorageConnectorRestController {
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleUpdate(
+    public ResponseEntity<StorageConnectorResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final StorageConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -211,9 +211,9 @@ public class StorageConnectorRestController {
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleReplace(
+    public ResponseEntity<StorageConnectorResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final StorageConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)

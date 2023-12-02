@@ -59,6 +59,11 @@ public class Cpu extends NameableEntity {
     public static final String FIELD_MAX_TDP = "maxTdp";
 
     /**
+     * Название поля, хранящего максимальный объем оперативной памяти.
+     */
+    public static final String FIELD_MAX_MEMORY_SIZE = "maxMemorySize";
+
+    /**
      * Название поля, хранящего производителя.
      */
     public static final String FIELD_MANUFACTURER = "manufacturer";
@@ -120,6 +125,14 @@ public class Cpu extends NameableEntity {
     @NotNull
     @Column(name = "max_tdp", nullable = false)
     protected Integer maxTdp;
+
+    /**
+     * Максимальный объем оперативной памяти (Мб).
+     */
+    @Min(32768)
+    @NotNull
+    @Column(name = "max_memory_size", nullable = false)
+    protected Integer maxMemorySize;
 
     /**
      * Производитель.

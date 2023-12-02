@@ -72,6 +72,14 @@ public class CpuRequestDto extends NameableRequestDto {
     protected Integer maxTdp;
 
     /**
+     * Максимальный объем оперативной памяти (Мб).
+     */
+    @Schema(description = "Максимальный объем оперативной памяти (Мб)")
+    @Min(32768)
+    @NotNull
+    protected Integer maxMemorySize;
+
+    /**
      * ID производителя.
      */
     @Schema(description = "ID производителя")

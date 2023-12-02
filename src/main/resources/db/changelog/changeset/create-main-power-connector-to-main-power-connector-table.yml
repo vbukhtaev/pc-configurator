@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-main-power-connector-to-main-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: main_power_connector_to_main_power_connector
+            remarks: Совместимые основные коннекторы питания
+            columns:
+              - column:
+                  name: connector_id
+                  remarks: Коннектор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: main_power_con_to_main_power_con_connector_fk
+                    referencedTableName: main_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: compatible_connector_id
+                  remarks: Совместимый коннектор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: main_power_con_to_main_power_con_compatible_connector_fk
+                    referencedTableName: main_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: connector_id, compatible_connector_id
+            constraintName: pk_main_power_connector_to_main_power_connector
+            tableName: main_power_connector_to_main_power_connector

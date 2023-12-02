@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IPsuMapper;
 import ru.bukhtaev.dto.request.PsuRequestDto;
 import ru.bukhtaev.dto.response.PsuResponseDto;
 import ru.bukhtaev.model.Psu;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.PsuSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

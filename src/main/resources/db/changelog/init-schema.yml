@@ -93,3 +93,15 @@ databaseChangeLog:
       file: db/changelog/changeset/create-computer-build-to-hdd-table.yml
   - include:
       file: db/changelog/changeset/create-computer-build-to-ssd-table.yml
+  - include:
+      file: db/changelog/changeset/create-pci-express-connector-version-to-pci-express-connector-version-table.yml
+  - include:
+      file: db/changelog/changeset/create-cpu-power-connector-to-cpu-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/create-fan-power-connector-to-fan-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/create-graphics-card-power-connector-to-graphics-card-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/create-main-power-connector-to-main-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/create-storage-connector-to-storage-connector-table.yml

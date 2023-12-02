@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IChipsetMapper;
 import ru.bukhtaev.dto.request.ChipsetRequestDto;
 import ru.bukhtaev.dto.response.ChipsetResponseDto;
 import ru.bukhtaev.model.Chipset;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.ChipsetSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

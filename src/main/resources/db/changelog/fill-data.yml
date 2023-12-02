@@ -50,7 +50,7 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/insert-data-into-cooler-table.yml
   - include:
-      file: db/changelog/changeset/insert-data-into-cooler_to_socket-table.yml
+      file: db/changelog/changeset/insert-data-into-cooler-to-socket-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-cpu-table.yml
   - include:
@@ -83,3 +83,15 @@ databaseChangeLog:
       file: db/changelog/changeset/insert-data-into-computer-case-to-motherboard-form-factor-table.yml
   - include:
       file: db/changelog/changeset/insert-data-into-computer-case-to-psu-form-factor-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-pci-express-connector-version-to-pci-express-connector-version-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-cpu-power-connector-to-cpu-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-fan-power-connector-to-fan-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-graphics-card-power-connector-to-graphics-card-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-main-power-connector-to-main-power-connector-table.yml
+  - include:
+      file: db/changelog/changeset/insert-data-into-storage-connector-to-storage-connector-table.yml

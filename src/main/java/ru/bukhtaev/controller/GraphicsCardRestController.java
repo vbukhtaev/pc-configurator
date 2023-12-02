@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IGraphicsCardMapper;
 import ru.bukhtaev.dto.request.GraphicsCardRequestDto;
 import ru.bukhtaev.dto.response.GraphicsCardResponseDto;
 import ru.bukhtaev.model.GraphicsCard;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.GraphicsCardSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

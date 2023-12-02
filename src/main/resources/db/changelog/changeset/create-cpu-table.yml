@@ -59,6 +59,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: max_memory_size
+                  remarks: Максимальный объем оперативной памяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
                   name: socket_id
                   remarks: Сокет
                   type: UUID

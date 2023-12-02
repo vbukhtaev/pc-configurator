@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IDesignMapper;
 import ru.bukhtaev.dto.request.DesignRequestDto;
 import ru.bukhtaev.dto.response.DesignResponseDto;
 import ru.bukhtaev.model.Design;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.DesignSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

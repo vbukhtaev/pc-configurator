@@ -13,10 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.dictionary.ICpuPowerConnectorMapper;
-import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.dto.response.NameableResponseDto;
+import ru.bukhtaev.dto.request.dictionary.CpuPowerConnectorRequestDto;
+import ru.bukhtaev.dto.response.dictionary.CpuPowerConnectorResponseDto;
 import ru.bukhtaev.model.dictionary.CpuPowerConnector;
-import ru.bukhtaev.service.ICrudService;
+import ru.bukhtaev.service.crud.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class CpuPowerConnectorRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<NameableResponseDto>> handleGetAll() {
+    public ResponseEntity<List<CpuPowerConnectorResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -111,7 +111,7 @@ public class CpuPowerConnectorRestController {
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<CpuPowerConnectorResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -131,14 +131,21 @@ public class CpuPowerConnectorRestController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
                     )}
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Коннектор питания процессора не найден",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )}
             )
     })
     @PostMapping
-    public ResponseEntity<NameableResponseDto> handleCreate(
-            @RequestBody final NameableRequestDto dto,
+    public ResponseEntity<CpuPowerConnectorResponseDto> handleCreate(
+            @RequestBody final CpuPowerConnectorRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final NameableResponseDto savedDto = mapper.convertToDto(
+        final var savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
@@ -173,9 +180,9 @@ public class CpuPowerConnectorRestController {
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleUpdate(
+    public ResponseEntity<CpuPowerConnectorResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final CpuPowerConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -211,9 +218,9 @@ public class CpuPowerConnectorRestController {
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleReplace(
+    public ResponseEntity<CpuPowerConnectorResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final CpuPowerConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)

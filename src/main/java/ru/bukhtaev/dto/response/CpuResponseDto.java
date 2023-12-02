@@ -55,6 +55,12 @@ public class CpuResponseDto extends NameableResponseDto {
     protected Integer maxTdp;
 
     /**
+     * Максимальный объем оперативной памяти (Мб).
+     */
+    @Schema(description = "Максимальный объем оперативной памяти (Мб)")
+    protected Integer maxMemorySize;
+
+    /**
      * Производитель.
      */
     @Schema(description = "Производитель")

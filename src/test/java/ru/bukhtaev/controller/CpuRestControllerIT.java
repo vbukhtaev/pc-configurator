@@ -128,6 +128,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(4000)
                 .l3CacheSize(18)
                 .maxTdp(117)
+                .maxMemorySize(131072)
                 .manufacturer(manufacturerIntel)
                 .socket(socketLga1700)
                 .build();
@@ -143,6 +144,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(4400)
                 .l3CacheSize(32)
                 .maxTdp(65)
+                .maxMemorySize(131072)
                 .manufacturer(manufacturerAmd)
                 .socket(socketAm4)
                 .build();
@@ -158,6 +160,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuI512400F.getMaxClock())
                 .l3CacheSize(cpuI512400F.getL3CacheSize())
                 .maxTdp(cpuI512400F.getMaxTdp())
+                .maxMemorySize(cpuI512400F.getMaxMemorySize())
                 .manufacturerId(manufacturerIntel.getId())
                 .socketId(socketLga1700.getId())
                 .build();
@@ -173,6 +176,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuR55600X.getMaxClock())
                 .l3CacheSize(cpuR55600X.getL3CacheSize())
                 .maxTdp(cpuR55600X.getMaxTdp())
+                .maxMemorySize(cpuR55600X.getMaxMemorySize())
                 .manufacturerId(manufacturerAmd.getId())
                 .socketId(socketAm4.getId())
                 .build();
@@ -213,6 +217,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$[0].maxClock", is(cpuDtoI512400F.getMaxClock())),
                         jsonPath("$[0].l3CacheSize", is(cpuDtoI512400F.getL3CacheSize())),
                         jsonPath("$[0].maxTdp", is(cpuDtoI512400F.getMaxTdp())),
+                        jsonPath("$[0].maxMemorySize", is(cpuDtoI512400F.getMaxMemorySize())),
                         jsonPath("$[0].manufacturer.id", is(manufacturerIntel.getId().toString())),
                         jsonPath("$[0].manufacturer.name", is(manufacturerIntel.getName())),
                         jsonPath("$[0].socket.id", is(socketLga1700.getId().toString())),
@@ -237,6 +242,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$[1].maxClock", is(cpuDtoR55600X.getMaxClock())),
                         jsonPath("$[1].l3CacheSize", is(cpuDtoR55600X.getL3CacheSize())),
                         jsonPath("$[1].maxTdp", is(cpuDtoR55600X.getMaxTdp())),
+                        jsonPath("$[1].maxMemorySize", is(cpuDtoR55600X.getMaxMemorySize())),
                         jsonPath("$[1].manufacturer.id", is(manufacturerAmd.getId().toString())),
                         jsonPath("$[1].manufacturer.name", is(manufacturerAmd.getName())),
                         jsonPath("$[1].socket.id", is(socketAm4.getId().toString())),
@@ -281,6 +287,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.content.[0].maxClock", is(cpuDtoI512400F.getMaxClock())),
                         jsonPath("$.content.[0].l3CacheSize", is(cpuDtoI512400F.getL3CacheSize())),
                         jsonPath("$.content.[0].maxTdp", is(cpuDtoI512400F.getMaxTdp())),
+                        jsonPath("$.content.[0].maxMemorySize", is(cpuDtoI512400F.getMaxMemorySize())),
                         jsonPath("$.content.[0].manufacturer.id", is(manufacturerIntel.getId().toString())),
                         jsonPath("$.content.[0].manufacturer.name", is(manufacturerIntel.getName())),
                         jsonPath("$.content.[0].socket.id", is(socketLga1700.getId().toString())),
@@ -305,6 +312,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.content.[1].maxClock", is(cpuDtoR55600X.getMaxClock())),
                         jsonPath("$.content.[1].l3CacheSize", is(cpuDtoR55600X.getL3CacheSize())),
                         jsonPath("$.content.[1].maxTdp", is(cpuDtoR55600X.getMaxTdp())),
+                        jsonPath("$.content.[1].maxMemorySize", is(cpuDtoR55600X.getMaxMemorySize())),
                         jsonPath("$.content.[1].manufacturer.id", is(manufacturerAmd.getId().toString())),
                         jsonPath("$.content.[1].manufacturer.name", is(manufacturerAmd.getName())),
                         jsonPath("$.content.[1].socket.id", is(socketAm4.getId().toString())),
@@ -349,6 +357,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.maxClock", is(cpuDtoI512400F.getMaxClock())),
                         jsonPath("$.l3CacheSize", is(cpuDtoI512400F.getL3CacheSize())),
                         jsonPath("$.maxTdp", is(cpuDtoI512400F.getMaxTdp())),
+                        jsonPath("$.maxMemorySize", is(cpuDtoI512400F.getMaxMemorySize())),
                         jsonPath("$.manufacturer.id", is(manufacturerIntel.getId().toString())),
                         jsonPath("$.manufacturer.name", is(manufacturerIntel.getName())),
                         jsonPath("$.socket.id", is(socketLga1700.getId().toString())),
@@ -421,6 +430,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.maxClock", is(cpuDtoI512400F.getMaxClock())),
                         jsonPath("$.l3CacheSize", is(cpuDtoI512400F.getL3CacheSize())),
                         jsonPath("$.maxTdp", is(cpuDtoI512400F.getMaxTdp())),
+                        jsonPath("$.maxMemorySize", is(cpuDtoI512400F.getMaxMemorySize())),
                         jsonPath("$.manufacturer.id", is(manufacturerIntel.getId().toString())),
                         jsonPath("$.manufacturer.name", is(manufacturerIntel.getName())),
                         jsonPath("$.socket.id", is(socketLga1700.getId().toString())),
@@ -459,6 +469,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuDtoI512400F.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuDtoI512400F.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuDtoI512400F.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerIntel.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -694,6 +706,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(cpuDtoI512400F.getSocketId())
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -719,6 +732,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.maxClock", is(cpuDtoI512400F.getMaxClock())),
                         jsonPath("$.l3CacheSize", is(cpuDtoI512400F.getL3CacheSize())),
                         jsonPath("$.maxTdp", is(cpuDtoI512400F.getMaxTdp())),
+                        jsonPath("$.maxMemorySize", is(cpuDtoI512400F.getMaxMemorySize())),
                         jsonPath("$.manufacturer.id", is(manufacturerIntel.getId().toString())),
                         jsonPath("$.manufacturer.name", is(manufacturerIntel.getName())),
                         jsonPath("$.socket.id", is(socketLga1700.getId().toString())),
@@ -756,6 +770,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuDtoI512400F.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuDtoI512400F.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuDtoI512400F.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerIntel.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -788,6 +804,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(nonExistentManufacturerId)
                 .socketId(cpuDtoI512400F.getSocketId())
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -835,6 +852,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -867,6 +886,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(nonExistentSocketId)
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -914,6 +934,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -946,6 +968,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(cpuDtoI512400F.getSocketId())
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -994,6 +1017,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1025,6 +1050,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(null)
                 .socketId(cpuDtoI512400F.getSocketId())
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -1067,6 +1093,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1098,6 +1126,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(null)
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -1140,6 +1169,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1171,6 +1202,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(cpuDtoI512400F.getSocketId())
                 .build();
@@ -1213,6 +1245,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1243,6 +1277,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(cpuDtoI512400F.getSocketId())
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -1290,6 +1325,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1321,6 +1358,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(cpuDtoI512400F.getSocketId())
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -1383,6 +1421,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuDtoI512400F.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuDtoI512400F.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuDtoI512400F.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerIntel.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1415,6 +1455,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(nonExistentManufacturerId)
                 .socketId(cpuDtoI512400F.getSocketId())
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -1462,6 +1503,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1494,6 +1537,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(nonExistentSocketId)
                 .supportedRamTypes(cpuDtoI512400F.getSupportedRamTypes())
@@ -1541,6 +1585,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1573,6 +1619,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoI512400F.getMaxClock())
                 .l3CacheSize(cpuDtoI512400F.getL3CacheSize())
                 .maxTdp(cpuDtoI512400F.getMaxTdp())
+                .maxMemorySize(cpuDtoI512400F.getMaxMemorySize())
                 .manufacturerId(cpuDtoI512400F.getManufacturerId())
                 .socketId(cpuDtoI512400F.getSocketId())
                 .build();
@@ -1620,6 +1667,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuR55600X.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuR55600X.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuR55600X.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerAmd.getId());
             assertThat(cooler.getManufacturer().getName())
@@ -1649,6 +1698,7 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                 .maxClock(cpuDtoR55600X.getMaxClock())
                 .l3CacheSize(cpuDtoR55600X.getL3CacheSize())
                 .maxTdp(cpuDtoR55600X.getMaxTdp())
+                .maxMemorySize(cpuDtoR55600X.getMaxMemorySize())
                 .manufacturerId(cpuDtoR55600X.getManufacturerId())
                 .socketId(cpuDtoR55600X.getSocketId())
                 .supportedRamTypes(cpuDtoR55600X.getSupportedRamTypes())
@@ -1698,6 +1748,8 @@ class CpuRestControllerIT extends AbstractIntegrationTest {
                     .isEqualTo(cpuDtoI512400F.getL3CacheSize());
             assertThat(cooler.getMaxTdp())
                     .isEqualTo(cpuDtoI512400F.getMaxTdp());
+            assertThat(cooler.getMaxMemorySize())
+                    .isEqualTo(cpuDtoI512400F.getMaxMemorySize());
             assertThat(cooler.getManufacturer().getId())
                     .isEqualTo(manufacturerIntel.getId());
             assertThat(cooler.getManufacturer().getName())

@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.ISsdMapper;
 import ru.bukhtaev.dto.request.SsdRequestDto;
 import ru.bukhtaev.dto.response.SsdResponseDto;
 import ru.bukhtaev.model.Ssd;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.SsdSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

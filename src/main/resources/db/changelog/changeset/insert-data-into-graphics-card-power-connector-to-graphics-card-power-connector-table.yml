@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-graphics-card-power-connector-to-graphics-card-power-connector-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/graphics_card_power_connectors_to_graphics_card_power_connectors.sql
+            stripComments: true

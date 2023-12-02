@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IHddMapper;
 import ru.bukhtaev.dto.request.HddRequestDto;
 import ru.bukhtaev.dto.response.HddResponseDto;
 import ru.bukhtaev.model.Hdd;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.HddSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

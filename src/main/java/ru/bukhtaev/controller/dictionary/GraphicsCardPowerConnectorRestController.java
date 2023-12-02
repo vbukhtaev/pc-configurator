@@ -13,10 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.dictionary.IGraphicsCardPowerConnectorMapper;
-import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.dto.response.NameableResponseDto;
+import ru.bukhtaev.dto.request.dictionary.GraphicsCardPowerConnectorRequestDto;
+import ru.bukhtaev.dto.response.dictionary.GraphicsCardPowerConnectorResponseDto;
 import ru.bukhtaev.model.dictionary.GraphicsCardPowerConnector;
-import ru.bukhtaev.service.ICrudService;
+import ru.bukhtaev.service.crud.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class GraphicsCardPowerConnectorRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<NameableResponseDto>> handleGetAll() {
+    public ResponseEntity<List<GraphicsCardPowerConnectorResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -111,7 +111,7 @@ public class GraphicsCardPowerConnectorRestController {
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<GraphicsCardPowerConnectorResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -134,11 +134,11 @@ public class GraphicsCardPowerConnectorRestController {
             )
     })
     @PostMapping
-    public ResponseEntity<NameableResponseDto> handleCreate(
-            @RequestBody final NameableRequestDto dto,
+    public ResponseEntity<GraphicsCardPowerConnectorResponseDto> handleCreate(
+            @RequestBody final GraphicsCardPowerConnectorRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final NameableResponseDto savedDto = mapper.convertToDto(
+        final var savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
@@ -173,9 +173,9 @@ public class GraphicsCardPowerConnectorRestController {
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleUpdate(
+    public ResponseEntity<GraphicsCardPowerConnectorResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final GraphicsCardPowerConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -211,9 +211,9 @@ public class GraphicsCardPowerConnectorRestController {
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleReplace(
+    public ResponseEntity<GraphicsCardPowerConnectorResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final GraphicsCardPowerConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)

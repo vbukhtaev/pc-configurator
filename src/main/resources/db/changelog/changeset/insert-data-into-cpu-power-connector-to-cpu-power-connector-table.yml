@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-cpu-power-connector-to-cpu-power-connector-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/cpu_power_connectors_to_cpu_power_connectors.sql
+            stripComments: true

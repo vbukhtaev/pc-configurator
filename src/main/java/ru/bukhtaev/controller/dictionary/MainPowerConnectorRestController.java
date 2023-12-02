@@ -13,10 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.bukhtaev.dto.mapper.dictionary.IMainPowerConnectorMapper;
-import ru.bukhtaev.dto.request.NameableRequestDto;
-import ru.bukhtaev.dto.response.NameableResponseDto;
+import ru.bukhtaev.dto.request.dictionary.MainPowerConnectorRequestDto;
+import ru.bukhtaev.dto.response.dictionary.MainPowerConnectorResponseDto;
 import ru.bukhtaev.model.dictionary.MainPowerConnector;
-import ru.bukhtaev.service.ICrudService;
+import ru.bukhtaev.service.crud.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class MainPowerConnectorRestController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<NameableResponseDto>> handleGetAll() {
+    public ResponseEntity<List<MainPowerConnectorResponseDto>> handleGetAll() {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -111,7 +111,7 @@ public class MainPowerConnectorRestController {
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleGetById(@PathVariable("id") final UUID id) {
+    public ResponseEntity<MainPowerConnectorResponseDto> handleGetById(@PathVariable("id") final UUID id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(
@@ -134,11 +134,11 @@ public class MainPowerConnectorRestController {
             )
     })
     @PostMapping
-    public ResponseEntity<NameableResponseDto> handleCreate(
-            @RequestBody final NameableRequestDto dto,
+    public ResponseEntity<MainPowerConnectorResponseDto> handleCreate(
+            @RequestBody final MainPowerConnectorRequestDto dto,
             final UriComponentsBuilder uriBuilder
     ) {
-        final NameableResponseDto savedDto = mapper.convertToDto(
+        final var savedDto = mapper.convertToDto(
                 crudService.create(
                         mapper.convertFromDto(dto)
                 )
@@ -173,9 +173,9 @@ public class MainPowerConnectorRestController {
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleUpdate(
+    public ResponseEntity<MainPowerConnectorResponseDto> handleUpdate(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final MainPowerConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -211,9 +211,9 @@ public class MainPowerConnectorRestController {
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<NameableResponseDto> handleReplace(
+    public ResponseEntity<MainPowerConnectorResponseDto> handleReplace(
             @PathVariable("id") final UUID id,
-            @RequestBody final NameableRequestDto dto
+            @RequestBody final MainPowerConnectorRequestDto dto
     ) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)

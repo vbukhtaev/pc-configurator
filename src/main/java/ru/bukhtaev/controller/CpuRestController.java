@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.ICpuMapper;
 import ru.bukhtaev.dto.request.CpuRequestDto;
 import ru.bukhtaev.dto.response.CpuResponseDto;
 import ru.bukhtaev.model.Cpu;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.CpuSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 

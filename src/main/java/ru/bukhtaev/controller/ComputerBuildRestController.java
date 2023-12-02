@@ -18,7 +18,9 @@ import ru.bukhtaev.dto.mapper.IComputerBuildMapper;
 import ru.bukhtaev.dto.request.ComputerBuildRequestDto;
 import ru.bukhtaev.dto.response.ComputerBuildResponseDto;
 import ru.bukhtaev.model.ComputerBuild;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.checker.ComputerBuildVerifyingService;
+import ru.bukhtaev.service.checker.ComputerVerifyResult;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.ComputerBuildSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
@@ -47,6 +49,11 @@ public class ComputerBuildRestController {
     private final IPagingCrudService<ComputerBuild, UUID> crudService;
 
     /**
+     * Сервис проверки сборок ПК на совместимость комплектующих.
+     */
+    private final ComputerBuildVerifyingService checkingService;
+
+    /**
      * Маппер для DTO сборок ПК.
      */
     private final IComputerBuildMapper mapper;
@@ -54,15 +61,18 @@ public class ComputerBuildRestController {
     /**
      * Конструктор.
      *
-     * @param crudService сервис CRUD операций над сборками ПК
-     * @param mapper      маппер для DTO сборок ПК
+     * @param crudService     сервис CRUD операций над сборками ПК
+     * @param checkingService сервис проверки сборок ПК на совместимость комплектующих
+     * @param mapper          маппер для DTO сборок ПК
      */
     @Autowired
     public ComputerBuildRestController(
             final IPagingCrudService<ComputerBuild, UUID> crudService,
+            final ComputerBuildVerifyingService checkingService,
             final IComputerBuildMapper mapper
     ) {
         this.crudService = crudService;
+        this.checkingService = checkingService;
         this.mapper = mapper;
     }
 
@@ -292,5 +302,35 @@ public class ComputerBuildRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void handleDelete(@PathVariable("id") final UUID id) {
         crudService.delete(id);
+    }
+
+    @Operation(summary = "Проверка сборки ПК на совместимость комплектующих")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Результат проверки получен"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Ошибка валидации",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )}
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Сборка ПК не найдена",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )}
+            )
+    })
+    @GetMapping("/compatibility/{id}")
+    public ResponseEntity<ComputerVerifyResult> handleCheck(@PathVariable("id") final UUID id) {
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(
+                        checkingService.verify(id)
+                );
     }
 }

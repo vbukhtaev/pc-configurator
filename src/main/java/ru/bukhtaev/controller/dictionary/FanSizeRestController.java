@@ -16,7 +16,7 @@ import ru.bukhtaev.dto.mapper.dictionary.IFanSizeMapper;
 import ru.bukhtaev.dto.request.FanSizeRequestDto;
 import ru.bukhtaev.dto.response.FanSizeResponseDto;
 import ru.bukhtaev.model.dictionary.FanSize;
-import ru.bukhtaev.service.ICrudService;
+import ru.bukhtaev.service.crud.ICrudService;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
 import java.util.List;

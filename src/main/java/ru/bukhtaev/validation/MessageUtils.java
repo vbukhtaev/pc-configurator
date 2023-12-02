@@ -12,6 +12,18 @@ public class MessageUtils {
     }
 
     /**
+     * Шаблон сообщения для сущностей с названием,
+     * состоящим из 2 частей.
+     */
+    public static final String MESSAGE_TEMPLATE_TWO_PART_NAME = "{0} {1}";
+
+    /**
+     * Шаблон сообщения для сущностей с составным названием,
+     * состоящим из 3 частей.
+     */
+    public static final String MESSAGE_TEMPLATE_THREE_PART_NAME = "{0} {1} {2}";
+
+    /**
      * Код сообщения о том, что значение параметра некорректно.
      */
     public static final String MESSAGE_CODE_INVALID_PARAM_VALUE = "validation.common.invalid-param-value";
@@ -342,4 +354,283 @@ public class MessageUtils {
      * Код сообщения о том, что конфигурация ПК с указанным названием уже существует.
      */
     public static final String MESSAGE_CODE_COMPUTER_BUILD_UNIQUE = "validation.computer-build.unique-name";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствует процессор.
+     */
+    public static final String MESSAGE_CODE_COMPUTER_BUILD_NO_CPU = "completeness.no-cpu";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствует блок питания.
+     */
+    public static final String MESSAGE_CODE_COMPUTER_BUILD_NO_PSU = "completeness.no-psu";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствует процессорный кулер.
+     */
+    public static final String MESSAGE_CODE_COMPUTER_BUILD_NO_CPU_COOLER = "completeness.no-cpu-cooler";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствует материнская плата.
+     */
+    public static final String MESSAGE_CODE_COMPUTER_BUILD_NO_MOTHERBOARD = "completeness.no-motherboard";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствует видеокарта.
+     */
+    public static final String MESSAGE_CODE_NO_GRAPHICS_CARD = "completeness.no-graphics-card";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствует корпус.
+     */
+    public static final String MESSAGE_CODE_NO_COMPUTER_CASE = "completeness.no-computer-case";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствуют модули оперативной памяти.
+     */
+    public static final String MESSAGE_CODE_NO_RAM_MODULES = "completeness.no-ram-modules";
+
+    /**
+     * Код сообщения о том, что в сборке ПК отсутствуют устройства хранения данных.
+     */
+    public static final String MESSAGE_CODE_NO_STORAGE_DEVICES = "completeness.no-storage-devices";
+
+    /**
+     * Код сообщения о том, что в сборке ПК меньше двух вентиляторов.
+     */
+    public static final String MESSAGE_CODE_THERE_ARE_AT_LEAST_TWO_FANS = "completeness.there-are-at-least-two-fans";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * версия коннектора PCI-Express на материнской плате ниже, чем на видеокарте.
+     */
+    public static final String MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION = "optimality.pci-express-connector-version";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * модули оперативной памяти имеют разные варианты исполнения.
+     */
+    public static final String MESSAGE_CODE_RAM_MODULES_WITH_DIFFERENT_DESIGN
+            = "optimality.ram-modules-with-different-design";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * модули оперативной памяти имеют разную частоту.
+     */
+    public static final String MESSAGE_CODE_RAM_MODULES_DIFFERENT_CLOCK
+            = "optimality.ram-modules-different-clock";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * есть модули оперативной памяти с частотой выше,
+     * чем максимальна частота оперативной памяти процессора.
+     */
+    public static final String MESSAGE_CODE_CPU_MAX_RAM_CLOCK_EXCEEDING
+            = "optimality.cpu-max-ram-clock-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * есть модули оперативной памяти с частотой выше,
+     * чем максимальна частота оперативной памяти материнской платы.
+     */
+    public static final String MESSAGE_CODE_MOTHERBOARD_MAX_RAM_CLOCK_EXCEEDING
+            = "optimality.motherboard-max-ram-clock-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * материнская плата не располагает количеством коннекторов питания,
+     * позволяющим подключить все включенные в сборку накопители без потерь скорости.
+     */
+    public static final String MESSAGE_CODE_STORAGE_DEVICE_SPEED_LOSSES = "optimality.storage-connectors-speed-losses";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * материнская плата не располагает количеством коннекторов подключения,
+     * позволяющим подключить все включенные в сборку накопители.
+     */
+    public static final String MESSAGE_CODE_NOT_ENOUGH_STORAGE_CONNECTORS
+            = "compatibility.not-enough-storage-connectors";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * корпус не поддерживает достаточное количество размеров вентиляторов
+     * для всех включенных в сборку вентиляторов.
+     */
+    public static final String MESSAGE_CODE_NOT_ENOUGH_FAN_SIZES
+            = "compatibility.not-enough-fan-sizes";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * корпус не поддерживает достаточное количество форматов отсеков расширения
+     * для всех включенных в сборку жестких дисков и SSD-накопителей.
+     */
+    public static final String MESSAGE_CODE_NOT_ENOUGH_EXPANSION_BAY_FORMATS
+            = "compatibility.not-enough-expansion-bay-formats";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * блок питания не располагает количеством коннекторов питания накопителей,
+     * позволяющим подключить все включенные в сборку накопители.
+     */
+    public static final String MESSAGE_CODE_NOT_ENOUGH_STORAGE_POWER_CONNECTORS
+            = "compatibility.not-enough-storage-power-connectors";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * материнская плата не располагает количеством коннекторов питания,
+     * позволяющим подключить все включенные в сборку вентиляторы.
+     */
+    public static final String MESSAGE_CODE_NOT_ENOUGH_FAN_POWER_CONNECTORS
+            = "compatibility.not-enough-fan-power-connectors";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * блок питания не располагает всеми необходимыми
+     * для питания видеокарты коннекторами.
+     */
+    public static final String MESSAGE_CODE_NOT_ENOUGH_GRAPHICS_CARD_POWER_CONNECTORS
+            = "compatibility.not-enough-graphics-card-power-connectors";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * материнская плата не располагает количеством слотов оперативной памяти,
+     * позволяющим подключить все включенные в сборку модули оперативной памяти.
+     */
+    public static final String MESSAGE_CODE_NOT_ENOUGH_RAM_SLOTS
+            = "compatibility.not-enough-ram-slots";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * сокет материнской платы не соответствует сокету процессора.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_MOTHERBOARD_SOCKET
+            = "compatibility.incompatible-motherboard-socket";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * форм-фактор материнской платы не соответствует ни одному
+     * из поддерживаемых корпусом форм-факторов материнских плат.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_MOTHERBOARD_FORM_FACTOR
+            = "compatibility.incompatible-motherboard-form-factor";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * форм-фактор блока питания не соответствует ни одному
+     * из поддерживаемых корпусом форм-факторов блоков питания.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_PSU_FORM_FACTOR
+            = "compatibility.incompatible-psu-form-factor";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * тип поддерживаемый материнской платой тип оперативной памяти не соответствует
+     * ни одному поддерживаемому процессором типу оперативной памяти.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_MOTHERBOARD_RAM_TYPE
+            = "compatibility.incompatible-motherboard-ram-type";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * модули оперативной памяти имеют разный тип памяти.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_RAM_MODULES
+            = "compatibility.incompatible-ram-modules";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * ни один из поддерживаемых процессорным кулером сокетов
+     * не соответствует сокету процессора.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_COOLER_SOCKETS
+            = "compatibility.incompatible-cooler-sockets";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * коннектор питания процессорного кулера не соответствует
+     * коннектору питания процессорного кулера на материнской плате.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_COOLER_POWER_CONNECTOR
+            = "compatibility.incompatible-cooler-power-connector";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * основной коннектор питания на материнской плате не соответствует
+     * основному коннектору питания в блоке питания.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_MAIN_POWER_CONNECTOR
+            = "compatibility.incompatible-main-power-connector";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * ни один из поддерживаемых блоком питания коннекторов питания процессора сокетов
+     * не соответствует коннектору питания процессора на материнской плате.
+     */
+    public static final String MESSAGE_CODE_INCOMPATIBLE_CPU_POWER_CONNECTOR
+            = "compatibility.incompatible-cpu-power-connector";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * процессор не поддерживает тип модулей оперативной памяти.
+     */
+    public static final String MESSAGE_CODE_CPU_DOES_NOT_SUPPORT_RAM_MODULES_RAM_TYPE
+            = "compatibility.cpu-does-not-support-ram-modules-ram-type";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * материнская плата не поддерживает тип модулей оперативной памяти.
+     */
+    public static final String MESSAGE_CODE_MOTHERBOARD_DOES_NOT_SUPPORT_RAM_MODULES_RAM_TYPE
+            = "compatibility.motherboard-does-not-support-ram-modules-ram-type";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * суммарный объем модулей оперативной памяти превышает
+     * максимальный объем оперативной памяти процессора.
+     */
+    public static final String MESSAGE_CODE_CPU_MAX_RAM_SIZE_EXCEEDING
+            = "compatibility.cpu-max-ram-size-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * мощности блока питания не достаточно.
+     */
+    public static final String MESSAGE_CODE_PSU_POWER_EXCEEDING
+            = "compatibility.psu-power-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * суммарный объем модулей оперативной памяти превышает
+     * максимальный объем оперативной памяти материнской платы.
+     */
+    public static final String MESSAGE_CODE_MOTHERBOARD_MAX_RAM_SIZE_EXCEEDING
+            = "compatibility.motherboard-max-ram-size-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * видеокарта не сможет поместиться в корпус.
+     */
+    public static final String MESSAGE_CODE_CASE_MAX_GRAPHICS_CARD_LENGTH_EXCEEDING
+            = "compatibility.case-max-graphics-card-length-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * блок питания не сможет поместиться в корпус.
+     */
+    public static final String MESSAGE_CODE_CASE_MAX_PSU_LENGTH_EXCEEDING
+            = "compatibility.case-max-psu-length-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * процессорный кулер не сможет поместиться в корпус.
+     */
+    public static final String MESSAGE_CODE_CASE_MAX_COOLER_HEIGHT_EXCEEDING
+            = "compatibility.case-max-cooler-height-exceeding";
+
+    /**
+     * Код сообщения о том, что в сборке ПК
+     * рассеиваемой мощности процессорного кулера не достаточно для охлаждения процессора.
+     */
+    public static final String MESSAGE_CODE_CPU_OVERHEAT
+            = "compatibility.cpu-overheat";
 }

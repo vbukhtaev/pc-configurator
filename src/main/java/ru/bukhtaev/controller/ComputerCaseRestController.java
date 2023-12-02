@@ -18,7 +18,7 @@ import ru.bukhtaev.dto.mapper.IComputerCaseMapper;
 import ru.bukhtaev.dto.request.ComputerCaseRequestDto;
 import ru.bukhtaev.dto.response.ComputerCaseResponseDto;
 import ru.bukhtaev.model.ComputerCase;
-import ru.bukhtaev.service.IPagingCrudService;
+import ru.bukhtaev.service.crud.IPagingCrudService;
 import ru.bukhtaev.util.ComputerCaseSort;
 import ru.bukhtaev.validation.handling.ErrorResponse;
 
