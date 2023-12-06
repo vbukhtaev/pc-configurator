@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-design-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: design
+            remarks: Вариант исполнения
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: design_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: design_name_uq
+                    nullable: false
+              - column:
+                  name: vendor_id
+                  remarks: Вендор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: design_vendor_fk
+                    referencedTableName: vendor
+                    referencedColumnNames: id
+                    nullable: false

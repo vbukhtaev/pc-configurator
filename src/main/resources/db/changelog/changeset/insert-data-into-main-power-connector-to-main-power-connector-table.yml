@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-main-power-connector-to-main-power-connector-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/main_power_connectors_to_main_power_connectors.sql
+            stripComments: true

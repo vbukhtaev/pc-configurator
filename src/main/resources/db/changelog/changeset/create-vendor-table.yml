@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-vendor-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: vendor
+            remarks: Вендор
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: vendor_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: vendor_name_uq
+                    nullable: false

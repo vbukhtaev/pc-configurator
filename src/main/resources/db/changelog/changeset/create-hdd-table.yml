@@ -1,0 +1,92 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-hdd-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: hdd
+            remarks: Жесткий диск
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: hdd_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: capacity
+                  remarks: Объем памяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reading_speed
+                  remarks: Скорость чтения
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: writing_speed
+                  remarks: Скорость записи
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spindle_speed
+                  remarks: Скорость вращения шпинделя
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cache_size
+                  remarks: Объем кэш-памяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vendor_id
+                  remarks: Вендор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: hdd_vendor_fk
+                    referencedTableName: vendor
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: connector_id
+                  remarks: Коннектор подключения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: hdd_connector_fk
+                    referencedTableName: storage_connector
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: power_connector_id
+                  remarks: Коннектор питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: hdd_power_connector_fk
+                    referencedTableName: storage_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: expansion_bay_format_id
+                  remarks: Формат отсека расширения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: hdd_expansion_bay_format_fk
+                    referencedTableName: expansion_bay_format
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: hdd
+            columnNames: name, capacity, spindle_speed, cache_size
+            constraintName: hdd_name_and_capacity_and_spindle_speed_and_cache_size_uq

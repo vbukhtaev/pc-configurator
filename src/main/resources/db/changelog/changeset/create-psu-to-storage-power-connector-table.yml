@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-psu-to-storage-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: psu_to_storage_power_connector
+            remarks: Имеющиеся у блока питания коннекторы питания накопителей
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: psu_to_storage_power_connector_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: psu_id
+                  remarks: Блок питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_to_storage_power_connector_psu_fk
+                    referencedTableName: psu
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: storage_power_connector_id
+                  remarks: Коннектор питания накопителя
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_to_storage_power_connector_storage_power_connector_fk
+                    referencedTableName: storage_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: psu_to_storage_power_connector
+            columnNames: psu_id, storage_power_connector_id
+            constraintName: psu_to_storage_power_connector_psu_id_and_storage_power_connector_id_uq

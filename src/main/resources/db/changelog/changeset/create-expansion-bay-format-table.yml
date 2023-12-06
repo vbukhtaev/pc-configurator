@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-expansion-bay-format-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: expansion_bay_format
+            remarks: Формат отсека расширения
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: expansion_bay_format_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: expansion_bay_format_name_uq
+                    nullable: false

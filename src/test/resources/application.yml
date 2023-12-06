@@ -1,5 +1,8 @@
 spring:
-  datasource:
-    url: jdbc:tc:postgresql:16:///${PC_CONFIG_APP_TEST_DB_NAME}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+
   liquibase:
     change-log: classpath:db/changelog/test-changelog-master.yml

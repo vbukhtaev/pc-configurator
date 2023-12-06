@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-computer-case-to-psu-form-factor-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: computer_case_to_psu_form_factor
+            remarks: Поддерживаемые корпусом форм-факторы блоков питания
+            columns:
+              - column:
+                  name: computer_case_id
+                  remarks: Корпус
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_case_to_psu_form_factor_computer_case_fk
+                    referencedTableName: computer_case
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: psu_form_factor_id
+                  remarks: Форм-фактор блока питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_case_to_psu_form_factor_psu_form_factor_fk
+                    referencedTableName: psu_form_factor
+                    referencedColumnNames: id
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: computer_case_id, psu_form_factor_id
+            constraintName: pk_computer_case_to_psu_form_factor
+            tableName: computer_case_to_psu_form_factor

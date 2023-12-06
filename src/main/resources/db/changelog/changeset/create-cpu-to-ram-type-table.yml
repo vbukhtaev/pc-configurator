@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cpu-to-ram-type-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: cpu_to_ram_type
+            remarks: Поддерживаемые процессорами типы оперативной памяти
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: cpu_to_ram_type_pk
+                    nullable: false
+              - column:
+                  name: max_memory_clock
+                  remarks: Максимальная поддерживаемая частота
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cpu_id
+                  remarks: Процессор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cpu_to_ram_type_cpu_fk
+                    referencedTableName: cpu
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: ram_type_id
+                  remarks: Тип оперативной памяти
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cpu_to_ram_type_ram_type_fk
+                    referencedTableName: ram_type
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: cpu_to_ram_type
+            columnNames: cpu_id, ram_type_id
+            constraintName: cpu_to_ram_type_cpu_id_and_ram_type_id_uq

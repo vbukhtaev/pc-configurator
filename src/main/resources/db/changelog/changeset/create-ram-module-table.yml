@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-ram-module-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: ram_module
+            remarks: Модуль оперативной памяти
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: ram_module_pk
+                    nullable: false
+              - column:
+                  name: clock
+                  remarks: Частота
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: capacity
+                  remarks: Объем
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type_id
+                  remarks: Тип
+                  type: UUID
+                  constraints:
+                    foreignKeyName: ram_module_type_fk
+                    referencedTableName: ram_type
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: design_id
+                  remarks: Вариант исполнения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: ram_module_design_fk
+                    referencedTableName: design
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: ram_module
+            columnNames: clock, capacity, type_id, design_id
+            constraintName: ram_module_clock_and_capacity_and_type_id_and_design_id_uq

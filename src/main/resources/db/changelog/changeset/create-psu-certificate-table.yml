@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-psu-certificate-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: psu_certificate
+            remarks: Сертификат блока питания
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: psu_certificate_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: psu_certificate_name_uq
+                    nullable: false

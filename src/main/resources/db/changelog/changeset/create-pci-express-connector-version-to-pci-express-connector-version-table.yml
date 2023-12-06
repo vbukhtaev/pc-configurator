@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-pci-express-connector-version-to-pci-express-connector-version-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: pci_express_connector_version_to_pci_express_connector_version
+            remarks: Более старые версии коннекторов PCI-Express по отношению к текущей
+            columns:
+              - column:
+                  name: version_id
+                  remarks: Версия коннектора PCI-Express
+                  type: UUID
+                  constraints:
+                    foreignKeyName: pci_e_version_to_pci_e_version_version_fk
+                    referencedTableName: pci_express_connector_version
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: lower_version_id
+                  remarks: Более старая версия
+                  type: UUID
+                  constraints:
+                    foreignKeyName: pci_e_version_to_pci_e_version_lower_version_fk
+                    referencedTableName: pci_express_connector_version
+                    referencedColumnNames: id
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: version_id, lower_version_id
+            constraintName: pk_pci_e_version_to_pci_e_version
+            tableName: pci_express_connector_version_to_pci_express_connector_version

@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-graphics-card-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: graphics_card_power_connector
+            remarks: Коннектор питания видеокарты
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: graphics_card_power_connector_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: graphics_card_power_connector_name_uq
+                    nullable: false

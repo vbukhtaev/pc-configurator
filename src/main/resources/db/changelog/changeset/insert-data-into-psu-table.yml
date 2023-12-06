@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-psu-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/psus.sql
+            stripComments: true

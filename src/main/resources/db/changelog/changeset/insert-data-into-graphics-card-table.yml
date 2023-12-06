@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-graphics-card-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/graphics_cards.sql
+            stripComments: true

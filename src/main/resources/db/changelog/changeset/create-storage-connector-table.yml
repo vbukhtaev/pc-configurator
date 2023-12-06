@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-storage-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: storage_connector
+            remarks: Коннектор подключения накопителя
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: storage_connector_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: storage_connector_name_uq
+                    nullable: false

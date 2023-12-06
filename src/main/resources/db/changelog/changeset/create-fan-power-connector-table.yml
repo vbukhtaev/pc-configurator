@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-fan-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: fan_power_connector
+            remarks: Коннектор питания вентилятора
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: fan_power_connector_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: fan_power_connector_name_uq
+                    nullable: false

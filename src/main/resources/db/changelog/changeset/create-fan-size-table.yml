@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-fan-size-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: fan_size
+            remarks: Размер вентилятора
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: fan_size_pk
+                    nullable: false
+              - column:
+                  name: length
+                  remarks: Длина
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: width
+                  remarks: Ширина
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: height
+                  remarks: Высота
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: fan_size
+            columnNames: length, width, height
+            constraintName: fan_size_length_and_width_and_height_uq

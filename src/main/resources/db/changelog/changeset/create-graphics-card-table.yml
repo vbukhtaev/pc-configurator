@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-graphics-card-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: graphics_card
+            remarks: Видеокарта
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: graphics_card_pk
+                    nullable: false
+              - column:
+                  name: length
+                  remarks: Длина
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gpu_id
+                  remarks: Графический процессор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: graphics_card_gpu_fk
+                    referencedTableName: gpu
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: design_id
+                  remarks: Вариант исполнения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: graphics_card_design_fk
+                    referencedTableName: design
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: pci_express_connector_version_id
+                  remarks: Версия коннектора PCI-Express
+                  type: UUID
+                  constraints:
+                    foreignKeyName: graphics_card_pci_express_connector_version_fk
+                    referencedTableName: pci_express_connector_version
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: graphics_card
+            columnNames: gpu_id, design_id
+            constraintName: graphics_card_gpu_id_and_design_id_uq

@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-computer-build-to-hdd-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: computer_build_to_hdd
+            remarks: Включенные в сборку ПК жесткие диски
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: computer_build_to_hdd_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: computer_build_id
+                  remarks: Сборка ПК
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_build_to_hdd_computer_build_fk
+                    referencedTableName: computer_build
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: hdd_id
+                  remarks: Жесткий диск
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_build_to_hdd_hdd_fk
+                    referencedTableName: hdd
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: computer_build_to_hdd
+            columnNames: computer_build_id, hdd_id
+            constraintName: computer_build_to_hdd_computer_build_id_and_hdd_id_uq

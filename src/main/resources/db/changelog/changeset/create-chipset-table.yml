@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-chipset-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: chipset
+            remarks: Чипсет
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: chipset_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: chipset_name_uq
+                    nullable: false
+              - column:
+                  name: socket_id
+                  remarks: Сокет
+                  type: UUID
+                  constraints:
+                    foreignKeyName: chipset_socket_fk
+                    referencedTableName: socket
+                    referencedColumnNames: id
+                    nullable: false

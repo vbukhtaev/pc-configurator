@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-pci-express-connector-version-to-pci-express-connector-version-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/pci_express_connector_versions_to_pci_express_connector_versions.sql
+            stripComments: true

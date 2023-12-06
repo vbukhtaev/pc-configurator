@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-video-memory-type-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/video_memory_types.sql
+            stripComments: true

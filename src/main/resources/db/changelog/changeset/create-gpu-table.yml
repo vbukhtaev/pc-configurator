@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-gpu-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: gpu
+            remarks: Графический процессор
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: gpu_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: memory_size
+                  remarks: Объем видеопамяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: power_consumption
+                  remarks: Энергопотребление
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manufacturer_id
+                  remarks: Производитель
+                  type: UUID
+                  constraints:
+                    foreignKeyName: gpu_manufacturer_fk
+                    referencedTableName: manufacturer
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: memory_type_id
+                  remarks: Тип видеопамяти
+                  type: UUID
+                  constraints:
+                    foreignKeyName: gpu_memory_type_fk
+                    referencedTableName: video_memory_type
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: gpu
+            columnNames: name, memory_size, memory_type_id
+            constraintName: gpu_name_and_memory_size_and_memory_type_id_uq

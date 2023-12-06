@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-socket-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: socket
+            remarks: Сокет
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: socket_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: socket_name_uq
+                    nullable: false

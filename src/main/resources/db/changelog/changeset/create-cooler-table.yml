@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cooler-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: cooler
+            remarks: Процессорный кулер
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: cooler_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: cooler_name_uq
+                    nullable: false
+              - column:
+                  name: power_dissipation
+                  remarks: Рассеиваемая мощность
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: height
+                  remarks: Высота
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vendor_id
+                  remarks: Вендор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cooler_vendor_fk
+                    referencedTableName: vendor
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: fan_size_id
+                  remarks: Размер вентилятора
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cooler_fan_size_fk
+                    referencedTableName: fan_size
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: power_connector_id
+                  remarks: Коннектор питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cooler_power_connector_fk
+                    referencedTableName: fan_power_connector
+                    referencedColumnNames: id
+                    nullable: false

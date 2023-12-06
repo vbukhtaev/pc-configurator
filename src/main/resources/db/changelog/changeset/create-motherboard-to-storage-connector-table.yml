@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-motherboard-to-storage-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: motherboard_to_storage_connector
+            remarks: Имеющиеся у материнской платы коннекторы подключения накопителей
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: motherboard_to_storage_connector_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: motherboard_id
+                  remarks: Материнская плата
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_to_storage_connector_motherboard_fk
+                    referencedTableName: motherboard
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: storage_connector_id
+                  remarks: Коннектор подключения накопителя
+                  type: UUID
+                  constraints:
+                    foreignKeyName: motherboard_to_storage_connector_storage_connector_fk
+                    referencedTableName: storage_connector
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: motherboard_to_storage_connector
+            columnNames: motherboard_id, storage_connector_id
+            constraintName: motherboard_to_storage_connector_motherboard_id_and_storage_connector_id_uq

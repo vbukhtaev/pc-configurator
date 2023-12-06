@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-computer-build-to-ram-module-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: computer_build_to_ram_module
+            remarks: Включенные в сборку ПК модули оперативной памяти
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: computer_build_to_ram_module_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: computer_build_id
+                  remarks: Сборка ПК
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_build_to_ram_module_computer_build_fk
+                    referencedTableName: computer_build
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: ram_module_id
+                  remarks: Модуль оперативной памяти
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_build_to_ram_module_ram_module_fk
+                    referencedTableName: ram_module
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: computer_build_to_ram_module
+            columnNames: computer_build_id, ram_module_id
+            constraintName: computer_build_to_ram_module_computer_build_id_and_ram_module_id_uq

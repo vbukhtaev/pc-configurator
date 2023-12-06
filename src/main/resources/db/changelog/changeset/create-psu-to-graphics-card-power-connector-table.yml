@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-psu-to-graphics-card-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: psu_to_graphics_card_power_connector
+            remarks: Имеющиеся у блока питания коннекторы питания видеокарт
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: psu_to_graphics_card_power_connector_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: psu_id
+                  remarks: Блок питания
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_to_graphics_card_power_connector_psu_fk
+                    referencedTableName: psu
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: graphics_card_power_connector_id
+                  remarks: Коннектор питания видеокарты
+                  type: UUID
+                  constraints:
+                    foreignKeyName: psu_to_graphics_card_power_connector_graphics_card_power_connector_fk
+                    referencedTableName: graphics_card_power_connector
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: psu_to_graphics_card_power_connector
+            columnNames: psu_id, graphics_card_power_connector_id
+            constraintName: psu_to_graphics_card_power_connector_psu_id_and_graphics_card_power_connector_id_uq

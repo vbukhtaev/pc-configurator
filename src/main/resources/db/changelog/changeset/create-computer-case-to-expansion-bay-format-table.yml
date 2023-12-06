@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-computer-case-to-expansion-bay-format-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: computer_case_to_expansion_bay_format
+            remarks: Поддерживаемые корпусом форматы отсеков расширения
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: computer_case_to_expansion_bay_format_pk
+                    nullable: false
+              - column:
+                  name: count
+                  remarks: Количество
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: computer_case_id
+                  remarks: Корпус
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_case_to_expansion_bay_format_computer_case_fk
+                    referencedTableName: computer_case
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: expansion_bay_format_id
+                  remarks: Формат отсека расширения
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_case_to_expansion_bay_format_expansion_bay_format_fk
+                    referencedTableName: expansion_bay_format
+                    referencedColumnNames: id
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: computer_case_to_expansion_bay_format
+            columnNames: computer_case_id, expansion_bay_format_id
+            constraintName: computer_case_to_expansion_bay_format_computer_case_id_and_expansion_bay_format_id_uq

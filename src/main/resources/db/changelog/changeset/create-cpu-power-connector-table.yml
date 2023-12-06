@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cpu-power-connector-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: cpu_power_connector
+            remarks: Коннектор питания процессора
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: cpu_power_connector_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: cpu_power_connector_name_uq
+                    nullable: false

@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-computer-case-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: computer_case
+            remarks: Корпус
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: computer_case_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: computer_case_name_uq
+                    nullable: false
+              - column:
+                  name: max_psu_length
+                  remarks: Максимальная длина блока питания
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_cooler_height
+                  remarks: Максимальная высота кулера
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_graphics_card_length
+                  remarks: Максимальная длина видеокарты
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vendor_id
+                  remarks: Вендор
+                  type: UUID
+                  constraints:
+                    foreignKeyName: computer_case_vendor_fk
+                    referencedTableName: vendor
+                    referencedColumnNames: id
+                    nullable: false

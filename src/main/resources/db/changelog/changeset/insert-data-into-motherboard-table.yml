@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-motherboard-table
+      author: VBukhtaev
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/motherboards.sql
+            stripComments: true

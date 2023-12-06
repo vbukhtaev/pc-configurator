@@ -1,0 +1,84 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cpu-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: cpu
+            remarks: Процессор
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: cpu_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: cpu_name_uq
+                    nullable: false
+              - column:
+                  name: core_count
+                  remarks: Количество ядер
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: thread_count
+                  remarks: Количество потоков
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: base_clock
+                  remarks: Базовая частота
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_clock
+                  remarks: Максимальная частота
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: l3cache_size
+                  remarks: Объем L3 кэша
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_tdp
+                  remarks: Максимальное тепловыделение
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_memory_size
+                  remarks: Максимальный объем оперативной памяти
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: socket_id
+                  remarks: Сокет
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cpu_socket_fk
+                    referencedTableName: socket
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: manufacturer_id
+                  remarks: Производитель
+                  type: UUID
+                  constraints:
+                    foreignKeyName: cpu_manufacturer_fk
+                    referencedTableName: manufacturer
+                    referencedColumnNames: id
+                    nullable: false

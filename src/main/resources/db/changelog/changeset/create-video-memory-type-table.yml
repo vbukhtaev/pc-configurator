@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-video-memory-type-table
+      author: VBukhtaev
+      changes:
+        - createTable:
+            tableName: video_memory_type
+            remarks: Тип видеопамяти
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: video_memory_type_pk
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: Название
+                  type: VARCHAR(64)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: video_memory_type_name_uq
+                    nullable: false
