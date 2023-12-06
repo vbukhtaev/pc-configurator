@@ -4,11 +4,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.Cpu;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_CPU_MAX_RAM_SIZE_EXCEEDING;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_CPU_MAX_RAM_SIZE_EXCEEDING;
 
 /**
  * Сервис проверки модулей оперативной памяти.

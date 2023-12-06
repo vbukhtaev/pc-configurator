@@ -1,7 +1,7 @@
 package ru.bukhtaev.service.checker.compatibility;
 
 import ru.bukhtaev.service.checker.IComputerBuildChecker;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 /**
  * Абстрактный сервис проверки сборки ПК

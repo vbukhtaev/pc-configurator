@@ -18,7 +18,7 @@ import ru.bukhtaev.repository.dictionary.IExpansionBayFormatRepository;
 import ru.bukhtaev.repository.dictionary.IStorageConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IStoragePowerConnectorRepository;
 import ru.bukhtaev.repository.dictionary.IVendorRepository;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +31,7 @@ import static ru.bukhtaev.model.Hdd.*;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
 import static ru.bukhtaev.model.StorageDevice.FIELD_CAPACITY;
 import static ru.bukhtaev.model.StorageDevice.FIELD_CONNECTOR;
-import static ru.bukhtaev.validation.MessageUtils.*;
+import static ru.bukhtaev.i18n.MessageUtils.*;
 
 /**
  * Реализация сервиса CRUD операций над жесткими дисками.

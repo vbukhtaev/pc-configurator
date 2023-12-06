@@ -7,13 +7,13 @@ import ru.bukhtaev.model.Cpu;
 import ru.bukhtaev.model.NameableEntity;
 import ru.bukhtaev.model.cross.CpuToRamType;
 import ru.bukhtaev.model.dictionary.RamType;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_CPU_DOES_NOT_SUPPORT_RAM_MODULES_RAM_TYPE;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_CPU_DOES_NOT_SUPPORT_RAM_MODULES_RAM_TYPE;
 
 /**
  * Сервис проверки модулей оперативной памяти.

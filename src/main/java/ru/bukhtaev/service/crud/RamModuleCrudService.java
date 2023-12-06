@@ -14,7 +14,7 @@ import ru.bukhtaev.model.dictionary.RamType;
 import ru.bukhtaev.repository.IDesignRepository;
 import ru.bukhtaev.repository.IRamModuleRepository;
 import ru.bukhtaev.repository.dictionary.IRamTypeRepository;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +24,7 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.RamModule.*;
-import static ru.bukhtaev.validation.MessageUtils.*;
+import static ru.bukhtaev.i18n.MessageUtils.*;
 
 /**
  * Реализация сервиса CRUD операций над модулями оперативной памяти.

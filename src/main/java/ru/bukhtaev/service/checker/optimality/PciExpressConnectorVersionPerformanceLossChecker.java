@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.GraphicsCard;
 import ru.bukhtaev.model.Motherboard;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_PCI_EXPRESS_CONNECTOR_VERSION;
 
 /**
  * Сервис проверки версии коннектора PCI-Express.

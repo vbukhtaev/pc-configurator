@@ -7,7 +7,7 @@ import ru.bukhtaev.model.Cpu;
 import ru.bukhtaev.model.RamModule;
 import ru.bukhtaev.model.cross.ComputerBuildToRamModule;
 import ru.bukhtaev.model.dictionary.RamType;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_CPU_MAX_RAM_CLOCK_EXCEEDING;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_CPU_MAX_RAM_CLOCK_EXCEEDING;
 
 /**
  * Сервис проверки модулей оперативной памяти.

@@ -6,11 +6,11 @@ import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.Cpu;
 import ru.bukhtaev.model.GraphicsCard;
 import ru.bukhtaev.model.Psu;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_PSU_POWER_EXCEEDING;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_PSU_POWER_EXCEEDING;
 
 /**
  * Сервис проверки блока питания.

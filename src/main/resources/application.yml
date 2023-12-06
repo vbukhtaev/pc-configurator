@@ -7,6 +7,11 @@ spring:
     username: ${PC_CONFIG_APP_DB_USERNAME}
     password: ${PC_CONFIG_APP_DB_PASSWORD}
 
+  docker:
+    compose:
+      enabled: false # fixme enable for using docker compose
+      file: docker-compose.yml
+
   jpa:
     hibernate:
       ddl-auto: none

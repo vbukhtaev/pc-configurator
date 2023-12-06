@@ -7,7 +7,7 @@ import ru.bukhtaev.model.Motherboard;
 import ru.bukhtaev.model.cross.ComputerBuildToFan;
 import ru.bukhtaev.model.cross.MotherboardToFanPowerConnector;
 import ru.bukhtaev.model.dictionary.FanPowerConnector;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.text.MessageFormat;
 import java.util.Map;
@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_NOT_ENOUGH_FAN_POWER_CONNECTORS;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_TEMPLATE_THREE_PART_NAME;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_NOT_ENOUGH_FAN_POWER_CONNECTORS;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_TEMPLATE_THREE_PART_NAME;
 
 /**
  * Сервис проверки материнской платы.

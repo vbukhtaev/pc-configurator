@@ -10,7 +10,7 @@ import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.dictionary.ISocketRepository;
 import ru.bukhtaev.service.crud.IPagingCrudService;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +19,8 @@ import java.util.UUID;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_SOCKET_NOT_FOUND;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_SOCKET_UNIQUE;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_SOCKET_NOT_FOUND;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_SOCKET_UNIQUE;
 
 /**
  * Реализация сервиса CRUD операций над сокетами.

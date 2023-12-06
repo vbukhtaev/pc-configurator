@@ -16,7 +16,7 @@ import ru.bukhtaev.model.cross.ComputerCaseToFanSize;
 import ru.bukhtaev.model.dictionary.*;
 import ru.bukhtaev.repository.IComputerCaseRepository;
 import ru.bukhtaev.repository.dictionary.*;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.ComputerCase.*;
-import static ru.bukhtaev.validation.MessageUtils.*;
+import static ru.bukhtaev.i18n.MessageUtils.*;
 
 /**
  * Реализация сервиса CRUD операций над корпусами.

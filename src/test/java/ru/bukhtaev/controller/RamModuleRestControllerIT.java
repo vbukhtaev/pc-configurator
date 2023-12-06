@@ -458,7 +458,7 @@ class RamModuleRestControllerIT extends AbstractIntegrationTest {
                                 contains("clock", "capacity", "type", "design")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "RAM module with clock <{0}> capacity <{1}> " +
+                                        "RAM module with clock <{0} Mhz>, capacity <{1}>, " +
                                                 "type <{2}> and design <{3}> already exists!",
                                         ramModuleDdr4.getClock(),
                                         ramModuleDdr4.getCapacity(),
@@ -786,7 +786,7 @@ class RamModuleRestControllerIT extends AbstractIntegrationTest {
                                 contains("clock", "capacity", "type", "design")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "RAM module with clock <{0}> capacity <{1}> " +
+                                        "RAM module with clock <{0} Mhz>, capacity <{1}>, " +
                                                 "type <{2}> and design <{3}> already exists!",
                                         ramModuleDdr4.getClock(),
                                         ramModuleDdr4.getCapacity(),
@@ -1023,7 +1023,7 @@ class RamModuleRestControllerIT extends AbstractIntegrationTest {
                                 contains("clock", "capacity", "type", "design")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "RAM module with clock <{0}> capacity <{1}> " +
+                                        "RAM module with clock <{0} Mhz>, capacity <{1}>, " +
                                                 "type <{2}> and design <{3}> already exists!",
                                         ramModuleDdr5.getClock(),
                                         ramModuleDdr5.getCapacity(),

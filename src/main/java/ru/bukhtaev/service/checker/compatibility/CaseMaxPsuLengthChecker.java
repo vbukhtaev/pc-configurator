@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.ComputerCase;
 import ru.bukhtaev.model.Psu;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_CASE_MAX_PSU_LENGTH_EXCEEDING;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_CASE_MAX_PSU_LENGTH_EXCEEDING;
 
 /**
  * Сервис проверки корпуса.

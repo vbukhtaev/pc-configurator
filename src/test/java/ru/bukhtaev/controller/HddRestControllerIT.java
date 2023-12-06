@@ -682,7 +682,7 @@ class HddRestControllerIT extends AbstractIntegrationTest {
                                 contains("name", "capacity", "spindleSpeed", "cacheSize")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "HDD with name <{0}> capacity <{1}> spindle speed <{2}> " +
+                                        "HDD with name <{0}>, capacity <{1}>, spindle speed <{2}> " +
                                                 "and cache size <{3}> already exists!",
                                         hddBarracuda.getName(),
                                         hddBarracuda.getCapacity(),
@@ -1446,7 +1446,7 @@ class HddRestControllerIT extends AbstractIntegrationTest {
                                 contains("name", "capacity", "spindleSpeed", "cacheSize")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "HDD with name <{0}> capacity <{1}> spindle speed <{2}> " +
+                                        "HDD with name <{0}>, capacity <{1}>, spindle speed <{2}> " +
                                                 "and cache size <{3}> already exists!",
                                         hddBarracuda.getName(),
                                         hddBarracuda.getCapacity(),
@@ -1941,7 +1941,7 @@ class HddRestControllerIT extends AbstractIntegrationTest {
                                 contains("name", "capacity", "spindleSpeed", "cacheSize")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "HDD with name <{0}> capacity <{1}> spindle speed <{2}> " +
+                                        "HDD with name <{0}>, capacity <{1}>, spindle speed <{2}> " +
                                                 "and cache size <{3}> already exists!",
                                         hddP300.getName(),
                                         hddP300.getCapacity(),

@@ -6,12 +6,12 @@ import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.ComputerCase;
 import ru.bukhtaev.model.NameableEntity;
 import ru.bukhtaev.model.Psu;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_INCOMPATIBLE_PSU_FORM_FACTOR;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_INCOMPATIBLE_PSU_FORM_FACTOR;
 
 /**
  * Сервис проверки блока питания.

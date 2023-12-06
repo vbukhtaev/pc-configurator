@@ -8,7 +8,7 @@ import ru.bukhtaev.repository.IComputerBuildRepository;
 import ru.bukhtaev.service.checker.compatibility.ICompatibilityChecker;
 import ru.bukhtaev.service.checker.completeness.ICompletenessChecker;
 import ru.bukhtaev.service.checker.optimality.IOptimalityChecker;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +17,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static ru.bukhtaev.model.ComputerBuild.FIELD_ID;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_COMPUTER_BUILD_NOT_FOUND;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_COMPUTER_BUILD_NOT_FOUND;
 
 /**
  * Сервис проверки сборки ПК на законченность,

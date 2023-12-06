@@ -6,12 +6,12 @@ import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.RamModule;
 import ru.bukhtaev.model.cross.ComputerBuildToRamModule;
 import ru.bukhtaev.model.dictionary.RamType;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_RAM_MODULES_DIFFERENT_CLOCK;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_RAM_MODULES_DIFFERENT_CLOCK;
 
 /**
  * Сервис проверки модулей оперативной памяти.

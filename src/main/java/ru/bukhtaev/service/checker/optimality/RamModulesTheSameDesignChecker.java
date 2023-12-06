@@ -4,15 +4,15 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.Design;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_RAM_MODULES_WITH_DIFFERENT_DESIGN;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_TEMPLATE_TWO_PART_NAME;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_RAM_MODULES_WITH_DIFFERENT_DESIGN;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_TEMPLATE_TWO_PART_NAME;
 
 /**
  * Сервис проверки модулей оперативной памяти.

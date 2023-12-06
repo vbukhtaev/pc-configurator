@@ -445,7 +445,7 @@ class GpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.violations[0].paramNames", contains("name", "memorySize", "memoryType")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "GPU with name <{0}> memory size <{1}> and memory type <{2}> already exists!",
+                                        "GPU with name <{0}>, memory size <{1}> and memory type <{2}> already exists!",
                                         gpuGtx1060.getName(),
                                         gpuGtx1060.getMemorySize(),
                                         memoryTypeGddr5.getName()
@@ -782,7 +782,7 @@ class GpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.violations[0].paramNames", contains("name", "memorySize", "memoryType")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "GPU with name <{0}> memory size <{1}> and memory type <{2}> already exists!",
+                                        "GPU with name <{0}>, memory size <{1}> and memory type <{2}> already exists!",
                                         gpuGtx1060.getName(),
                                         gpuGtx1060.getMemorySize(),
                                         memoryTypeGddr5.getName()
@@ -1025,7 +1025,7 @@ class GpuRestControllerIT extends AbstractIntegrationTest {
                         jsonPath("$.violations[0].paramNames", contains("name", "memorySize", "memoryType")),
                         jsonPath("$.violations[0].message", is(
                                 MessageFormat.format(
-                                        "GPU with name <{0}> memory size <{1}> and memory type <{2}> already exists!",
+                                        "GPU with name <{0}>, memory size <{1}> and memory type <{2}> already exists!",
                                         gpuRx5700.getName(),
                                         gpuRx5700.getMemorySize(),
                                         memoryTypeGddr6.getName()

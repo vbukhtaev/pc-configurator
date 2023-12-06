@@ -9,7 +9,7 @@ import ru.bukhtaev.exception.UniqueNameException;
 import ru.bukhtaev.model.dictionary.GraphicsCardPowerConnector;
 import ru.bukhtaev.repository.dictionary.IGraphicsCardPowerConnectorRepository;
 import ru.bukhtaev.service.crud.ICrudService;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +21,7 @@ import static org.springframework.transaction.annotation.Isolation.READ_COMMITTE
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
 import static ru.bukhtaev.model.dictionary.GraphicsCardPowerConnector.FIELD_COMPATIBLE_CONNECTORS;
-import static ru.bukhtaev.validation.MessageUtils.*;
+import static ru.bukhtaev.i18n.MessageUtils.*;
 
 /**
  * Реализация сервиса CRUD операций над коннекторами питания видеокарт.

@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.Motherboard;
 import ru.bukhtaev.model.dictionary.RamType;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_MOTHERBOARD_DOES_NOT_SUPPORT_RAM_MODULES_RAM_TYPE;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_MOTHERBOARD_DOES_NOT_SUPPORT_RAM_MODULES_RAM_TYPE;
 
 /**
  * Сервис проверки модулей оперативной памяти.

@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.info.Info;
  */
 @OpenAPIDefinition(
         info = @Info(
-                title = "Weather CRUD API",
+                title = "PC Configurator",
                 description = "API for virtual PC configuration app",
                 version = "0.0.1-SNAPSHOT",
                 contact = @Contact(

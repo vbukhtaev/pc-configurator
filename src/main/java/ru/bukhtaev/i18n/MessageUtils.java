@@ -1,4 +1,4 @@
-package ru.bukhtaev.validation;
+package ru.bukhtaev.i18n;
 
 /**
  * Утилитный класс со статическими константами, содержащими коды сообщений и сообщения.

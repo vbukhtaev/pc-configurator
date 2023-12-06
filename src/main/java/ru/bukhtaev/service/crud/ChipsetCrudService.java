@@ -12,7 +12,7 @@ import ru.bukhtaev.model.Chipset;
 import ru.bukhtaev.model.dictionary.Socket;
 import ru.bukhtaev.repository.IChipsetRepository;
 import ru.bukhtaev.repository.dictionary.ISocketRepository;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ import static org.springframework.transaction.annotation.Isolation.READ_COMMITTE
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.Chipset.FIELD_SOCKET;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.*;
+import static ru.bukhtaev.i18n.MessageUtils.*;
 
 /**
  * Реализация сервиса CRUD операций над чипсетами.

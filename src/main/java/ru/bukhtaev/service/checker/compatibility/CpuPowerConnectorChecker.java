@@ -7,14 +7,14 @@ import ru.bukhtaev.model.Motherboard;
 import ru.bukhtaev.model.NameableEntity;
 import ru.bukhtaev.model.Psu;
 import ru.bukhtaev.model.cross.PsuToCpuPowerConnector;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.springframework.util.CollectionUtils.containsAny;
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_INCOMPATIBLE_CPU_POWER_CONNECTOR;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_INCOMPATIBLE_CPU_POWER_CONNECTOR;
 
 /**
  * Сервис проверки блока питания.

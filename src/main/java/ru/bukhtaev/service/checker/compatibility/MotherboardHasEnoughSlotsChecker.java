@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import ru.bukhtaev.model.ComputerBuild;
 import ru.bukhtaev.model.Motherboard;
 import ru.bukhtaev.model.cross.ComputerBuildToRamModule;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_NOT_ENOUGH_RAM_SLOTS;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_NOT_ENOUGH_RAM_SLOTS;
 
 /**
  * Сервис проверки материнской платы.

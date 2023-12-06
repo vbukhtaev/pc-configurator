@@ -16,14 +16,14 @@ import ru.bukhtaev.model.cross.ComputerBuildToHdd;
 import ru.bukhtaev.model.cross.ComputerBuildToRamModule;
 import ru.bukhtaev.model.cross.ComputerBuildToSsd;
 import ru.bukhtaev.repository.*;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.*;
 
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.ComputerBuild.*;
-import static ru.bukhtaev.validation.MessageUtils.*;
+import static ru.bukhtaev.i18n.MessageUtils.*;
 
 /**
  * Реализация сервиса CRUD операций над сборками ПК.

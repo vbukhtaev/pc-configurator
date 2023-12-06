@@ -19,7 +19,7 @@ import ru.bukhtaev.repository.ICpuRepository;
 import ru.bukhtaev.repository.dictionary.IManufacturerRepository;
 import ru.bukhtaev.repository.dictionary.IRamTypeRepository;
 import ru.bukhtaev.repository.dictionary.ISocketRepository;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.*;
 
@@ -27,7 +27,7 @@ import static org.springframework.transaction.annotation.Isolation.READ_COMMITTE
 import static ru.bukhtaev.model.BaseEntity.FIELD_ID;
 import static ru.bukhtaev.model.Cpu.*;
 import static ru.bukhtaev.model.NameableEntity.FIELD_NAME;
-import static ru.bukhtaev.validation.MessageUtils.*;
+import static ru.bukhtaev.i18n.MessageUtils.*;
 
 /**
  * Реализация сервиса CRUD операций над процессорами.

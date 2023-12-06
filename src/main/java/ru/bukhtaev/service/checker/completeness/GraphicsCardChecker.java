@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import ru.bukhtaev.model.ComputerBuild;
-import ru.bukhtaev.validation.Translator;
+import ru.bukhtaev.i18n.Translator;
 
 import java.util.Optional;
 
-import static ru.bukhtaev.validation.MessageUtils.MESSAGE_CODE_NO_GRAPHICS_CARD;
+import static ru.bukhtaev.i18n.MessageUtils.MESSAGE_CODE_NO_GRAPHICS_CARD;
 
 /**
  * Сервис проверки сборки ПК
